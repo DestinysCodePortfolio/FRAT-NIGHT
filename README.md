@@ -1,54 +1,56 @@
-# CS 100 Programming Project
-<!-- Title: Rush Week
-Group Members:
-Ava Williams - https://github.com/avamwilliams
-Pedro Chaidez - https://github.com/PedroChaidez
-Destiny Gonzalez - https://github.com/DestinysCodePortfolio
-Ian Catren - https://github.com/iqnc06
+# CS 100 Programming Project: Rush Week
 
-Project Description
-Rush Week is an interactive story-driven mystery game built in C++. The narrative follows Natalie, a college student searching for her missing friend Evelyn, who vanished after rushing for a fraternity. As Natalie explores the campus and uncovers secrets, players will be presented with choices that impact the storyline and determine which ending they receive.
+# Group Members:
+## Ava Williams - https://github.com/avamwilliams
+## Pedro Chaidez - https://github.com/PedroChaidez
+## Destiny Gonzalez - https://github.com/DestinysCodePortfolio
+## Ian Catren - https://github.com/iqnc06
 
-Why this project is important to us
-We wanted to create a game that blends the excitement of college life with the suspense of a mystery thriller. Rush Week allows us to practice our C++ programming skills while exploring storytelling, game design, and character development in an interactive format. This project also gives us the chance to integrate art and creativity through custom-drawn sprites and (potentially) a graphical UI in the future.
+# Project Description:
+## Rush Week is an interactive story-driven mystery game built in C++. The narrative follows Natalie, a college student searching for her missing friend Evelyn, who vanished after rushing for a fraternity. As Natalie explores the campus and uncovers secrets, players will be presented with choices that impact the storyline and determine which ending they receive.
 
-Languages, Tools, and Technologies
-C++ – Main programming language
+# Why this project is important to us
+## We wanted to create a game that blends the excitement of college life with the suspense of a mystery thriller. Rush Week allows us to practice our C++ programming skills while exploring storytelling, game design, and character development in an interactive format. This project also gives us the chance to integrate art and creativity through custom-drawn sprites and (potentially) a graphical UI in the future.
 
-Custom Hand-Drawn Sprites – For character and scene visuals (optional for terminal version)
+# Languages, Tools, and Technologies
+## C++ – Main programming language
+## Custom Hand-Drawn Sprites – For character and scene visuals (optional for terminal version)
+## Terminal/Console – Primary UI for this project
+## (Optional in future): UI framework for adding a graphical interface
 
-Terminal/Console – Primary UI for this project
+# Input/Output
+## Input: Player decisions made through text-based prompts
+## Output: Branching story paths and multiple unique endings depending on player choices
 
-(Optional in future): UI framework for adding a graphical interface
+# Features:
+## 10 minute single user expiernence
 
-Input/Output
-Input: Player decisions made through text-based prompts
+## No save progess since the game is quick to finish and reseting the game is advised to reach the multiple endings of the game
 
-Output: Branching story paths and multiple unique endings depending on player choices
+## Player actions will be supported through a limited selection of actions depending on the player's current scenerio
 
-Features:
-10 minute single user expiernence
+## Interactive storytelling with branching paths
 
-No save progess since the game is quick to finish and reseting the game is advised to reach the multiple endings of the game
+## Each branching path won't lead to an ending but to a early game over screen depening on player's actions
 
-Player actions will be supported through a limited selection of actions depending on the player's current scenerio
+## The player can collect items that will unlock different options that they can choose that can lead to different endings
 
-Interactive storytelling with branching paths
+## Players are encouraged to search rooms while they explore the mystery of the game's lore
 
-Each branching path won't lead to an ending but to a early game over screen depening on player's actions
+## The areas of the game will be descriced through text and characters will be able to interact with the player to further progress in the story
 
-The player can collect items that will unlock different options that they can choose that can lead to different endings
+## The Story's scenerios will be displayed word by word instead of all at once
 
-Players are encouraged to search rooms while they explore the mystery of the game's lore
+## 3 possible endings based on player decisions
 
-The areas of the game will be descriced through text and characters will be able to interact with the player to further progress in the story
+## One secret ending will be achieved by looking through the files of the game and decrypting the messages to unlock the ending in game through in game user input
 
-3 possible endings based on player decisions
+## Mystery-solving mechanics through dialogue and file.txt manipulation
 
-One secret ending will be achieved by looking through the files of the game and decrypting the messages to unlock the ending in game through in game user input
+## Hand-drawn character sprites (with possible future UI integration)
 
-Mystery-solving mechanics through dialogue and file manipulation
+## Terminal-based user interface for simplicity and accessibility
 
-Hand-drawn character sprites (with possible future UI integration)
+# Descrition Detail
 
-Terminal-based user interface for simplicity and accessibility -->
+## The Game will have a time complexity of O(n) since displaying each word separetly in a string will have a time complexity O(n). Players actions will be O(1) through the use of a switch statement to determine the branching of the story. File.txt manipulation will also be O(n) since each file's words will be changed completely to display new sentences. 
