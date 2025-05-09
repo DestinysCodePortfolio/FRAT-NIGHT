@@ -58,7 +58,7 @@ Output: Branching story paths and multiple unique endings depending on player ch
 The Game will have a time complexity of O(n) since displaying each word separetly in a string will have a time complexity O(n). Players actions will be O(1) through the use of a switch statement to determine the branching of the story. File.txt manipulation will also be O(n) since each file's words will be changed completely to display new sentences. 
 
 ## Navigation Diagram
-![Navigation Diagram - Rush Week](https://github.com/user-attachments/assets/07e3f148-fa0a-4020-b021-f1f1d70caffe)
+![Rush Week Navigation Diagram](https://github.com/user-attachments/assets/d8275147-a209-4af7-8590-2764dc0f7a21)
 
 • On and Off states are when the program is running the game or is being closed.
 
@@ -72,7 +72,7 @@ The Game will have a time complexity of O(n) since displaying each word separetl
 
 • The Read User Input State prompts the user either an action or urgently requires the player to commit an action to progress in the game. Faluire to commit the action or chooses the wrong one will get to the game over screen then closes the game
 
-• The Ending states are similar to the print game screen state but they display their respective ending
+• The Ending states are similar to the print game screen state, but they display their respective ending. They will all exit the game and delete the save file to start a new game.
 
 ## Class Diagram
 
