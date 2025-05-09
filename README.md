@@ -75,4 +75,5 @@ The Game will have a time complexity of O(n) since displaying each word separetl
 • The Ending states are similar to the print game screen state, but they display their respective ending. They will all exit the game and delete the save file to start a new game.
 
 ## Class Diagram
-![Class Diagram Rush Week drawio (1)](https://github.com/user-attachments/assets/dc588bf7-5e37-41e5-8834-518ade63e5ee)
+![Class Diagram Rush Week drawio (2)](https://github.com/user-attachments/assets/ee3c35e9-c59f-4604-8fbc-35f02ee80b18)
+
