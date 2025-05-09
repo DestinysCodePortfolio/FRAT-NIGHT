@@ -58,7 +58,7 @@ Output: Branching story paths and multiple unique endings depending on player ch
 The Game will have a time complexity of O(n) since displaying each word separetly in a string will have a time complexity O(n). Players actions will be O(1) through the use of a switch statement to determine the branching of the story. File.txt manipulation will also be O(n) since each file's words will be changed completely to display new sentences. 
 
 ## Navigation Diagram
-![Rush Week Navigation Diagram (1)](https://github.com/user-attachments/assets/8865e691-9202-49fd-8c24-7a414e131daf)
+[Rush Week Navigation Diagram.pdf](https://github.com/user-attachments/files/20130168/Rush.Week.Navigation.Diagram.pdf)
 
 • On and Off states are when the program is running the game or is being closed.
 
