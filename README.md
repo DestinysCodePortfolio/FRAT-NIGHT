@@ -2,8 +2,11 @@
 
 ## Group Members:
 • Ava Williams - https://github.com/avamwilliams
+
 • Pedro Chaidez - https://github.com/PedroChaidez
+
 • Destiny Gonzalez - https://github.com/DestinysCodePortfolio
+
 • Ian Catren - https://github.com/iqnc06
 
 ## Project Description:
@@ -23,19 +26,32 @@ Input: Player decisions made through text-based prompts
 Output: Branching story paths and multiple unique endings depending on player choices
 
 ## Features:
-• 10 minute single user expiernence
+• 10 minute single user experience
+
 • No save progess since the game is quick to finish and reseting the game is advised to reach the multiple endings of the game
-• Player actions will be supported through a limited selection of actions depending on the player's current scenerio
+
+• Player actions will be supported through a limited selection of actions depending on the player's current scenario
+
 • Interactive storytelling with branching paths
+
 • Each branching path won't lead to an ending but to a early game over screen depening on player's actions
+
 • The player can collect items that will unlock different options that they can choose that can lead to different endings
+
 • Players are encouraged to search rooms while they explore the mystery of the game's lore
+
 • The areas of the game will be descriced through text and characters will be able to interact with the player to further progress in the story
+
 • The Story's scenerios will be displayed word by word instead of all at once
+
 • 3 possible endings based on player decisions
+
 • One secret ending will be achieved by looking through the files of the game and decrypting the messages to unlock the ending in game through in game user input
+
 • Mystery-solving mechanics through dialogue and file.txt manipulation
+
 • Hand-drawn character sprites (with possible future UI integration)
+
 • Terminal-based user interface for simplicity and accessibility
 
 ## Descrition Detail
@@ -45,11 +61,17 @@ The Game will have a time complexity of O(n) since displaying each word separetl
 ![Navigation Diagram - Rush Week](https://github.com/user-attachments/assets/07e3f148-fa0a-4020-b021-f1f1d70caffe)
 
 • On and Off states are when the program is running the game or is being closed.
+
 • The Title Screen state displays the title of the game as well as options to start a new game or to conitnue an old save of the game, the user also has the option to close the game.
+
 • The New Game state starts the game and deletes old save data and creates an empty one
+
 • The Load game state uses the save data in a txt file to continue the game
+
 • The Print Game Screen state is in the current game and outputs the current story the user is currently playing
+
 • The Read User Input State prompts the user either an action or urgently requires the player to commit an action to progress in the game. Faluire to commit the action or chooses the wrong one will get to the game over screen then closes the game
+
 • The Ending states are similar to the print game screen state but they display their respective ending
 
 ## Class Diagram
