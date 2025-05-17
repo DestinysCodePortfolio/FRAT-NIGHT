@@ -21,23 +21,3 @@ struct TitleScreen : public UIScreen{
 	void userPrompt(char& userChoice) override;
 };
 
-class Scene : public UIScreen {
-	uint8_t wordMaxLength;
-	string name;
-	string description;
-	const string FILE_LOCATION;
-	
-public:
-	Scene(): name(""), description(""), wordMaxLength(255), FILE_LOCATION("./lib/FRAT NIGHT SCRIPT.txt") {}
-	~Scene() override=default;
-	Scene(Scene& otherScene) = delete;
-	Scene& operator=(Scene& otherScene) = delete;
-	string getName() const;
-	string getDescription() const;
-	void setName(string newName);
-	void setDescription(string newDescription);
-	void getSceneFromTextFile(const string& fileName);
-	void trickleDisplayString(const string& inputString, uint8_t delay) const;
-	void printScreen() override;
-
-};
