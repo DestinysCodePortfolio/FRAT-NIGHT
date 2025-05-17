@@ -1,4 +1,5 @@
 #include "../header/scene.hpp"
+#include <iostream>
 using namespace std;
 
 //openers dialogue-- until 

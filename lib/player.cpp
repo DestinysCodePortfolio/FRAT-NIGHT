@@ -4,7 +4,6 @@
 #include <chrono>
 #include <fstream>
 #include <stdexcept>
-#include <vector>
 using std::cout;
 using std::endl;
 using std::this_thread::sleep_for;
@@ -14,17 +13,17 @@ using std::cin;
 
 
 //increments shot counter
-const void shotMeter(){
+void Player::shotMeter(){
     shotCounter++;
 }
 
 //item name accessor
-const string getItemName(){
+const string Item::getItemName(){
     return name;
 }
 
 //inventory status accessor
-bool isInInventory(){
+bool Item::isInInventory(){
     return inInventory;
 }
 

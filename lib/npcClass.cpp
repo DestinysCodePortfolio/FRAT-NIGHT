@@ -6,21 +6,21 @@
 #include <stdexcept>
 #include <vector>
 
- void npcClass:: gainTrust(){
-    trustMeter = 1;
+ void NonPlayableCharacter:: gainTrust(){
+    trustMeter++;
  }
- void npcClass:: looseTrust(){
-    trustMeter -= 1;
+ void NonPlayableCharacter:: looseTrust(){
+    trustMeter--;
  }
-void npcClass:: romance(){
+void kevin:: romance(){
     
  }
 
- void npcClass:: agression(){
+ void chad:: agression(){
    
  }
 
- void npcClass:: intoxicated(){
+ void lilith:: intoxicated(){
  }
 
 
