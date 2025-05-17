@@ -32,7 +32,6 @@
 *.out
 *.app
 rshell
-test
 
 # CMake Temp Files
 CMakeCache.txt
