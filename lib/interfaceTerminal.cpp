@@ -66,33 +66,16 @@ void TitleScreen::userPrompt(char& userChoice){
 	cout<<endl;
 }
 
-void Scene::printScreen(){
-	
-	
-	
-	getSceneFromTextFile(FILE_LOCATION);
-	trickleDisplayString(description, 10);
-}
-void Scene::trickleDisplayString(const string& inputString, uint8_t delay) const{
+void UIScreen::trickleDisplayString(const string& inputString, uint8_t delay) const{
 	for(char currentChar : inputString){
 		cout<<currentChar<<flush;
 		sleep_for(milliseconds(delay));
 	}
 	cout<<endl;
 }
-string Scene::getName() const{
-	return name;
-}
-string Scene::getDescription() const{
-	return description;
-}
-void Scene::setName(string newName){
-	name = newName;
-}
-void Scene::setDescription(string newDescription){
-	description = newDescription;
-}
-void Scene::getSceneFromTextFile(const string& fileName){
+
+/* ------> If we want to use this to get stuff from files
+void UIScreen::getSceneFromTextFile(const string& fileName){
 	std::ifstream file(fileName);
 	if(!file.is_open()){
 		throw std::runtime_error("File didn't open correctly");
@@ -109,6 +92,6 @@ void Scene::getSceneFromTextFile(const string& fileName){
 	file.close();
 	for (string& str : lines) {
 		cout << str << endl;
-		description.append(str+'\n');
 	}
 }
+*/

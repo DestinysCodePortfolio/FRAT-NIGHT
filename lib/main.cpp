@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <iostream>
 using std::cout;
+using std::endl;
 int main() {
 	char userChoice = 0;
 	UIScreen* currentScreen = new TitleScreen();
@@ -12,6 +13,7 @@ int main() {
 	}
 	delete currentScreen;
 
+
 	if(userChoice == 's'){
 		cout<<"User chose s.\n";
 	}
@@ -19,12 +21,18 @@ int main() {
 		cout<<"User chose c.\n";
 	}
 	else if(userChoice == 'q'){
-		cout<<"User chose q.\n";
+		#ifdef _WIN32
+			system("cls");
+		#else
+			system("clear");
+		#endif
+		cout<<"Thanks for playing!!!"<<endl;
+		return 0;
 	}
 	else{
 		throw std::invalid_argument("User's choice is a weird option");
 	}
 
-
+	
 	return 0;
 }
