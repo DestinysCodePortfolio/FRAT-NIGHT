@@ -1,5 +1,6 @@
 #include "../header/interfaceTerminal.hpp"
 #include "../header/dialogueTree.hpp"
+#include "../header/scene.hpp"
 #include <stdexcept>
 #include <iostream>
 using std::cout;
@@ -25,6 +26,9 @@ int main() {
 		throw std::invalid_argument("User's choice is a weird option");
 	}
 
+	Scene* currentScene = new openingScene;
+	currentScene->dialogue();
+	delete currentScene;
 
 	return 0;
 }
