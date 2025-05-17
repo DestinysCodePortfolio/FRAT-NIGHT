@@ -20,7 +20,7 @@ int main() {
 		cout<<"User chose q.\n";
 	}
 	else{
-		throw std::invalid_argument("User's choice exited ");
+		throw std::invalid_argument("User's choice is a weird option");
 	}
 	return 0;
 }
