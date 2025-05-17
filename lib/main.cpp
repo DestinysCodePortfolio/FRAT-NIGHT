@@ -5,19 +5,19 @@ using std::cout;
 int main() {
 	char userChoice = 0;
 	TitleScreen currentScreen;
-	while(userChoice != 'q' || userChoice != 's' || userChoice!='c'){
+	while(userChoice != 'q' && userChoice != 's' && userChoice!='c'){
 		currentScreen.printScreen();
 		currentScreen.userPrompt(userChoice);
 	}
 
 	if(userChoice = 's'){
-		cout<<"User chose "<<userChoice<<".\n";
+		cout<<"User chose s.\n";
 	}
-	if(userChoice = 'c'){
-		cout<<"User chose "<<userChoice<<".\n";
+	else if(userChoice = 'c'){
+		cout<<"User chose c.\n";
 	}
-	if(userChoice = 'q'){
-		cout<<"User chose "<<userChoice<<".\n";
+	else if(userChoice = 'q'){
+		cout<<"User chose q.\n";
 	}
 	else{
 		throw std::invalid_argument("User's choice exited ");

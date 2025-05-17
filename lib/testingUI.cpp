@@ -4,7 +4,7 @@
 using std::string;
 using std::cout;
 using std::cin;
-using std::endl;;
+using std::endl;
 struct GameUI {
 	static void titleScreen() {
 			// Clear screen (cross-platform)
@@ -36,23 +36,23 @@ struct GameUI {
 			};
 
 			// Top border
-			cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;;
+			cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 
 			// Game title (centered)
 			cout << VERTICAL << centerText(GAME_TITLE) 
-								<< std::setw(BOX_WIDTH - centerText(GAME_TITLE).length() + 1) << VERTICAL << endl;;
+								<< std::setw(BOX_WIDTH - centerText(GAME_TITLE).length() + 1) << VERTICAL << endl;
 
 			// Divider line
-			cout << VERTICAL << string(BOX_WIDTH, HORIZONTAL) << VERTICAL << endl;;
+			cout << VERTICAL << string(BOX_WIDTH, HORIZONTAL) << VERTICAL << endl;
 
 			// Menu options (centered)
 			for (int i = 0; i < NUM_OPTIONS; ++i) {
 					cout << VERTICAL << centerText(MENU_OPTIONS[i]) 
-										<< std::setw(BOX_WIDTH - centerText(MENU_OPTIONS[i]).length() + 1) << VERTICAL << endl;;
+										<< std::setw(BOX_WIDTH - centerText(MENU_OPTIONS[i]).length() + 1) << VERTICAL << endl;
 			}
 
 			// Bottom border
-			cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;;
+			cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 	}
 	static void userPrompt(char& userChoice){
 		cout<<"Your choice: ";
