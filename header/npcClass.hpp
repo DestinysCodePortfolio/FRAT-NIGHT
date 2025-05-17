@@ -8,19 +8,26 @@ class NonPlayableCharacter : public UIScreen {
 	// characterDialogues: DialogueTree;
 public:
  virtual ~NonPlayableCharacter() = default;
+ void gainTrust ();
+ void looseTrust();
 };
 
 class chad : public NonPlayableCharacter {
 	uint8_t agressionMeter;
-public:
+	public:
+	 void agression();
+	
+
 };
 
 class lilith : public NonPlayableCharacter {
 	uint8_t intoxicatedMeter;
-public:
+	public:
+	 void intoxicated();
 };
 
 class kevin : public NonPlayableCharacter {
 	uint8_t romanceMeter;
-public:
+	public:
+	 void romance();
 };
