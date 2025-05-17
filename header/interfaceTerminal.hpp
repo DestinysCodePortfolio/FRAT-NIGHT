@@ -9,7 +9,7 @@ struct UIScreen { //It should be a pure virtual function isnce it is a interface
 	UIScreen(UIScreen& other) = delete;
 	UIScreen& operator=(UIScreen& other) = delete;
 	virtual void printScreen() = 0;
-	virtual void userPrompt(char& userChoice);
+	virtual void userPrompt(char& userChoice) =0;
 };
 
 struct TitleScreen : public UIScreen{
