@@ -1,0 +1,45 @@
+﻿Opener: You are Natalie Fitzgerald, a university student whose friend went missing at a frat party a couple nights ago. You are here at another party, trying to unravel the mystery of her disappearance. You know they did it. You just can't prove it. 
+
+
+My ears throb with every bass drop pounding through the floorboards.
+Sweat clings to my back. The house is packed wall to wall—drunken laughter, sticky floors, and that sour-sweet stench of booze and regret.
+???: “YO! Look who finally decided to pull up!”
+ A can sprays open. A vodka seltzer fizzes out all over Chad’s hand as he slides into view,  stumbling a little with his arms open.
+Chad: “Where my hug at?”
+→ [Take the hug]
+ He reeks of tequila and cologne that never fully covered up whatever he did last night.
+→ [Reject the hug]
+ He scoffs, eyes rolling.
+ Chad: “Damn, Natalie. Acting brand new?”
+
+
+Natalie: “Chad, have you been drinking?!”
+Chad: “Have you not? It’s Halloweekend, babe.”
+It’s Thursday.
+Natalie: “Whatever. Have you seen [REDACTED]? She wasn’t at her apartment, hasn’t shown up to class, and her location’s off…”
+Chad (shrugs, pulling out a red cup): “Bro… I dunno. She’s probably out getting hazed with her bigs or whatever.”
+Chad (eyes lighting up): “But yo, forget that—you need to catch up. SHOTS. NOW.”
+He grabs my arm, dragging me towards the kitchen.
+Lilith (sitting on the counter, eyeliner smudged): “That girl was so hard to keep still —”
+Kevin (yelling across the room): “NATALIEEE! You’re so late! Lilith already threw up twice!”
+Natalie: “It’s 10:15 pm…the party started at 10.”
+Lilith (rolls eyes): “Kevin, that was you.”
+Kevin: “IT’S FIVE O’CLOCK SOMEWHEREEEE, SO—”
+Lilith (smirking): “So where’s that friend of yours? [REDACTED], right?”
+Natalie (stepping closer): “I could ask you the same question. Aren’t you the sweetheart of this place?”
+Lilith: “I mean, yeah—but we’ve got like, over a hundred girls rushing. I don’t remember every newbie.”
+Chad (waving around a bottle): “PICK YOUR POISON!
+→ [Natalie picks a drink]
+ The liquor burns my throat, but I try not to show it.
+→ [Natalie stays sober]
+ I push the cup back toward him. I need to find her.
+IF TAKES SHOT->
+IF REFUSES SHOT->
+Chad (waving around a bottle): I know youre paranoid about your friend and all , but she aint here little lady. Stop killing the vibe.
+
+
+Natalie - fine ill find her myself bitch
+
+
+[look around the house ]
+[go outside]
