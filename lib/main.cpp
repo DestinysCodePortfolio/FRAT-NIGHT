@@ -10,13 +10,13 @@ int main() {
 		currentScreen.userPrompt(userChoice);
 	}
 
-	if(userChoice = 's'){
+	if(userChoice == 's'){
 		cout<<"User chose s.\n";
 	}
-	else if(userChoice = 'c'){
+	else if(userChoice == 'c'){
 		cout<<"User chose c.\n";
 	}
-	else if(userChoice = 'q'){
+	else if(userChoice == 'q'){
 		cout<<"User chose q.\n";
 	}
 	else{
