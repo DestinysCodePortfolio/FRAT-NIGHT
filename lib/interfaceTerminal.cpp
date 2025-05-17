@@ -66,14 +66,6 @@ void TitleScreen::userPrompt(char& userChoice){
 	cout<<endl;
 }
 
-void UIScreen::trickleDisplayString(const string& inputString, uint8_t delay) const{
-	for(char currentChar : inputString){
-		cout<<currentChar<<flush;
-		sleep_for(milliseconds(delay));
-	}
-	cout<<endl;
-}
-
 /* ------> If we want to use this to get stuff from files
 void UIScreen::getSceneFromTextFile(const string& fileName){
 	std::ifstream file(fileName);

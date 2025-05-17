@@ -15,7 +15,6 @@ class UIScreen { //It should be a pure virtual function isnce it is a interface
 		virtual void printScreen() = 0;
 		virtual void userPrompt(char& userChoice) =0;
 		// void getSceneFromTextFile(const string& fileName);
-		void trickleDisplayString(const string& inputString, uint8_t delay) const;
 };
 
 struct TitleScreen : public UIScreen{
