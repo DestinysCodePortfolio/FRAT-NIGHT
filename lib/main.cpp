@@ -17,10 +17,10 @@ int main() {
 
 	currentScreen->clearScreen();
 	if(userChoice == 's'){
-		cout<<"User chose s."<<endl;
+		cout<<"Starting game."<<endl;
 	}
 	else if(userChoice == 'c'){
-		cout<<"User chose c."<<endl;
+		cout<<"Loading game."<<endl;
 	}
 	else if(userChoice == 'q'){
 		cout<<"Thanks for playing!!!"<<endl;
@@ -30,9 +30,10 @@ int main() {
 		throw std::invalid_argument("User's choice is a weird option");
 	}
 
-	Scene* currentScene = new openingScene;
-	currentScene->dialogue();
-	delete currentScene;
-
+	currentScreen = new MainGameScreen();
+	while(userChoice != q){
+		currentScreen->printScreen();
+		currentScreen->userPrompt(userChoice);
+	}
 	return 0;
 }
