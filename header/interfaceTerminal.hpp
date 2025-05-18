@@ -14,6 +14,7 @@ class UIScreen { //It should be a pure virtual function isnce it is a interface
 		UIScreen& operator=(UIScreen& other) = delete;
 		virtual void printScreen() = 0;
 		virtual void userPrompt(char& userChoice) =0;
+		void clearScreen();
 		// void getSceneFromTextFile(const string& fileName);
 };
 
