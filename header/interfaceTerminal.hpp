@@ -25,4 +25,5 @@ struct TitleScreen : public UIScreen{
 	TitleScreen& operator=(TitleScreen& other) = delete;
 	void printScreen() override;
 	void userPrompt(char& userChoice) override;
+
 };

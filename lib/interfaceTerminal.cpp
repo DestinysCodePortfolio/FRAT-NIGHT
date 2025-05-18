@@ -61,25 +61,3 @@ void TitleScreen::userPrompt(char& userChoice){
 	cin>> userChoice;
 	cout<<endl;
 }
-
-/* ------> If we want to use this to get stuff from files
-void UIScreen::getSceneFromTextFile(const string& fileName){
-	std::ifstream file(fileName);
-	if(!file.is_open()){
-		throw std::runtime_error("File didn't open correctly");
-	}
-	string line;
-	std::vector<string> lines;
-	int i = 0;
-	while (std::getline(file, line)) {
-			lines.push_back(line);
-			if (i == 5){
-				break;
-			}
-	}
-	file.close();
-	for (string& str : lines) {
-		cout << str << endl;
-	}
-}
-*/
