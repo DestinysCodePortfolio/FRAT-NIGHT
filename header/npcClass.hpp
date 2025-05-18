@@ -3,7 +3,7 @@
 #include <string>
 using std::string;
 
-class NonPlayableCharacter : public UIScreen {
+class NonPlayableCharacter  {
 	uint8_t trustMeter;
 	// characterDialogues: DialogueTree;
 public:

@@ -3,7 +3,9 @@
 #include "../header/scene.hpp"
 #include <stdexcept>
 #include <iostream>
+
 using std::cout;
+using std::endl;
 int main() {
 	char userChoice = 0;
 	UIScreen* currentScreen = new TitleScreen();
@@ -13,14 +15,16 @@ int main() {
 	}
 	delete currentScreen;
 
+	currentScreen->clearScreen();
 	if(userChoice == 's'){
-		cout<<"User chose s.\n";
+		cout<<"User chose s."<<endl;
 	}
 	else if(userChoice == 'c'){
-		cout<<"User chose c.\n";
+		cout<<"User chose c."<<endl;
 	}
 	else if(userChoice == 'q'){
-		cout<<"User chose q.\n";
+		cout<<"Thanks for playing!!!"<<endl;
+		return 0;
 	}
 	else{
 		throw std::invalid_argument("User's choice is a weird option");

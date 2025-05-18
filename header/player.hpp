@@ -1,17 +1,8 @@
 #pragma once
 #include <cstdint>
 #include <string>
-using std::string;
-
-
-class Player{
-    public:
-    const void shotMeter();
-
-    private:
-    vector<item> inventory;
-    int shotCounter = 0;
-};
+#include <vector>
+using namespace std;
 
 class Item{
     public:
@@ -21,4 +12,13 @@ class Item{
     private:
     bool inInventory;
     string name;
+};
+
+class Player{
+	public:
+	void shotMeter();
+
+	private:
+	std::vector<Item> inventory;
+	uint8_t shotCounter = 0;
 };
