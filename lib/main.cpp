@@ -1,5 +1,4 @@
 #include "../header/interfaceTerminal.hpp"
-#include "../header/dialogueTree.hpp"
 #include "../header/scene.hpp"
 #include <stdexcept>
 #include <iostream>
@@ -9,31 +8,12 @@ using std::endl;
 int main() {
 	char userChoice = 0;
 	UIScreen* currentScreen = new TitleScreen();
-	while(userChoice != 'q' && userChoice != 's' && userChoice!='c'){
+	while(currentScreen->ifInCurrentChoices(userChoice)){
 		currentScreen->printScreen();
 		currentScreen->userPrompt(userChoice);
+		currentScreen->updateOptions();
+		currentScreen->screenAction();
 	}
 	delete currentScreen;
-
-	currentScreen->clearScreen();
-	if(userChoice == 's'){
-		cout<<"Starting game."<<endl;
-	}
-	else if(userChoice == 'c'){
-		cout<<"Loading game."<<endl;
-	}
-	else if(userChoice == 'q'){
-		cout<<"Thanks for playing!!!"<<endl;
-		return 0;
-	}
-	else{
-		throw std::invalid_argument("User's choice is a weird option");
-	}
-
-	currentScreen = new MainGameScreen();
-	while(userChoice != 'q'){
-		currentScreen->printScreen();
-		currentScreen->userPrompt(userChoice);
-	}
 	return 0;
 }

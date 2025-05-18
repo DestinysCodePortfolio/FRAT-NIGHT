@@ -5,9 +5,17 @@ using namespace std;
 
 class Scene{
 		char* choice;
-		friend class DialogueTree;
+		struct DialogueTree{
+			struct choices {
+
+			};
+			DialogueTree() = default;
+			~DialogueTree()=default;
+			DialogueTree(DialogueTree& other) = delete;
+			DialogueTree& operator=(DialogueTree& other) = delete;
+		};
 	public: 
-		Scene()=delete;
+		Scene() = default;
 		Scene(char& choice);
 		~Scene();
 		Scene(Scene& other) = delete;

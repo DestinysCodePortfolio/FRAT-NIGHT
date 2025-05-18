@@ -16,7 +16,8 @@ void UIScreen::clearScreen(){
 }
 
 TitleScreen::TitleScreen():
-	BOX_WIDTH(40)
+	BOX_WIDTH(40),
+	UIScreen()
 {}
 
 void TitleScreen::printScreen(){
@@ -35,8 +36,8 @@ void TitleScreen::printScreen(){
 	const char VERTICAL = '|';
 
 	// Helper lambda to center text
-	auto centerText = [&BOX_WIDTH](const string &text) {
-		int padding = (BOX_WIDTH - text.length()) / 2;
+	auto centerText = [this](const string &text) {
+		int padding = (this->BOX_WIDTH - text.length()) / 2;
 		if (padding < 0) padding = 0;
 		return string(padding, ' ') + text;
 	};
@@ -59,8 +60,45 @@ void TitleScreen::printScreen(){
 	// Bottom border
 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 }
-void TitleScreen::userPrompt(char& userChoice){
+void UIScreen::userPrompt(){
 	cout<<"Your choice: ";
-	cin>> userChoice;
+	cin>> UIScreen::userChoice;
 	cout<<endl;
 }
+
+void TitleScreen::updateOptions(){
+	currentChoices.resize(3);
+	currentChoices.at(0)='q';
+	currentChoices.at(0)='s';
+	currentChoices.at(0)='c';
+}
+
+bool TitleScreen::ifInCurrentChoices(char& input){
+	for(char currentOption : currentChoices){
+		if(input==currentOption){
+			return true;
+		}
+	}
+	return false;
+}
+
+void TitleScreen::screenAction(){
+	clearScreen();
+	if(userChoice == 's'){
+		cout<<"Starting game."<<endl;
+	}
+	else if(userChoice == 'c'){
+		cout<<"Loading game."<<endl;
+	}
+	else if(userChoice == 'q'){
+		cout<<"Thanks for playing!!!"<<endl;
+		return 0;
+	}
+	else{
+		throw std::invalid_argument("User's choice is a weird option");
+	}
+}
+
+UIScreen::UIScreen():
+	userChoice(0)
+{}
