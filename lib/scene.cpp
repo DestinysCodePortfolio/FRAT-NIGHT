@@ -10,18 +10,30 @@ using std::this_thread::sleep_for;
 using std::chrono::milliseconds;
 using std::flush;
 using std::cin;
+//Copy constructor
+// Scene& Scene::operator=(const Scene& other) {
+//     if (this != &other) {
+//         this->choice = other.choice;
+//     }
+//     return *this;
+// }
 
 //openers dialogue-- until where my hug at
 void openingScene::dialogue(){
-    string output = "";
-    output = "You are Natalie Fitzgerald, a university student whose friend went missing at a frat party a couple nights ago. \n \n Sweat clings to my back. The house is packed wall to wall—drunken laughter, sticky floors, and \n that sour-sweet stench of booze and regret. \n \n ???: YO! Look who finally decided to pull up! \n \n A can sprays open. A vodka seltzer fizzes out all over Chad’s hand as he slides into view, \n stumbling a little with his arms open. \n \n Chad: Where my hug at? \n \n 1. Take The Hug [a] \n 2. Reject The Hug [b]";
-    trickleDisplayString(output, 50);
-    //string choice;
-    //cin >> choice;
-    //if(choice == "a") takeHug();
-    //else if(choice == "b") rejectHug();
+    string output = "You are Natalie Fitzgerald, a university student whose friend went missing at a frat party...\n";
+    trickleDisplayString(output, 1);
 
+    cin >> choice;
+
+    // if (choice == 'a') {
+    //     return new takeHug();
+    // } else if (choice == 'b') {
+    //     return new rejectHug();
+    // }
+
+    // return nullptr; // if invalid input
 }
+
 
 //if you take the hug
 void takeHug::dialogue(){

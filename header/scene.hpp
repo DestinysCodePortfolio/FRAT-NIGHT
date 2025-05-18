@@ -4,17 +4,12 @@
 using namespace std;
 
 class Scene{
-        struct Choices{
-            Choices() = default;
-            ~Choices() = default;
-            Choices(Choices& other) = delete;
-            Choices& operator=(Choices& other) = delete;
-        };
     public: 
+        char choice;
         Scene() = default;
         virtual ~Scene() = default;
         Scene(Scene& other) = delete;
-        Scene& operator=(Scene& other) = delete;
+        Scene& operator=(Scene& other);
         virtual void dialogue()=0;   
         void trickleDisplayString(const string& inputString, uint8_t delay); 
 };
