@@ -1,20 +1,33 @@
 #pragma once
 #include <cstdint>
 #include <string>
-using std::string;
+using namespace std;
 
-struct Scene{
-    Scene() = default;
-    virtual ~Scene() = default;
-    Scene(Scene& other) = delete;
-    Scene& operator=(Scene& other) = delete;
-    virtual void dialogue()=0;    
+class Scene{
+        struct Choices{
+            Choices() = default;
+            ~Choices() = default;
+            Choices(Choices& other) = delete;
+            Choices& operator=(Choices& other) = delete;
+        };
+    public: 
+        Scene() = default;
+        virtual ~Scene() = default;
+        Scene(Scene& other) = delete;
+        Scene& operator=(Scene& other) = delete;
+        virtual void dialogue()=0;   
+        void trickleDisplayString(const string& inputString, uint8_t delay); 
 };
 
 class openingScene:public Scene{
     void dialogue() override;
 };
 
-class takeFirstShot:public Scene{
+class takeHug:public Scene{
     void dialogue() override;
 };
+
+class rejectHug:public Scene{
+    void dialogue() override;
+};
+
