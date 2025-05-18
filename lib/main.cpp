@@ -3,6 +3,7 @@
 #include "../header/scene.hpp"
 #include <stdexcept>
 #include <iostream>
+
 using std::cout;
 using std::endl;
 int main() {
