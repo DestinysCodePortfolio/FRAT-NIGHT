@@ -16,7 +16,6 @@ class Scene{
 		};
 	public: 
 		Scene() = default;
-		Scene(char& choice);
 		~Scene();
 		Scene(Scene& other) = delete;
 		Scene& operator=(Scene& other);

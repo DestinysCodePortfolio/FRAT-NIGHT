@@ -6,14 +6,26 @@
 using std::cout;
 using std::endl;
 int main() {
-	char userChoice = 0;
+	static char userChoice = 0;
 	UIScreen* currentScreen = new TitleScreen();
-	while(currentScreen->ifInCurrentChoices(userChoice)){
+	currentScreen->clearScreen();
+	while(currentScreen->ifInCurrentChoices()){
 		currentScreen->printScreen();
-		currentScreen->userPrompt(userChoice);
+		// cout<<"test1"<<endl;
+		currentScreen->userPrompt();
+		// cout<<"test2"<<endl;
+		try{
+			currentScreen->screenAction();
+		}
+		catch(std::invalid_argument weirdChoice){
+			cout<<weirdChoice.what()<<endl;
+		}
+		// cout<<"test3"<<endl;
 		currentScreen->updateOptions();
-		currentScreen->screenAction();
+		// cout<<"test4"<<endl;
 	}
+	// cout<<"Exiting program"<<endl;
+	// cout<<"test5"<<endl;
 	delete currentScreen;
 	return 0;
 }

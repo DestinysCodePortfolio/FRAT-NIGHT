@@ -3,7 +3,9 @@ cmake_minimum_required(VERSION 3.2)
 add_library(simpleLibrary
   main.cpp
 	interfaceTerminal.cpp
-  scene.cpp
+	npcClass.cpp
+	player.cpp
+	scene.cpp
 )
 
 find_library(M_LIB m)

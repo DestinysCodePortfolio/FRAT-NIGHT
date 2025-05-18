@@ -13,12 +13,11 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/test/lib/googlemock/include/
 )
 add_executable(Rush_Week
-    lib/main.cpp
-		lib/interfaceTerminal.cpp
-		lib/npcClass.cpp
-		lib/player.cpp
-		lib/scene.cpp
-		lib/dialogueTree.cpp
+	lib/main.cpp
+	lib/interfaceTerminal.cpp
+	lib/npcClass.cpp
+	lib/player.cpp
+	lib/scene.cpp
 )
 
 add_subdirectory(lib)

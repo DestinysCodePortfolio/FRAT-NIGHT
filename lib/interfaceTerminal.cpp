@@ -15,13 +15,17 @@ void UIScreen::clearScreen(){
 	#endif
 }
 
-TitleScreen::TitleScreen():
-	BOX_WIDTH(40),
-	UIScreen()
+UIScreen::UIScreen():
+	userChoice(0)
 {}
 
+TitleScreen::TitleScreen():
+	BOX_WIDTH(40),
+	UIScreen(){
+	currentChoices = {0};
+}
+
 void TitleScreen::printScreen(){
-	clearScreen();
 	const string GAME_TITLE = "FRAT NIGHT!";
 	const string MENU_OPTIONS[] = {
 		"1. Start Game [s]",
@@ -60,26 +64,29 @@ void TitleScreen::printScreen(){
 	// Bottom border
 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 }
-void UIScreen::userPrompt(){
+void TitleScreen::userPrompt(){
 	cout<<"Your choice: ";
-	cin>> UIScreen::userChoice;
+	cin>> userChoice;
 	cout<<endl;
 }
 
 void TitleScreen::updateOptions(){
 	currentChoices.resize(3);
 	currentChoices.at(0)='q';
-	currentChoices.at(0)='s';
-	currentChoices.at(0)='c';
+	currentChoices.at(1)='s';
+	currentChoices.at(2)='c';
+	// cout<<"populated new options"<<endl;
 }
 
-bool TitleScreen::ifInCurrentChoices(char& input){
-	for(char currentOption : currentChoices){
-		if(input==currentOption){
-			return true;
+bool TitleScreen::ifInCurrentChoices(){
+	if(userChoice!=0){
+		for(char currentOption : currentChoices){
+			if(userChoice==currentOption){
+				return false;
+			}
 		}
 	}
-	return false;
+	return true;
 }
 
 void TitleScreen::screenAction(){
@@ -92,13 +99,8 @@ void TitleScreen::screenAction(){
 	}
 	else if(userChoice == 'q'){
 		cout<<"Thanks for playing!!!"<<endl;
-		return 0;
 	}
 	else{
-		throw std::invalid_argument("User's choice is a weird option");
+		throw std::invalid_argument("Try again!");
 	}
 }
-
-UIScreen::UIScreen():
-	userChoice(0)
-{}
