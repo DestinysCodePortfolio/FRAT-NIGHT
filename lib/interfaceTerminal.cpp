@@ -1,26 +1,22 @@
 #include "../header/interfaceTerminal.hpp"
 #include <iostream>
-#include <thread>
-#include <chrono>
 #include <fstream>
-#include <stdexcept>
-#include <vector>
 #include <iomanip>
 using std::cout;
 using std::endl;
-using std::this_thread::sleep_for;
-using std::chrono::milliseconds;
-using std::flush;
 using std::cin;
 
-void TitleScreen::printScreen(){
+void UIScreen::clearScreen(){
 	// Clear screen (cross-platform)
 	#ifdef _WIN32
 		system("cls");
 	#else
 		system("clear");
 	#endif
+}
 
+void TitleScreen::printScreen(){
+	clearScreen();
 	const int BOX_WIDTH = 40;  // Adjust width as needed
 	const string GAME_TITLE = "FRAT NIGHT!";
 	const string MENU_OPTIONS[] = {

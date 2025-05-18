@@ -15,19 +15,14 @@ int main() {
 	}
 	delete currentScreen;
 
-
+	currentScreen->clearScreen();
 	if(userChoice == 's'){
-		cout<<"User chose s.\n";
+		cout<<"User chose s."<<endl;
 	}
 	else if(userChoice == 'c'){
-		cout<<"User chose c.\n";
+		cout<<"User chose c."<<endl;
 	}
 	else if(userChoice == 'q'){
-		#ifdef _WIN32
-			system("cls");
-		#else
-			system("clear");
-		#endif
 		cout<<"Thanks for playing!!!"<<endl;
 		return 0;
 	}
