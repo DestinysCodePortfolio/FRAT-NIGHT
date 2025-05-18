@@ -15,9 +15,12 @@ void UIScreen::clearScreen(){
 	#endif
 }
 
+TitleScreen::TitleScreen():
+	BOX_WIDTH(40)
+{}
+
 void TitleScreen::printScreen(){
 	clearScreen();
-	const int BOX_WIDTH = 40;  // Adjust width as needed
 	const string GAME_TITLE = "FRAT NIGHT!";
 	const string MENU_OPTIONS[] = {
 		"1. Start Game [s]",

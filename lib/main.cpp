@@ -31,7 +31,7 @@ int main() {
 	}
 
 	currentScreen = new MainGameScreen();
-	while(userChoice != q){
+	while(userChoice != 'q'){
 		currentScreen->printScreen();
 		currentScreen->userPrompt(userChoice);
 	}
