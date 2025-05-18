@@ -18,6 +18,7 @@ add_executable(Rush_Week
 		lib/npcClass.cpp
 		lib/player.cpp
 		lib/scene.cpp
+		lib/dialogueTree.cpp
 )
 
 add_subdirectory(lib)

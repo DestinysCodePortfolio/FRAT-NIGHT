@@ -23,7 +23,7 @@ void openingScene::dialogue(){
     string output = "You are Natalie Fitzgerald, a university student whose friend went missing at a frat party...\n";
     trickleDisplayString(output, 1);
 
-    cin >> choice;
+    cin >> choice*;
 
     // if (choice == 'a') {
     //     return new takeHug();
@@ -34,6 +34,12 @@ void openingScene::dialogue(){
     // return nullptr; // if invalid input
 }
 
+Scene::Scene(char& userChoice): 
+	choice(userChoice)
+{}
+Scene::~Scene(){
+	choice=nullptr;
+}
 
 //if you take the hug
 void takeHug::dialogue(){
