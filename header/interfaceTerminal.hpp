@@ -5,7 +5,7 @@
 #include <vector>
 using std::string;
 
-struct UIScreen { //It should be a pure virtual function isnce it is a interface
+class UIScreen { //It should be a pure virtual function isnce it is a interface
 	protected:
 		std::vector<char> currentChoices;
 		char userChoice;
@@ -14,33 +14,30 @@ struct UIScreen { //It should be a pure virtual function isnce it is a interface
 		virtual ~UIScreen()=default;
 		UIScreen(UIScreen& other) = delete;
 		UIScreen& operator=(UIScreen& other) = delete;
-		virtual void printScreen() = 0;
-		virtual void userPrompt() =0;
+		virtual void printScreen() const = 0;
+		void userPrompt();
 		virtual void updateOptions() = 0;
-		virtual bool ifInCurrentChoices() = 0;
-		virtual void screenAction() = 0;
-		void clearScreen();
+		bool ifInCurrentChoices() const;
+		virtual void screenAction() const = 0;
+		void clearScreen() const;
 };
 
-class TitleScreen : public UIScreen{
-		const uint8_t BOX_WIDTH; // length of the box
-	public:
-		TitleScreen();
-		~TitleScreen()=default;
-		TitleScreen(TitleScreen& other) = delete;
-		TitleScreen& operator=(TitleScreen& other) = delete;
-		bool ifInCurrentChoices() override;
-		void printScreen() override;
-		void userPrompt() override;
-		void updateOptions() override;
-		void screenAction() override;
+struct TitleScreen : public UIScreen{
+	TitleScreen();
+	~TitleScreen()=default;
+	TitleScreen(TitleScreen& other) = delete;
+	TitleScreen& operator=(TitleScreen& other) = delete;
+	void printScreen() const override;
+	void updateOptions() override;
+	void screenAction() const override;
 };
 
 struct MainGameScreen : public UIScreen{
-	MainGameScreen()=default;
+	MainGameScreen();
 	~MainGameScreen()=default;
 	MainGameScreen(MainGameScreen& other) = delete;
 	MainGameScreen& operator=(MainGameScreen& other) = delete;
-	void printScreen() override;
-	void userPrompt() override;
+	void printScreen() const override;
+	void updateOptions() override;
+	void screenAction() const override;
 };
