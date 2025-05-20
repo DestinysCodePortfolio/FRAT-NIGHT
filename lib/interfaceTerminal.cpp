@@ -6,7 +6,25 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-void UIScreen::clearScreen(){
+UIScreen::UIScreen():
+	userChoice(0)
+{}
+void UIScreen::userPrompt(){
+	cout<<"Your choice: ";
+	cin>> userChoice;
+	cout<<endl;
+}
+bool UIScreen::ifInCurrentChoices() const{
+	if(userChoice!=0){
+		for(char currentOption : currentChoices){
+			if(userChoice==currentOption){
+				return false;
+			}
+		}
+	}
+	return true;
+}
+void UIScreen::clearScreen() const{
 	// Clear screen (cross-platform)
 	#ifdef _WIN32
 		system("cls");
@@ -14,10 +32,11 @@ void UIScreen::clearScreen(){
 		system("clear");
 	#endif
 }
-
-void TitleScreen::printScreen(){
-	clearScreen();
-	const int BOX_WIDTH = 40;  // Adjust width as needed
+TitleScreen::TitleScreen():
+	UIScreen(){
+	currentChoices = {0};
+}
+void TitleScreen::printScreen() const {
 	const string GAME_TITLE = "FRAT NIGHT!";
 	const string MENU_OPTIONS[] = {
 		"1. Start Game [s]",
@@ -25,6 +44,7 @@ void TitleScreen::printScreen(){
 		"3. Quit [q]"
 	};
 	const int NUM_OPTIONS = 3;
+	const uint8_t BOX_WIDTH = 40; // changes length of title screen box
 
 	// Double-line border characters
 	const char CORNER = '+';
@@ -56,8 +76,54 @@ void TitleScreen::printScreen(){
 	// Bottom border
 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 }
-void TitleScreen::userPrompt(char& userChoice){
-	cout<<"Your choice: ";
-	cin>> userChoice;
-	cout<<endl;
+void TitleScreen::updateOptions(){
+	currentChoices.resize(3);
+	currentChoices.at(0)='q';
+	currentChoices.at(1)='s';
+	currentChoices.at(2)='c';
+	// cout<<"populated new options"<<endl;
+}
+void TitleScreen::screenAction() const{
+	clearScreen();
+	if(userChoice == 's'){
+		cout<<"Starting game."<<endl;
+	}
+	else if(userChoice == 'c'){
+		cout<<"Loading game."<<endl;
+	}
+	else if(userChoice == 'q'){
+		cout<<"Thanks for playing!!!"<<endl;
+	}
+	else{
+		throw std::invalid_argument("Try again!");
+	}
+}
+MainGameScreen::MainGameScreen():
+	UIScreen(){
+	currentChoices = {0};
+}
+void MainGameScreen::printScreen() const {
+	cout<<"main game print screen"<<endl;
+}
+void MainGameScreen::updateOptions(){
+	currentChoices.resize(3);
+	currentChoices.at(0)='q';
+	currentChoices.at(1)='s';
+	currentChoices.at(2)='c';
+	// cout<<"populated new options"<<endl;
+}
+void MainGameScreen::screenAction() const{
+	clearScreen();
+	if(userChoice == 's'){
+		cout<<"Starting game."<<endl;
+	}
+	else if(userChoice == 'c'){
+		cout<<"Loading game."<<endl;
+	}
+	else if(userChoice == 'q'){
+		cout<<"Thanks for playing!!!"<<endl;
+	}
+	else{
+		throw std::invalid_argument("Try again!");
+	}
 }

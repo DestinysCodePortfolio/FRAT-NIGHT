@@ -4,14 +4,23 @@
 using namespace std;
 
 class Scene{
-    public: 
-        char choice;
-        Scene() = default;
-        virtual ~Scene() = default;
-        Scene(Scene& other) = delete;
-        Scene& operator=(Scene& other);
-        virtual void dialogue()=0;   
-        void trickleDisplayString(const string& inputString, uint8_t delay); 
+		char* choice;
+		struct DialogueTree{
+			struct choices {
+
+			};
+			DialogueTree() = default;
+			~DialogueTree()=default;
+			DialogueTree(DialogueTree& other) = delete;
+			DialogueTree& operator=(DialogueTree& other) = delete;
+		};
+	public: 
+		Scene() = default;
+		~Scene();
+		Scene(Scene& other) = delete;
+		Scene& operator=(Scene& other);
+		virtual void dialogue()=0;   
+		void trickleDisplayString(const string& inputString, uint8_t delay); 
 };
 
 class openingScene:public Scene{
