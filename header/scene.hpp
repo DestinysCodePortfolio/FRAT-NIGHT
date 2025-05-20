@@ -7,7 +7,10 @@ class Scene{
 		char* choice;
 		struct DialogueTree{
 			struct choices {
-
+				choices() = default;
+				~choices()=default;
+				choices(choices& other) = delete;
+				choices& operator=(choices& other) = delete;
 			};
 			DialogueTree() = default;
 			~DialogueTree()=default;
