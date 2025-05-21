@@ -1,26 +1,6 @@
 #include "../header/npcClass.hpp"
-#include <iostream>
-#include <thread>
-#include <chrono>
-#include <fstream>
-#include <stdexcept>
-#include <vector>
+//Honestly I didn't like the format we were using
+//I'd rather call an object named chadAggressionMeter
+//so It isn't overconveluted
 
- void NonPlayableCharacter:: gainTrust(){
-    trustMeter++;
- }
- void NonPlayableCharacter:: looseTrust(){
-    trustMeter--;
- }
-void kevin:: romance(){
-    
- }
-
- void chad:: agression(){
-   
- }
-
- void lilith:: intoxicated(){
- }
-
-
+//Someone implement this function vvv

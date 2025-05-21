@@ -5,20 +5,24 @@
 using namespace std;
 
 class Item{
-    public:
-    const string getItemName();
-    bool isInInventory();
-
-    private:
-    bool inInventory;
-    string name;
+		bool inInventory;
+		string name;
+	public:
+		Item();
+		~Item();
+		Item(Item& other) = delete;
+		Item& operator=(Item& other) = delete;
+		const string getItemName();
+		bool isInInventory();
 };
 
 class Player{
+		vector<Item> inventory;
+		uint8_t shotCounter;
 	public:
-	void shotMeter();
-
-	private:
-	std::vector<Item> inventory;
-	uint8_t shotCounter = 0;
+		Player();
+		~Player();
+		Player(Player& other) = delete;
+		Player& operator=(Player& other) = delete;
+		void increaseShotCoutnerByOne();
 };
