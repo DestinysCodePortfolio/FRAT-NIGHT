@@ -35,10 +35,6 @@ void openingScene::dialogue(){
 }
 
 
-Scene::~Scene(){
-	choice=nullptr;
-}
-
 //if you take the hug
 void takeHug::dialogue(){
     string output = "";
