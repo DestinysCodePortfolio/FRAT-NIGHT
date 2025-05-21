@@ -1,5 +1,4 @@
-
-#include "quickTimeEvent.h"
+#include "../header/quickTimeEvent.hpp"
 #include <iostream>
 
 quickTimeEvent::quickTimeEvent(double dur, std::string crrctAns){

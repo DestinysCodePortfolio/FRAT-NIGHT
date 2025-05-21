@@ -6,6 +6,7 @@ add_library(simpleLibrary
 	npcClass.cpp
 	player.cpp
 	scene.cpp
+	quickTimeEvent.cpp
 )
 
 find_library(M_LIB m)
