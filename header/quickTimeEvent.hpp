@@ -9,6 +9,7 @@ class quickTimeEvent {
 		std::string userInp;
 		std::string soln;
 	public:
+		quickTimeEvent()=delete;
 		quickTimeEvent(double dur, std::string crrctAns);
 		void setDuration(double newDur);
 		double getDuration();
