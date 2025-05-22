@@ -11,7 +11,6 @@ public:
  void gainTrust ();
  void looseTrust();
 };
-
 class chad : public NonPlayableCharacter {
 	uint8_t agressionMeter;
 	public:
