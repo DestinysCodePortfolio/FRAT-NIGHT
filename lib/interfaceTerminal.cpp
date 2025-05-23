@@ -103,18 +103,14 @@ void TitleScreen::screenAction() const{
 	}
 }
 MainGameScreen::MainGameScreen():
-	UIScreen(){
-	currentChoices = {0};
-}
+	UIScreen()
+{}
 void MainGameScreen::printScreen() const {
 	cout<<"main game print screen"<<endl;
 }
 void MainGameScreen::updateOptions(){
-	currentChoices.resize(3);
-	currentChoices.at(0)='q';
-	currentChoices.at(1)='s';
-	currentChoices.at(2)='c';
-	// cout<<"populated new options"<<endl;
+	
+	cout<<"populated new options"<<endl;
 }
 void MainGameScreen::screenAction() const{
 	clearScreen();

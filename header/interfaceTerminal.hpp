@@ -7,7 +7,6 @@ using std::string;
 
 class UIScreen { //It should be a pure virtual function isnce it is a interface
 	protected:
-		std::vector<char> currentChoices;
 		char userChoice;
 	public:
 		UIScreen();

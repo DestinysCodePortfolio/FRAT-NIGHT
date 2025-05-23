@@ -3,5 +3,7 @@ DialogueTree::DialogueTree():
 	currentScene(nullptr)
 {}
 DialogueTree::~DialogueTree(){
-	delete currentScene;
+	if (currentScene!=nullptr){
+		delete currentScene;
+	}
 }
