@@ -15,10 +15,10 @@ class UIScreen { //It should be a pure virtual function isnce it is a interface
 		UIScreen(UIScreen& other) = delete;
 		UIScreen& operator=(UIScreen& other) = delete;
 		virtual void printScreen() const = 0;
-		void userPrompt();
 		virtual void updateOptions() = 0;
-		virtual bool ifInCurrentChoices() const;
+		virtual bool ifInCurrentChoices() const = 0;
 		virtual void screenAction() const = 0;
+		void userPrompt();
 		void clearScreen() const;
 };
 

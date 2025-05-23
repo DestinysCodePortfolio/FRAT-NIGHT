@@ -27,7 +27,9 @@ Scene::Scene(char name):
 {}
 Scene::~Scene(){
 	for(Scene* currentScene : nextPossibleScenes){
-		delete currentScene;
+		if(currentScene!=nullptr){
+			delete currentScene;
+		}
 	}
 }
 void openingScene::dialogue(){

@@ -9,6 +9,7 @@ using std::cin;
 UIScreen::UIScreen():
 	userChoice(0)
 {}
+
 void UIScreen::userPrompt(){
 	cout<<"Your choice: ";
 	cin>> userChoice;
