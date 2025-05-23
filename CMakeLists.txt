@@ -25,5 +25,5 @@ add_subdirectory(lib)
 add_subdirectory(test)
 
 target_compile_options(Rush_Week PRIVATE -Wall -Wextra -Wpedantic)
-# target_compile_options(debug PRIVATE -g)
-# ^^^ turn on debug
+# target_compile_options(Rush_Week PRIVATE -g)
+# ^^^ turn on debug by adding this
