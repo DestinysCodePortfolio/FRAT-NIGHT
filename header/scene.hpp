@@ -1,39 +1,36 @@
 #pragma once
-#include <cstdint>
+#include <vector>
 #include <string>
-using namespace std;
+using std::string;
+using std::vector;
 
 class Scene{
-	struct DialogueTree{
-		struct choices {
-			choices() = default;
-			~choices()=default;
-			choices(choices& other) = delete;
-			choices& operator=(choices& other) = delete;
-		};
-		DialogueTree() = default;
-		~DialogueTree()=default;
-		DialogueTree(DialogueTree& other) = delete;
-		DialogueTree& operator=(DialogueTree& other) = delete;
-	};
+		char optionName;
+		vector<Scene*> nextPossibleScenes;
+	protected:
+		void trickleDisplayString(const string& inputString, uint8_t delay);
 	public: 
-		Scene() = default;
-		~Scene() = default;
+		Scene() = delete;
+		Scene(char name);
+		~Scene();
 		Scene(Scene& other) = delete;
-		Scene& operator=(Scene& other);
-		virtual void dialogue()=0;   
-		void trickleDisplayString(const string& inputString, uint8_t delay); 
+		Scene& operator=(Scene& other) = delete;
+		virtual void dialogue()=0;
+		virtual void updatePossibleScenes()=0;
 };
 
 struct openingScene:public Scene{
     void dialogue() override;
+		void updatePossibleScenes() override;
 };
 
 struct takeHug:public Scene{
     void dialogue() override;
+		void updatePossibleScenes() override;
 };
 
 struct rejectHug:public Scene{
     void dialogue() override;
+		void updatePossibleScenes() override;
 };
 
