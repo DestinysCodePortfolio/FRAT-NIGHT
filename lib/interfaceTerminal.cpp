@@ -9,12 +9,13 @@ using std::cin;
 UIScreen::UIScreen():
 	userChoice(0)
 {}
+
 void UIScreen::userPrompt(){
 	cout<<"Your choice: ";
 	cin>> userChoice;
 	cout<<endl;
 }
-bool UIScreen::ifInCurrentChoices() const{
+bool TitleScreen::ifInCurrentChoices() const{
 	if(userChoice!=0){
 		for(char currentOption : currentChoices){
 			if(userChoice==currentOption){
@@ -23,6 +24,9 @@ bool UIScreen::ifInCurrentChoices() const{
 		}
 	}
 	return true;
+}
+bool MainGameScreen::ifInCurrentChoices() const{
+	return 0;
 }
 void UIScreen::clearScreen() const{
 	// Clear screen (cross-platform)
@@ -99,18 +103,14 @@ void TitleScreen::screenAction() const{
 	}
 }
 MainGameScreen::MainGameScreen():
-	UIScreen(){
-	currentChoices = {0};
-}
+	UIScreen()
+{}
 void MainGameScreen::printScreen() const {
 	cout<<"main game print screen"<<endl;
 }
 void MainGameScreen::updateOptions(){
-	currentChoices.resize(3);
-	currentChoices.at(0)='q';
-	currentChoices.at(1)='s';
-	currentChoices.at(2)='c';
-	// cout<<"populated new options"<<endl;
+	
+	cout<<"populated new options"<<endl;
 }
 void MainGameScreen::screenAction() const{
 	clearScreen();

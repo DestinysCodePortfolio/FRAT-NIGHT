@@ -19,6 +19,15 @@ using std::cin;
 // }
 
 //openers dialogue-- until where my hug at
+Scene::Scene():
+	optionName(0)
+{}
+Scene::Scene(char name):
+	optionName(name)
+{}
+char Scene::getOptionName(){
+	return optionName;
+}
 void openingScene::dialogue(){
     string output = "You are Natalie Fitzgerald, a university student whose friend went missing at a frat party...\n";
     trickleDisplayString(output, 1);
@@ -33,6 +42,11 @@ void openingScene::dialogue(){
 
     // return nullptr; // if invalid input
 }
+void openingScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	for(Scene* currentPointer : nextPossibleScenes){
+		cout<<currentPointer->getOptionName()<<endl;
+	}
+}
 
 
 //if you take the hug
@@ -41,12 +55,22 @@ void takeHug::dialogue(){
     output = " He reeks of tequila and cologne that never fully covered up whatever he did last night.";
     trickleDisplayString(output, 50);
 }
+void takeHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	for(Scene* currentPointer : nextPossibleScenes){
+		cout<<currentPointer->getOptionName()<<endl;
+	}
+}
 
 //if you dont take the hug
 void rejectHug::dialogue(){
     string output = "";
     output = "Damn, Natalie. Acting brand new?";
     trickleDisplayString(output, 50);
+}
+void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	for(Scene* currentPointer : nextPossibleScenes){
+		cout<<currentPointer->getOptionName()<<endl;
+	}
 }
 
 void Scene:: trickleDisplayString(const string& inputString, uint8_t delay){

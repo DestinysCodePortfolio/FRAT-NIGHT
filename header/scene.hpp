@@ -1,39 +1,52 @@
 #pragma once
 #include <cstdint>
+#include <vector>
 #include <string>
-using namespace std;
+using std::string;
+using std::vector;
 
 class Scene{
-	struct DialogueTree{
-		struct choices {
-			choices() = default;
-			~choices()=default;
-			choices(choices& other) = delete;
-			choices& operator=(choices& other) = delete;
-		};
-		DialogueTree() = default;
-		~DialogueTree()=default;
-		DialogueTree(DialogueTree& other) = delete;
-		DialogueTree& operator=(DialogueTree& other) = delete;
-	};
+		const char optionName;
+	protected:
+		void trickleDisplayString(const string& inputString, uint8_t delay);
 	public: 
-		Scene() = default;
-		~Scene() = default;
+		Scene();
+		Scene(char name);
+		virtual ~Scene() = default;
 		Scene(Scene& other) = delete;
-		Scene& operator=(Scene& other);
-		virtual void dialogue()=0;   
-		void trickleDisplayString(const string& inputString, uint8_t delay); 
+		Scene& operator=(Scene& other) = delete;
+		char getOptionName();
+		virtual void dialogue()=0;
+		virtual void updatePossibleScenes(vector<Scene*>& nextPossibleScenes)=0;
 };
 
 struct openingScene:public Scene{
-    void dialogue() override;
+	openingScene(): Scene(){}
+	openingScene(char name): Scene(name){}
+	~openingScene() override=default;
+	openingScene(openingScene& other) = delete;
+	openingScene& operator=(openingScene& other) = delete;
+	void dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
 struct takeHug:public Scene{
-    void dialogue() override;
+	takeHug(): Scene(){}
+	takeHug(char name): Scene(name){}
+	~takeHug() override=default;
+	takeHug(takeHug& other) = delete;
+	takeHug& operator=(takeHug& other) = delete;  
+	void dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
 struct rejectHug:public Scene{
-    void dialogue() override;
+	rejectHug(): Scene(){}
+	rejectHug(char name): Scene(name){}
+	~rejectHug() override=default;
+	rejectHug(rejectHug& other) = delete;
+	rejectHug& operator=(rejectHug& other) = delete;  
+	void dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
