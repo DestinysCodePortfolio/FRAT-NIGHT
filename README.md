@@ -57,7 +57,7 @@ Output: Branching story paths and multiple unique endings depending on player ch
 ## Descrition Detail
 The Game will have a time complexity of O(n) since displaying each word separetly in a string will have a time complexity O(n). Players actions will be O(1) through the use of a switch statement to determine the branching of the story. File.txt manipulation will also be O(n) since each file's words will be changed completely to display new sentences. 
 
-## Navigation Diagram
+## Navigation Diagram 
 [Rush Week Navigation Diagram.pdf](https://github.com/user-attachments/files/20130168/Rush.Week.Navigation.Diagram.pdf)
 
 • On and Off states are when the program is running the game or is being closed.
@@ -74,7 +74,19 @@ The Game will have a time complexity of O(n) since displaying each word separetl
 
 • The Ending states are similar to the print game screen state, but they display their respective ending. They will all exit the game and delete the save file to start a new game.
 
-## Class Diagram
+## Class Diagram (Original)
+![OG Rush Week UML.pdf](https://github.com/user-attachments/assets/eb263937-e597-4754-b73a-55eee32d53cd)
+
+## Class Diagram (Updated)
 ![Class Diagram Rush Week drawio](https://github.com/user-attachments/assets/434b5bad-c6b9-482d-8c7b-ee373642a6ce)
 
+• Completed quickTimeEvent to SOLID standards  
+  • QuickTimeEvent in accordance with the single responsibility principle  
+    • Doesn’t have its own output, was written to only fulfill the objective of timing an input event  
+  • Liskov substitution satisfied thru policeRunnningScene and roofieActionScene  
+  • Only has necessary methods to fulfill ISP  
+
+• Added instances of the scene class   
+• Removed item and player classes due to unneccessary nature, both could be incorporated as choices in the dialogueTree  
+• Updated relation arrows to accurately reflect the nature of class interaction  
 
