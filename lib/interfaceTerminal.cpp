@@ -14,7 +14,7 @@ void UIScreen::userPrompt(){
 	cin>> userChoice;
 	cout<<endl;
 }
-bool UIScreen::ifInCurrentChoices() const{
+bool TitleScreen::ifInCurrentChoices() const{
 	if(userChoice!=0){
 		for(char currentOption : currentChoices){
 			if(userChoice==currentOption){
@@ -23,6 +23,9 @@ bool UIScreen::ifInCurrentChoices() const{
 		}
 	}
 	return true;
+}
+bool MainGameScreen::ifInCurrentChoices() const{
+	return 0;
 }
 void UIScreen::clearScreen() const{
 	// Clear screen (cross-platform)

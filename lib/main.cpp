@@ -12,8 +12,11 @@ int main() {
 		try{
 			currentScreen->screenAction();
 		}
-		catch(std::invalid_argument weirdChoice){
-			std::cout<<weirdChoice.what()<<std::endl;
+		catch(const std::invalid_argument& weirdChoice){
+			std::cerr<<weirdChoice.what()<<std::endl;
+		}
+		catch(...){
+			std::cerr << "Caught an exception!" << std::endl;
 		}
 		currentScreen->updateOptions();
 	}

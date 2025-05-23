@@ -11,6 +11,9 @@ class quickTimeEvent {
 	public:
 		quickTimeEvent()=delete;
 		quickTimeEvent(double dur, std::string crrctAns);
+		~quickTimeEvent() = default;
+		quickTimeEvent(quickTimeEvent& other) = delete;
+		quickTimeEvent& operator=(quickTimeEvent& other) = delete;
 		void setDuration(double newDur);
 		double getDuration();
 		bool startEvent();

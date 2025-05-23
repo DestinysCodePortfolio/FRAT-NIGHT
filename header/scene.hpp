@@ -10,7 +10,7 @@ class Scene{
 	protected:
 		void trickleDisplayString(const string& inputString, uint8_t delay);
 	public: 
-		Scene() = delete;
+		Scene();
 		Scene(char name);
 		~Scene();
 		Scene(Scene& other) = delete;
