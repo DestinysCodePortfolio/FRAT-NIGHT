@@ -85,18 +85,21 @@ void TitleScreen::updateOptions(){
 	currentChoices.at(0)='q';
 	currentChoices.at(1)='s';
 	currentChoices.at(2)='c';
-	// cout<<"populated new options"<<endl;
+    cout<<"populated new options"<<endl;
 }
-void TitleScreen::screenAction() const{
+ScreenType TitleScreen::screenAction() const{
 	clearScreen();
 	if(userChoice == 's'){
 		cout<<"Starting game."<<endl;
+		return MAIN_GAME;
 	}
 	else if(userChoice == 'c'){
 		cout<<"Loading game."<<endl;
+		 return MAIN_GAME;
 	}
 	else if(userChoice == 'q'){
 		cout<<"Thanks for playing!!!"<<endl;
+		return QUIT;
 	}
 	else{
 		throw std::invalid_argument("Try again!");
@@ -109,10 +112,10 @@ void MainGameScreen::printScreen() const {
 	cout<<"main game print screen"<<endl;
 }
 void MainGameScreen::updateOptions(){
-	
+
 	cout<<"populated new options"<<endl;
 }
-void MainGameScreen::screenAction() const{
+ScreenType MainGameScreen::screenAction() const{
 	clearScreen();
 	if(userChoice == 's'){
 		cout<<"Starting game."<<endl;

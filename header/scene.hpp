@@ -4,6 +4,11 @@
 #include <string>
 using std::string;
 using std::vector;
+enum ScreenType {
+    TITLE,
+    MAIN_GAME,
+    QUIT
+};
 
 class Scene{
 		const char optionName;
