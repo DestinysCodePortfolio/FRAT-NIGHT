@@ -1,5 +1,6 @@
 #pragma once
-#include "../header/scene.hpp"
+#include "scene.hpp"
+#include "DialogueTree.hpp"
 #include <cstdint>
 #include <string>
 #include <vector>
@@ -32,8 +33,10 @@ class TitleScreen : public UIScreen{
         ScreenType screenAction() const override; // Changed return type to ScreenType
 };
 
-struct MainGameScreen : public UIScreen{
-    MainGameScreen();
+class MainGameScreen : public UIScreen{
+    DialogueTree* theTree;
+	public:
+		MainGameScreen();
     ~MainGameScreen() override=default;
     MainGameScreen(MainGameScreen& other) = delete;
     MainGameScreen& operator=(MainGameScreen& other) = delete;

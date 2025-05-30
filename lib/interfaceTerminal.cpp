@@ -94,7 +94,8 @@ ScreenType TitleScreen::screenAction() const{
 	}
 }
 MainGameScreen::MainGameScreen():
-	UIScreen()
+	UIScreen(),
+	theTree()
 {}
 void MainGameScreen::printScreen() const {
 	cout<<"main game print screen"<<endl;
