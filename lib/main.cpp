@@ -21,5 +21,6 @@ int main() {
 		currentScreen->updateOptions();
 	}
 	delete currentScreen;
+	currentScreen=nullptr;
 	return 0;
 }
