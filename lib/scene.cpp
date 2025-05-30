@@ -158,6 +158,12 @@ void pressHer::dialogue(){
     trickleDisplayString(output, 50);
 }
 
+void pressHer::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	nextPossibleScenes.resize(1);
+	nextPossibleScenes.at(0)=new lookForKevin('t');
+	std::cout<<"Updated possible Scenes\n";
+}
+
 ///QUESTION FOR PEDRO HOW WE GONNA TRANSITION IS ONE OPTION TO GO BACK TO LOOK FOR KEVIN OKAY?  
 
 //look for kevin
@@ -189,8 +195,8 @@ void lookForKevinScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes)
 	std::cout<<"Updated possible Scenes\n";
 }
 
-//KEVIN KILLS YOU ENDING
-void kevinDeathEnding:: dialogue(){
+//kevin argument
+void kevinArgument:: dialogue(){
     string output = "";
     output = "Kevin: Natalie, no one here knows anything. You’re supposed to be her best friend. How would we know, and you wouldn't?
     \n Natalie: BULLSHIT KEVIN!
@@ -199,8 +205,14 @@ void kevinDeathEnding:: dialogue(){
     \n Kevin: She got a ride,  but that's the last we saw of her too. Lower your voice before they hear you.
     \n Natalie: Kevin, that's it. I'm going to the police like I should have in the first place.
     \n Kevin slams you into the wall and covers your mouth. He drags you towards the woods in the backyard, forcing you to be quiet. 
-    \nHe tells you if you stay quiet, he’ll show you the truth.
-    \n The air around me seems to grow heavier as Kevin pulls me deeper into the shadow of the woods. 
+    \nHe tells you if you stay quiet, he’ll show you the truth.";
+    trickleDisplayString(output, 50);
+}
+
+//KEVIN KILLS YOU ENDING
+void kevinDeathEnding:: dialogue(){
+    string output = "";
+    output = "The air around me seems to grow heavier as Kevin pulls me deeper into the shadow of the woods. 
     \nThe muffled bass of the music from the party behind us does nothing to drown out the growing sense of dread in my gut. 
     \nI try to keep my footing, but Kevin’s grip is unrelenting.
     \nHe slams me against a rough tree trunk, the bark scraping against my back, the suddenness of it stealing my breath.
@@ -213,7 +225,29 @@ void kevinDeathEnding:: dialogue(){
     trickleDisplayString(output, 50);
 }
 
+//Kevin romance
+void kevinRomance:: dialogue(){
+    string output = "";
+    output = "Kevin becomes flushed and stammers.
+    \n Kevin:  I, I don’t know I’m sorry. All I know is that when someone’s been gone for this long… they probably aren’t coming back Natalie.
+    \n Kevin:  I think it might be time for you to let the police handle it, and for you to move on.
+    \n The weight of the situation truly crashes down on me. My throat swells and tears stream down 
+    \n my face. He brushes the tear off of my cheek. Our eyes lock, and my body relaxes. I always 
+    \n thought he was some douche, but this moment feels genuine. Was Lilith telling the truth? 
+    \n Kevin: We will find her, I promise. She wouldn’t want you to panic, Natalie. I don’t want to see you like this. 
+    \n He hands me a red solo cup.
+    \n Kevin: We will go to the police station first thing tomorrow, together. But tonight let’s just relax.
+    \n Take shot [t] 
+    \n Reject shot [r]"; 
+    trickleDisplayString(output, 50);
+}
 
+void lookForKevinScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	nextPossibleScenes.resize(2);
+	nextPossibleScenes.at(0)=new takeThirdShot('t'); //would take you to kevinDeathEnding
+	nextPossibleScenes.at(1)=new rejectThirdShot('r'); //would take you to kevinArgument
+	std::cout<<"Updated possible Scenes\n";
+}
 
 void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
     const size_t BOX_WIDTH = 70; // Width inside the borders
