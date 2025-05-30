@@ -43,9 +43,10 @@ void openingScene::dialogue(){
     // return nullptr; // if invalid input
 }
 void openingScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-	for(Scene* currentPointer : nextPossibleScenes){
-		cout<<currentPointer->getOptionName()<<endl;
-	}
+	nextPossibleScenes.resize(2);
+	nextPossibleScenes.at(0)=new takeHug('t');
+	nextPossibleScenes.at(1)=new rejectHug('r');
+	std::cout<<"Updated possible Scenes\n";
 }
 
 
