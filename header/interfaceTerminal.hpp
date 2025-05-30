@@ -15,7 +15,6 @@ class UIScreen { //It should be a pure virtual function since it is an interface
         UIScreen& operator=(UIScreen& other) = delete;
         virtual void printScreen() const = 0;
         virtual void updateOptions() = 0;
-        virtual bool ifInCurrentChoices() const = 0;
         virtual ScreenType screenAction() const = 0; // Changed return type to ScreenType
         void userPrompt();
         void clearScreen() const;
@@ -31,7 +30,6 @@ class TitleScreen : public UIScreen{
         void printScreen() const override;
         void updateOptions() override;
         ScreenType screenAction() const override; // Changed return type to ScreenType
-        bool ifInCurrentChoices() const override;
 };
 
 struct MainGameScreen : public UIScreen{
@@ -42,5 +40,4 @@ struct MainGameScreen : public UIScreen{
     void printScreen() const override;
     void updateOptions() override;
     ScreenType screenAction() const override; // Changed return type to ScreenType
-    bool ifInCurrentChoices() const override;
 };

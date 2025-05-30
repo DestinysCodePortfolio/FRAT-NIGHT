@@ -15,19 +15,7 @@ void UIScreen::userPrompt(){
 	cin>> userChoice;
 	cout<<endl;
 }
-bool TitleScreen::ifInCurrentChoices() const{
-	if(userChoice!=0){
-		for(char currentOption : currentChoices){
-			if(userChoice==currentOption){
-				return false;
-			}
-		}
-	}
-	return true;
-}
-bool MainGameScreen::ifInCurrentChoices() const{
-	return 0;
-}
+
 void UIScreen::clearScreen() const{
 	// Clear screen (cross-platform)
 	#ifdef _WIN32
@@ -129,4 +117,5 @@ ScreenType MainGameScreen::screenAction() const{
 	else{
 		throw std::invalid_argument("Try again!");
 	}
+	return QUIT;
 }
