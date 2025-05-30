@@ -134,6 +134,85 @@ void rejectFirstShot::dialogue(){
 
 
 //takes second shot
+void takeSecondShot::dialogue(){
+    string output = "";
+    output = "Lilith: Well the reason why he’s so drunk is cause he was trying to get the balls to talk to you again. Ever since yall met, he can't shut up about how he wants to get to know you more - you should go and talk to him right now see for yourself!
+    \n Leave and look for Kevin[t]
+    \n Press her about what happened to[REDACTED][r]";
+    trickleDisplayString(output, 50);
+}
+
+void takeSecondShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	nextPossibleScenes.resize(2);
+	nextPossibleScenes.at(0)=new lookForKevin('t');
+	nextPossibleScenes.at(1)=new pressHer('r');
+	std::cout<<"Updated possible Scenes\n";
+}
+
+//press her
+void pressHer::dialogue(){
+    string output = "";
+    output = "Lilith : I did what he would have wanted.
+    \n ...
+    \n Lilith: I told you I don't know already, anyway I'm going back in to distract Chad while you get Kevin's attention, tell me how it goes."
+    trickleDisplayString(output, 50);
+}
+
+///QUESTION FOR PEDRO HOW WE GONNA TRANSITION IS ONE OPTION TO GO BACK TO LOOK FOR KEVIN OKAY?  
+
+//look for kevin
+void lookForKevinScene:: dialogue(){
+    string output = "";
+    output = " I see Kevin next to the bathroom, keeping to himself. He doesn’t look like he's doing too well, as if he were about to profusely vomit.
+    \n I sidle up to him, nervous with the revelation that Lilith gave me. We aren’t necessarily close, but we became pretty good friends 
+    \n during our English class, as we did a final presentation together and both became academic victims.
+    \n  Kevin: So, where have you been? I haven’t seen you since our project last quarter.
+    \n Natalie: WHAT?
+    \n The music is blaring. My ears are ringing.
+    \n Kevin: WHERE HAVE YOU BEEN?!
+    \n Natalie: WHAT???
+    \n He laughs, and gestures to the porch.
+    \n Kevin: OUTSIDE. LET'S GO OUTSIDEEE.
+    \n We push through the crowd of people and eventually make it outside.
+    \n Kevin: Anyways, as I was saying, or rather screaming, what have you been up to lately?
+    \n Natalie: I've been looking for [REDACTED]. I haven’t seen her around in a few days, and no one has told me where she is. Have you seen her around?
+    \n He looks on edge.
+    \n Intensify your glare[t]
+    \n Put your hand on his arm, feigning innocent conern[r]";
+    trickleDisplayString(output, 50);
+}
+
+void lookForKevinScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	nextPossibleScenes.resize(2);
+	nextPossibleScenes.at(0)=new glare('t');
+	nextPossibleScenes.at(1)=new touchHim('r');
+	std::cout<<"Updated possible Scenes\n";
+}
+
+//KEVIN KILLS YOU ENDING
+void kevinDeathEnding:: dialogue(){
+    string output = "";
+    output = "Kevin: Natalie, no one here knows anything. You’re supposed to be her best friend. How would we know, and you wouldn't?
+    \n Natalie: BULLSHIT KEVIN!
+    \n Kevin: Natalie I swear I don't know.
+    \n Natalie: THE LAST NIGHT I HEARD FROM HER, SHE WAS WITH YOU, LILITH, AND CHAD. YOU GUYS SHOULD HAVE AT LEAST SEEN HER LEAVE.
+    \n Kevin: She got a ride,  but that's the last we saw of her too. Lower your voice before they hear you.
+    \n Natalie: Kevin, that's it. I'm going to the police like I should have in the first place.
+    \n Kevin slams you into the wall and covers your mouth. He drags you towards the woods in the backyard, forcing you to be quiet. 
+    \nHe tells you if you stay quiet, he’ll show you the truth.
+    \n The air around me seems to grow heavier as Kevin pulls me deeper into the shadow of the woods. 
+    \nThe muffled bass of the music from the party behind us does nothing to drown out the growing sense of dread in my gut. 
+    \nI try to keep my footing, but Kevin’s grip is unrelenting.
+    \nHe slams me against a rough tree trunk, the bark scraping against my back, the suddenness of it stealing my breath.
+    \nMy pulse races in my ears, louder than the thudding beat inside. I try to scream, but Kevin’s hand is already over my mouth, his fingers cold and trembling.
+    \nKevin: You should have kept quiet, Natalie. But fear not,this is a privilege for her and for you. As his children we must obey, he's been waiting for you.
+    \nKevin: We will all be in his kingdom together, your death will have purpose, your flesh will bring us one step closer to reuniting with our father! επιστροφή σε μας Διόνυσο!
+    \n I writhe in pain as zip ties tighten around my wrists, he pries my jaw open and pours sour wine down my throat.
+    \n I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness.
+    \n I'm sorry Evelyn , I couldn't save you.";
+    trickleDisplayString(output, 50);
+}
+
 
 
 void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
