@@ -159,7 +159,7 @@ void takeSecondShot::dialogue(){
     "\n leave and look for kevin [L]" +
     "\n walk away [W] "+
     "\n press her about what happened to REDACTED [P]";
-    trickleDisplayString(output, 50);
+    trickleDisplayString(output, 50);  
 }
 void takeSecondShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
     nextPossibleScenes.resize(3);
