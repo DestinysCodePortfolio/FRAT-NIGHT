@@ -68,13 +68,7 @@ void TitleScreen::printScreen() const {
 	// Bottom border
 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 }
-void TitleScreen::updateOptions(){
-	currentChoices.resize(3);
-	currentChoices.at(0)='q';
-	currentChoices.at(1)='s';
-	currentChoices.at(2)='c';
-    cout<<"populated new options"<<endl;
-}
+void TitleScreen::updateOptions(){}
 ScreenType TitleScreen::screenAction() const{
 	clearScreen();
 	if(userChoice == 's'){
@@ -101,8 +95,9 @@ void MainGameScreen::printScreen() const {
 	cout<<"main game print screen"<<endl;
 }
 void MainGameScreen::updateOptions(){
-
-	cout<<"populated new options"<<endl;
+	std::cout<<"going to update options"<<endl;
+	theTree->updateScene(userChoice);
+	std::cout<<"did to update options"<<endl;
 }
 ScreenType MainGameScreen::screenAction() const{
 	clearScreen();

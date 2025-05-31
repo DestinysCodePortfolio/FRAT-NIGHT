@@ -1,14 +1,24 @@
 #include "../header/DialogueTree.hpp"
+#include <iostream>
 DialogueTree::DialogueTree():
-	currentScene(nullptr)
+	nextPossibleScenes(2),
+	currentScene(new openingScene())
 {}
 DialogueTree::~DialogueTree(){
 	if (currentScene!=nullptr){
 		delete currentScene;
+		currentScene=nullptr;
+	}
+	for(Scene* sceneVictim : nextPossibleScenes){
+		if (sceneVictim!=nullptr){
+			delete currentScene;
+		}
 	}
 }
 void DialogueTree::updateScene(char userInput){
+	std::cout<<"going to update possible scenes"<<std::endl;
 	currentScene->updatePossibleScenes(nextPossibleScenes);
+	std::cout<<"did to update possible scenes"<<std::endl;
 	for(Scene* currentPossibleScene : nextPossibleScenes){
 		if(userInput==currentPossibleScene->getOptionName()){
 			delete currentScene;
