@@ -113,7 +113,7 @@ void firstShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScen
 
 
 //take first shot
-void secondShotOptionScene::dialogue(){
+void takeFirstShot::dialogue(){
     string output = string("Kevin: WOOOAAAAAHH THAS LIQA!!!") +
     "\n Lilith: I'm tired of babysitting him, Chad, tag in." +
     "\n Lilith grabs my arm and pulls me to the couch." +
@@ -151,8 +151,26 @@ void rejectFirstShot::dialogue(){
 
 //takes second shot
 
-
-
+void takeSecondShot::dialogue(){
+    string output = string("Lilith: Well the reason why he’s so drunk is cause ") +
+    "\n he was trying to get the balls to talk to you again." +
+    "\n Ever since yall met, he can't shut up about how he wants to get to know you more" +
+    "\n  - you should go and talk to him right now see for yourself!." +
+    "\n leave and look for kevin [L]" +
+    "\n walk away [W] "+
+    "\n press her about what happened to REDACTED [P]";
+    trickleDisplayString(output, 50);
+}
+void takeSecondShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+    nextPossibleScenes.resize(3);
+    leave* leaveScene = new leave('L');
+    nextPossibleScenes.at(0)= leaveScene;
+    walk* walkScene = new walk('W');
+    nextPossibleScenes.at(1)= walkScene;
+    press* pressLilith = new press('P');
+    nextPossibleScenes.at(2)= pressLilith;
+    cout << "Updated possible Scenes\n";
+}
 
 void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
     const size_t BOX_WIDTH = 70; // Width inside the borders

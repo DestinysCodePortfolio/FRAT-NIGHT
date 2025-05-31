@@ -114,5 +114,37 @@ struct rejectSecondShot:public Scene{
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
+struct leave:public Scene{
+	leave(): Scene(){}
+	leave(char name): Scene(name){}
+	~leave() override=default;
+	leave(leave& other) = delete;
+	leave& operator=(leave& other) = delete;  
+	void dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+
+struct walk:public Scene{
+	walk(): Scene(){}
+	walk(char name): Scene(name){}
+	~walk() override=default;
+	walk(walk& other) = delete;
+	walk& operator=(walk& other) = delete;  
+	void dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+struct press:public Scene{
+	press(): Scene(){}
+	press(char name): Scene(name){}
+	~press() override=default;
+	press(press& other) = delete;
+	press& operator=(press& other) = delete;  
+	void dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+
 
 
