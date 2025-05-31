@@ -88,7 +88,7 @@ void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 
 //Continuing scene: kevin and lilith intro
 void firstShotOptionScene::dialogue(){
-    string output = "Natalie: Whatever. Have you seen [REDACTED]? She was not at her apartment, has not shown up to class, and her location is off…" +
+    string output = string("Natalie: Whatever. Have you seen [REDACTED]? She was not at her apartment, has not shown up to class, and her location is off…") +
     "\n Chad: Bro… I dunno. She is probably out getting hazed with her bigs or whatever." +
     "\n His eyes light up. " +
     "\nChad: But yo, forget that—you need to catch up. SHOTS. NOW. \n He grabs my arm, dragging me towards the kitchen. " +
@@ -114,16 +114,16 @@ void firstShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScen
 
 //take first shot
 void secondShotOptionScene::dialogue(){
-    string output = "Kevin: WOOOAAAAAHH THAS LIQA!!!" +
-    "\n Lilith: I'm tired of babysitting him, Chad, tag in."+
-    "\n Lilith grabs my arm and pulls me to the couch."+
-    "\n Lilith: So what do you think of Kevin , he's cute huh?"+
-    "\n Well yes..."+
-    "\n Natalie: Dude..."+
-    "\n Lilith: My bad I'm just trying to help my bro out. After all, I heard that you and your man just broke up..."+
-    "\n She pulls out small bottle of tequila from her purse."+
-    "\n Lilith: Oops did that slip out , well I'm too deep in now to not tell you, but i need another shot so WE forget that I told you!"+
-    "\n Take the shot: Kevin is cute, and I wanna know more[t]"+
+    string output = string("Kevin: WOOOAAAAAHH THAS LIQA!!!") +
+    "\n Lilith: I'm tired of babysitting him, Chad, tag in." +
+    "\n Lilith grabs my arm and pulls me to the couch." +
+    "\n Lilith: So what do you think of Kevin , he's cute huh?" +
+    "\n Well yes..." +
+    "\n Natalie: Dude..." +
+    "\n Lilith: My bad I'm just trying to help my bro out. After all, I heard that you and your man just broke up..." +
+    "\n She pulls out small bottle of tequila from her purse." +
+    "\n Lilith: Oops did that slip out , well I'm too deep in now to not tell you, but i need another shot so WE forget that I told you!" +
+    "\n Take the shot: Kevin is cute, and I wanna know more[t]" +
     "\n Reject the shot: I need to find my friend[r]";
     trickleDisplayString(output, 50);
 }
@@ -131,7 +131,7 @@ void secondShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleSce
     nextPossibleScenes.resize(2);
     takeSecondShot* takeShotTwo = new takeSecondShot('t');
     nextPossibleScenes.at(0)= takeShotTwo;
-    rejwctSecondShot* noShotTwo = new rejectSecondShot('r')
+    rejectSecondShot* noShotTwo = new rejectSecondShot('r');
     nextPossibleScenes.at(1)= noShotTwo;
     cout << "Updated possible Scenes\n";
 }
@@ -141,8 +141,8 @@ void secondShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleSce
 
 //reject first shot
 void rejectFirstShot::dialogue(){
-    string output = "Chad: I know you're paranoid about your friend and all , but she aint here little lady. Stop killing the vibe."+
-    "\n Natalie - Fine I'll find her myself, jerk.";
+    string output = string("Chad: I know you're paranoid about your friend and all , but she aint here little lady. Stop killing the vibe.") +
+    "\n Natalie: Fine I'll find her myself, jerk.";
     trickleDisplayString(output, 50);
 }
 
