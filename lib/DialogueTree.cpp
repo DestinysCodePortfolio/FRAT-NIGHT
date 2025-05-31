@@ -11,12 +11,13 @@ DialogueTree::~DialogueTree(){
 	}
 	for(Scene* sceneVictim : nextPossibleScenes){
 		if (sceneVictim!=nullptr){
-			delete currentScene;
+			delete sceneVictim;
+			sceneVictim = nullptr;
 		}
 	}
 }
 void DialogueTree::updateScene(char userInput){
-	std::cout<<"going to update possible scenes"<<std::endl;
+	std::cout<<"going to update possible scenes size: "<<nextPossibleScenes.size()<<std::endl;
 	currentScene->updatePossibleScenes(nextPossibleScenes);
 	std::cout<<"did to update possible scenes"<<std::endl;
 	for(Scene* currentPossibleScene : nextPossibleScenes){

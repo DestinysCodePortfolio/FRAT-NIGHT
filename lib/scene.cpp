@@ -90,10 +90,8 @@ void firstShotOptionScene::dialogue(){
 }
 void firstShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
     nextPossibleScenes.resize(2);
-    takeFirstShot* takeFirst = new takeFirstShot('t');
-    nextPossibleScenes.at(0)= takeFirst;
-    rejectFirstShot* rejectFirst = new rejectFirstShot('r');
-    nextPossibleScenes.at(1)= rejectFirst;
+    nextPossibleScenes.at(0)= new takeFirstShot('t');;
+    nextPossibleScenes.at(1)= new rejectFirstShot('r');
     cout<<"Updated possible Scenes\n";
 }
 
