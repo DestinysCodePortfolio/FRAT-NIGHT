@@ -6,6 +6,13 @@
 #include <vector>
 using std::string;
 
+enum ScreenType {
+	TITLE,
+	MAIN_GAME,
+	QUIT,
+	RUNNING_GAME
+};
+
 class UIScreen { //It should be a pure virtual function since it is an interface
     protected:
         char userChoice;
@@ -21,23 +28,21 @@ class UIScreen { //It should be a pure virtual function since it is an interface
         void clearScreen() const;
 };
 
-class TitleScreen : public UIScreen{
-        std::vector<char> currentChoices;
-    public:
-        TitleScreen();
-        ~TitleScreen() override=default;
-        TitleScreen(TitleScreen& other) = delete;
-        TitleScreen& operator=(TitleScreen& other) = delete;
-        void printScreen() const override;
-        void updateOptions() override;
-        ScreenType screenAction() const override; // Changed return type to ScreenType
+struct TitleScreen : public UIScreen{
+	TitleScreen();
+	~TitleScreen() override=default;
+	TitleScreen(TitleScreen& other) = delete;
+	TitleScreen& operator=(TitleScreen& other) = delete;
+	void printScreen() const override;
+	void updateOptions() override;
+	ScreenType screenAction() const override; // Changed return type to ScreenType
 };
 
 class MainGameScreen : public UIScreen{
     DialogueTree* theTree;
 	public:
 		MainGameScreen();
-    ~MainGameScreen() override=default;
+    ~MainGameScreen();
     MainGameScreen(MainGameScreen& other) = delete;
     MainGameScreen& operator=(MainGameScreen& other) = delete;
     void printScreen() const override;

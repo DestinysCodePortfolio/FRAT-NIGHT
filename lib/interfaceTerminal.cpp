@@ -18,15 +18,14 @@ void UIScreen::userPrompt(){
 
 void UIScreen::clearScreen() const{
 	// Clear screen (cross-platform)
-	#ifdef _WIN32
-		system("cls");
-	#else
-		system("clear");
-	#endif
+	// #ifdef _WIN32
+	// 	system("cls");
+	// #else
+	// 	system("clear");
+	// #endif
 }
 TitleScreen::TitleScreen():
 	UIScreen(){
-	currentChoices = {0};
 }
 void TitleScreen::printScreen() const {
 	const string GAME_TITLE = "FRAT NIGHT!";
@@ -84,34 +83,31 @@ ScreenType TitleScreen::screenAction() const{
 		return QUIT;
 	}
 	else{
-		throw std::invalid_argument("Try again!");
+		cout<<"Try again!"<<endl;
+		return TITLE;
 	}
 }
 MainGameScreen::MainGameScreen():
 	UIScreen(),
-	theTree()
+	theTree(new DialogueTree())
 {}
+MainGameScreen::~MainGameScreen(){
+	delete theTree;
+	theTree=nullptr;
+}
 void MainGameScreen::printScreen() const {
-	cout<<"main game print screen"<<endl;
+	theTree->printCurrentDialogue();
 }
 void MainGameScreen::updateOptions(){
-	std::cout<<"going to update options"<<endl;
+	std::cout<<"going to update options: "<<theTree->getCurrentSceneName()<<endl;
 	theTree->updateScene(userChoice);
 	std::cout<<"did to update options"<<endl;
 }
 ScreenType MainGameScreen::screenAction() const{
-	clearScreen();
-	if(userChoice == 's'){
-		cout<<"Starting game."<<endl;
-	}
-	else if(userChoice == 'c'){
-		cout<<"Loading game."<<endl;
-	}
-	else if(userChoice == 'q'){
-		cout<<"Thanks for playing!!!"<<endl;
+	if(userChoice!='q'){
+		return RUNNING_GAME;
 	}
 	else{
-		throw std::invalid_argument("Try again!");
+		return QUIT;
 	}
-	return QUIT;
 }

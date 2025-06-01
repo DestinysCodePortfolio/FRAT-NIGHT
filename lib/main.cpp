@@ -17,6 +17,8 @@ int main() {
 			ScreenType nextScreen = currentScreen->screenAction();
 			cout<<"screen action"<<endl;
 			switch (nextScreen) {
+				case RUNNING_GAME:
+					break;
 				case MAIN_GAME:
 					delete currentScreen;
 					currentScreen = new MainGameScreen();
@@ -47,6 +49,7 @@ int main() {
 			std::cerr << "Caught an exception!" << std::endl;
 			running=false;
 		}
+		cout<<"going to update options from main"<<endl;
 		currentScreen->updateOptions();
 		cout<<"updated options"<<endl;
 	}
