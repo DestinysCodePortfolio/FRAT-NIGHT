@@ -1,7 +1,6 @@
 #include "../header/DialogueTree.hpp"
 #include <iostream>
 DialogueTree::DialogueTree():
-	nextPossibleScenes(2),
 	currentScene(new openingScene('o'))
 {}
 DialogueTree::~DialogueTree(){
@@ -9,10 +8,10 @@ DialogueTree::~DialogueTree(){
 		delete currentScene;
 		currentScene=nullptr;
 	}
-	for(Scene* sceneVictim : nextPossibleScenes){
-		if (sceneVictim!=nullptr){
-			delete sceneVictim;
-			sceneVictim = nullptr;
+	for(Scene* currentPointer : nextPossibleScenes){
+		if(currentPointer!=nullptr){
+			delete currentPointer;
+			currentPointer=nullptr;
 		}
 	}
 }

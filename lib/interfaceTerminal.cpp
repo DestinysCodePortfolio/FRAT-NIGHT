@@ -31,10 +31,9 @@ void TitleScreen::printScreen() const {
 	const string GAME_TITLE = "FRAT NIGHT!";
 	const string MENU_OPTIONS[] = {
 		"1. Start Game [s]",
-		"2. Continue Game [c]",
-		"3. Quit [q]"
+		"2. Quit [q]"
 	};
-	const int NUM_OPTIONS = 3;
+	const int NUM_OPTIONS = 2;
 	const uint8_t BOX_WIDTH = 40; // changes length of title screen box
 
 	// Double-line border characters
@@ -73,10 +72,6 @@ ScreenType TitleScreen::screenAction() const{
 	if(userChoice == 's'){
 		cout<<"Starting game."<<endl;
 		return MAIN_GAME;
-	}
-	else if(userChoice == 'c'){
-		cout<<"Loading game."<<endl;
-		 return MAIN_GAME;
 	}
 	else if(userChoice == 'q'){
 		cout<<"Thanks for playing!!!"<<endl;
