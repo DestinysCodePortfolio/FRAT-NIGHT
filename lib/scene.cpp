@@ -59,27 +59,36 @@ string takeHug::dialogue(){
     string output = string("\n He reeks of tequila and cologne that never fully covered up whatever he did last night.")
     + "\n Natalie: Chad, have you been drinking?!"
     + "\n Chad: Have you not?"
-    + "It's Halloweekend, babe. \n It’s Thursday.";
+    + "It's Halloweekend, babe."
+    + "\n It’s Thursday."
+    + "\n Ask about [REDACTED] [t]";
     trickleDisplayString(output, 50);
     return output;
 }
+
 void takeHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-	for(Scene* currentPointer : nextPossibleScenes){
-		cout<<currentPointer->getOptionName()<<endl;
-	}
+    nextPossibleScenes.resize(1);
+	nextPossibleScenes.at(0)=new firstShotOptionScene('t');
+	std::cout<<"Updated possible Scenes\n";
 }
+
+
 
 //if you dont take the hug
 string rejectHug::dialogue(){
-    string output = string("\n Damn, Natalie. Acting brand new?");
+    string output = string("\n Damn, Natalie. Acting brand new?")
+    + "\n Ask about [REDACTED] [t]";
     trickleDisplayString(output, 50);
     return output;
 }
+
 void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-	for(Scene* currentPointer : nextPossibleScenes){
-		cout<<currentPointer->getOptionName()<<endl;
-	}
+	nextPossibleScenes.resize(1);
+	nextPossibleScenes.at(0)=new firstShotOptionScene('t');
+	std::cout<<"Updated possible Scenes\n";
 }
+
+
 
 //Continuing scene: kevin and lilith intro
 string firstShotOptionScene::dialogue(){
@@ -140,6 +149,10 @@ string rejectFirstShot::dialogue(){
     + "\n Natalie - Fine I'll find her myself, jerk.";
     trickleDisplayString(output, 50);
     return output;
+}
+
+void rejectFirstShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+
 }
 
 
@@ -228,9 +241,13 @@ string kevinArgument:: dialogue(){
     + "\n Kevin: We will all be in his kingdom together, your death will have purpose, your flesh will bring us one step closer to reuniting with our father! επιστροφή σε μας Διόνυσο!"
     + "\n I writhe in pain as zip ties tighten around my wrists, he pries my jaw open and pours sour wine down my throat."
     + "\n I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness."
-    + "\n I'm sorry Evelyn , I couldn't save you.";
+    + "\n I'm sorry Evelyn , I couldn't save you."
+    + "\n Press q to quit";
     trickleDisplayString(output, 50);
     return output;
+}
+void kevinArgument::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+
 }
 
 
@@ -272,8 +289,16 @@ string takeThirdShot:: dialogue(){
     + "\n Kevin: We will all be in his kingdom together, your death will have purpose, your flesh will bring us one step closer to reuniting with our father! επιστροφή σε μας Διόνυσο!"
     + "\n I writhe in pain as zip ties tighten around my wrists, he pries my jaw open and pours sour wine down my throat."
     + "\n I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness."
-    + "\n I'm sorry Evelyn , I couldn't save you.";
+    + "\n I'm sorry Evelyn , I couldn't save you."
+    + "\n Press q to quit.";
+    trickleDisplayString(output, 50);
+    return output;
 }
+
+void takeThirdShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+
+}
+
 
 string rejectThirdShot:: dialogue(){
     string output = string("\n Kevin: Natalie, no one here knows anything. You’re supposed to be her best friend. How would we know, and you wouldn't?")
@@ -293,11 +318,15 @@ string rejectThirdShot:: dialogue(){
     + "\n Kevin: We will all be in his kingdom together, your death will have purpose, your flesh will bring us one step closer to reuniting with our father! επιστροφή σε μας Διόνυσο!"
     + "\n I writhe in pain as zip ties tighten around my wrists, he pries my jaw open and pours sour wine down my throat."
     + "\n I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness."
-    + "\n I'm sorry Evelyn , I couldn't save you.";
+    + "\n I'm sorry Evelyn , I couldn't save you."
+    + "\n Press q to quit";
     trickleDisplayString(output, 50);
     return output;
 } 
 
+void rejectThirdShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+
+}
 
 
 // vvv Put this in the main game screen, not in the scene class
