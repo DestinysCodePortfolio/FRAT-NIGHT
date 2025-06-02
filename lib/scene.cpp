@@ -20,8 +20,6 @@ void Scene:: trickleDisplayString(const string& inputString, uint8_t delay){
 	cout<<endl;
 }
 
-
-
 //openers dialogue-- until where my hug at
 Scene::Scene():
     optionName(0)
@@ -37,11 +35,9 @@ void openingScene::dialogue(){
     trickleDisplayString(output, 1);
 }
 void openingScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-	std::cout<<"going to update vector"<<std::endl;
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new takeHug('t');
 	nextPossibleScenes.at(1)=new rejectHug('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -50,24 +46,20 @@ void openingScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 //if you take the hug
 void takeHug::dialogue(){
     string output = " He reeks of tequila and cologne that never fully covered up whatever he did last night.\n Natalie: Chad, have you been drinking?! \n Chad: Have you not? It's Halloweekend, babe. \n It’s Thursday.";
-    trickleDisplayString(output, 50);
+    trickleDisplayString(output, 1);
 }
 void takeHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-    for(Scene* currentPointer : nextPossibleScenes){
-        cout<<currentPointer->getOptionName()<<endl;
-    }
+	nextPossibleScenes.resize(0);
 }
 
 
 //if you dont take the hug
 void rejectHug::dialogue(){
     string output = "Damn, Natalie. Acting brand new?";
-    trickleDisplayString(output, 50);
+    trickleDisplayString(output, 1);
 }
 void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-    for(Scene* currentPointer : nextPossibleScenes){
-        cout<<currentPointer->getOptionName()<<endl;
-    }
+	nextPossibleScenes.resize(0);
 }
 
 //Continuing scene: kevin and lilith intro
@@ -84,7 +76,6 @@ void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 // 	"\n Chad : PICK YOUR POISON!"+
 // 	"\n Take the shot[t]"+
 // 	"\n Reject the shot[r]";
-// 	trickleDisplayString(output, 50);
 // }
 // void firstShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 // 	nextPossibleScenes.resize(2);
