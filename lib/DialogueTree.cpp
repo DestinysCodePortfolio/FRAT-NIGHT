@@ -14,6 +14,7 @@ DialogueTree::~DialogueTree(){
 			currentPointer=nullptr;
 		}
 	}
+	nextPossibleScenes.clear();
 }
 void DialogueTree::updateScene(char userInput){
 	std::cout<<"going to update possible scenes size: "<<nextPossibleScenes.size()<<std::endl;

@@ -26,6 +26,7 @@ void Scene::deletePointersInVector(vector<Scene*>& nextPossibleScenes){
 			currentPointer=nullptr;
 		}
 	}
+	nextPossibleScenes.clear();
 }
 
 
