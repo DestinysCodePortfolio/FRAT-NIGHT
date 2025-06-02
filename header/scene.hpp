@@ -16,7 +16,6 @@ class Scene{
 		Scene(Scene& other) = delete;
 		Scene& operator=(Scene& other) = delete;
 		char getOptionName();
-		void deletePointersInVector(vector<Scene*>& nextPossibleScenes);
 		virtual void dialogue()=0;
 		virtual void updatePossibleScenes(vector<Scene*>& nextPossibleScenes)=0;
 };

@@ -19,16 +19,6 @@ void Scene:: trickleDisplayString(const string& inputString, uint8_t delay){
 	}
 	cout<<endl;
 }
-void Scene::deletePointersInVector(vector<Scene*>& nextPossibleScenes){
-	for(Scene* currentPointer : nextPossibleScenes){
-		if(currentPointer!=nullptr){
-			delete currentPointer;
-			currentPointer=nullptr;
-		}
-	}
-	nextPossibleScenes.clear();
-}
-
 
 //openers dialogue-- until where my hug at
 Scene::Scene():
@@ -45,12 +35,9 @@ void openingScene::dialogue(){
     trickleDisplayString(output, 1);
 }
 void openingScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-	std::cout<<"going to update vector"<<std::endl;
-	deletePointersInVector(nextPossibleScenes);
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new takeHug('t');
 	nextPossibleScenes.at(1)=new rejectHug('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -62,7 +49,6 @@ void takeHug::dialogue(){
     trickleDisplayString(output, 1);
 }
 void takeHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-	deletePointersInVector(nextPossibleScenes);
 	nextPossibleScenes.resize(0);
 }
 
@@ -73,7 +59,6 @@ void rejectHug::dialogue(){
     trickleDisplayString(output, 1);
 }
 void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-	deletePointersInVector(nextPossibleScenes);
 	nextPossibleScenes.resize(0);
 }
 

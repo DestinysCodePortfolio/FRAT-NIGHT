@@ -23,6 +23,6 @@ add_executable(Rush_Week
 add_subdirectory(lib)
 add_subdirectory(test)
 
+# vvv turn on debug by adding this
 target_compile_options(Rush_Week PRIVATE -Wall -Wextra -Wpedantic)
 target_compile_options(Rush_Week PRIVATE -g)
-# ^^^ turn on debug by adding this

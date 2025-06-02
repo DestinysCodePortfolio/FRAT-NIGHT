@@ -17,7 +17,6 @@ void UIScreen::userPrompt(){
 }
 
 void UIScreen::clearScreen() const{
-	// Clear screen (cross-platform)
 	// #ifdef _WIN32
 	// 	system("cls");
 	// #else
@@ -70,7 +69,7 @@ void TitleScreen::updateOptions(){}
 ScreenType TitleScreen::screenAction() const{
 	clearScreen();
 	if(userChoice == 's'){
-		cout<<"Starting game."<<endl;
+		cout<<"Starting game. Loading percentage: %100\n\n";
 		return MAIN_GAME;
 	}
 	else if(userChoice == 'q'){
@@ -78,7 +77,6 @@ ScreenType TitleScreen::screenAction() const{
 		return QUIT;
 	}
 	else{
-		cout<<"Try again!"<<endl;
 		return TITLE;
 	}
 }
@@ -94,15 +92,15 @@ void MainGameScreen::printScreen() const {
 	theTree->printCurrentDialogue();
 }
 void MainGameScreen::updateOptions(){
-	std::cout<<"going to update options: "<<theTree->getCurrentSceneName()<<endl;
 	theTree->updateScene(userChoice);
-	std::cout<<"did to update options"<<endl;
 }
 ScreenType MainGameScreen::screenAction() const{
+	clearScreen();
 	if(userChoice!='q'){
 		return RUNNING_GAME;
 	}
 	else{
+		cout<<"Thanks for playing!!!"<<endl;
 		return QUIT;
 	}
 }
