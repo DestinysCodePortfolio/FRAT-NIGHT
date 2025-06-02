@@ -84,7 +84,6 @@ void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 // 	"\n Chad : PICK YOUR POISON!"+
 // 	"\n Take the shot[t]"+
 // 	"\n Reject the shot[r]";
-// 	trickleDisplayString(output, 50);
 // }
 // void firstShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 // 	nextPossibleScenes.resize(2);
