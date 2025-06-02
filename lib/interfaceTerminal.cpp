@@ -86,7 +86,6 @@ MainGameScreen::MainGameScreen():
 {}
 MainGameScreen::~MainGameScreen(){
 	delete theTree;
-	theTree=nullptr;
 }
 void MainGameScreen::printScreen() const {
 	theTree->printCurrentDialogue();

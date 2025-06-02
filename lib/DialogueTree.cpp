@@ -5,8 +5,10 @@ DialogueTree::DialogueTree():
 	currentScene(new openingScene('o'))
 {}
 DialogueTree::~DialogueTree(){
-	delete currentScene;
+	if(currentScene)
+		delete currentScene;
 	for(Scene* currentPossibleScene : nextPossibleScenes){
+		if(currentPossibleScene)
 			delete currentPossibleScene;
 	}
 	nextPossibleScenes.clear();
@@ -21,8 +23,8 @@ void DialogueTree::updateScene(char userInput){
 		else{
 			delete currentPossibleScene;
 		}
-		currentPossibleScene=nullptr;
 	}
+	nextPossibleScenes.clear();
 }
 
 void DialogueTree::printCurrentDialogue()const{
