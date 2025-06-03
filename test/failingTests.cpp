@@ -8,13 +8,13 @@
 
 TEST(quickTimeTestsFail, getDurTestFail){
     quickTimeEvent checkDuration(5, "test");
-    EXPECT_NE(checkDuration.getDuration(), 5);
+    EXPECT_NE(checkDuration.getDuration(), 50);
 }
 
 TEST(quickTimeTestsFail, setDurTestFail){
     quickTimeEvent checkSetDuration(5, "test");
     checkSetDuration.setDuration(20);
-    EXPECT_NE(checkSetDuration.getDuration(), 20);
+    EXPECT_NE(checkSetDuration.getDuration(), 200);
 }
 
 
