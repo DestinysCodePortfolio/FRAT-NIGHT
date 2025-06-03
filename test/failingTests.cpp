@@ -6,23 +6,23 @@
 #include "../header/quickTimeEvent.hpp"
 
 
-TEST(quickTimeTests, getDurTest){
+TEST(quickTimeTestsFail, getDurTestFail){
     quickTimeEvent checkDuration(5, "test");
     EXPECT_NE(checkDuration.getDuration(), 5);
 }
 
-TEST(quickTimeTests, setDurTest){
+TEST(quickTimeTestsFail, setDurTestFail){
     quickTimeEvent checkSetDuration(5, "test");
     checkSetDuration.setDuration(20);
     EXPECT_NE(checkSetDuration.getDuration(), 20);
 }
 
 
-TEST(quickTimeTests, runningTest){
+TEST(quickTimeTestsFail, runningTestFail){
     quickTimeEvent runningTest(10, "lrlrlrlrlr");
 
     std::stringstream input;
-    input << "lrlrlrlrlr";
+    input << "rlrlrlrlrl";
 
     auto original_cin = std::cin.rdbuf(); // Store original cin buffer
     std::cin.rdbuf(input.rdbuf()); // Redirect cin to stringstream
