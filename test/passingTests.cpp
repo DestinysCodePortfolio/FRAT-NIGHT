@@ -5,6 +5,7 @@
 //quickTimeEvent tests
 #include "../header/quickTimeEvent.hpp"
 
+
 TEST(quickTimeTests, getDurTest){
     quickTimeEvent checkDuration(5, "test");
     EXPECT_EQ(checkDuration.getDuration(), 5);
