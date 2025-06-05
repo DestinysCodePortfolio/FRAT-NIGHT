@@ -212,11 +212,60 @@ string lookKitchenOrBedroom::dialogue(){
     return output;
 }
 void lookKitchenOrBedroom::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-    // nextPossibleScenes.resize(2);
-    // nextPossibleScenes.at(0)=new kitchen('k');
+     nextPossibleScenes.resize(2);
+     nextPossibleScenes.at(0)=new kitchen('k');
     // nextPossibleScenes.at(1)=new room('k');
     // std::cout<<"Updated possible Scenes\n";
     cout << "RELEASE MEEE";
+}
+string kitchen::dialogue() {
+    string output = string("\n > The kitchen is a mess. Sticky floors, red solo cups stacked like pyramids, and the smell of burnt pizza fighting the stench of beer.")
+    + "\n  [f] Open fridge"
+    + "\n  [s] Look in the sink"
+    + "\n  [c] Open cabinet" 
+     + "\n Slip something in Chad's drink";
+    trickleDisplayString(output, 25);
+    return output;
+}
+string kitchenCheck::dialogue() {
+    string output;
+    if (checkedItem == 'c') {
+        output += "Chad : YO GET THE FUCK OUTTA MY FRIDGE FAT FUCK”;
+    } else if (checkedItem == 'f') {
+        output += "Hung crooked on the wall across from the toilet, a filthy frat flag flutters slightly from a draft you can't place.\n";
+        output += "Typical — they couldn’t even decorate with taste.\n";
+        output += "You pull it aside.\n";
+        output += "Behind it, nailed into the wall, dangles a small key on a string — the fabric stained a dark, tacky red. Blood?\n";
+        output += "Do you take it? → [take the key]\n";
+        output += "You hesitate. The stain is too fresh to ignore. Too thick to be paint.\n";
+        output += "Still, your hand moves on its own. You slip the string off the nail and clutch the key — it's small, rusted, and old. Not meant for safety. Meant for secrets.\n";
+        output += "The metal is warm.\n";
+        output += "From somewhere behind you:\nDrip.\nDrip.\nDrip.\nThree sharp echoes. Like footsteps in shallow water.\n";
+    } else if (checkedItem == 'm') {
+        output += "You see her blood on the walls.\n";
+        output += "The smell of metal makes you nauseous.\n";
+        output += "You blink and realize it wasn't real. You see yourself, and you feel her watching too.\n";
+    }
+    trickleDisplayString(output, 25);
+    return output;
+}
+void bathroomCheck::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
+    // After showing the narrative, go back to the main bathroom scene with updated flags
+    nextPossibleScenes.clear();
+    nextPossibleScenes.push_back(new bathroom('b', checkedCabinet, checkedFlag, checkedMirror));
+}
+
+void bathroom::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
+    nextPossibleScenes.clear();
+    if (!checkedCabinet)
+        nextPossibleScenes.push_back(new bathroomCheck('c', true, checkedFlag, checkedMirror));
+    if (!checkedFlag)
+        nextPossibleScenes.push_back(new bathroomCheck('f', checkedCabinet, true, checkedMirror));
+    if (!checkedMirror)
+        nextPossibleScenes.push_back(new bathroomCheck('m', checkedCabinet, checkedFlag, true));
+    if (checkedCabinet && checkedFlag && checkedMirror)
+        nextPossibleScenes.push_back(new lookKitchenOrBedroom('l'));
+    std::cout << "Updated possible Scenes\n";
 }
 
 //take first shot

@@ -216,3 +216,16 @@ struct kitchen:public Scene{
 	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
+
+struct kitchenCheck:public Scene{
+struct bathroomCheck : public Scene {
+    char checkedItem; // 'c' for cabinet, 'f' for flag, 'm' for mirror
+    bool checkedCabinet, checkedFlag, checkedMirror;
+
+    bathroomCheck(char item, bool cab, bool flag, bool mirror)
+        : Scene(item), checkedItem(item), checkedCabinet(cab), checkedFlag(flag), checkedMirror(mirror) {}
+
+    string dialogue() override;
+    void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+};
