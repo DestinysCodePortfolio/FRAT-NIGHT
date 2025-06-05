@@ -58,11 +58,10 @@ void openingScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 string takeHug::dialogue(){
     string output = string("\n He reeks of tequila and cologne that never fully covered up whatever he did last night.")
     + "\n Natalie: Chad, have you been drinking?!"
-    + "\n Chad: Have you not?"
-    + "It's Halloweekend, babe."
-    + "\n It’s Thursday."
+    + "\n Chad: Have you not? It's Halloweekend, babe."
+    + "\n It's Thursday. This man needs a life."
     + "\n Ask about [REDACTED] [t]";
-    trickleDisplayString(output, 50);
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -334,7 +333,7 @@ void rejectThirdShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
 	const size_t BOX_WIDTH = 70; // Width inside the borders
 	const size_t PADDING = 2;
-	const size_t MAX_LINE = BOX_WIDTH - PADDING * 2;
+	const size_t MAX_LINE = BOX_WIDTH - PADDING * 4;
 
 
 	istringstream inputStream(inputString);
@@ -374,14 +373,18 @@ void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
 
 	// Display lines with borders and padding
 	for (const auto& l : lines) {
-			string padded = string(PADDING, ' ') + l;
-			padded += string(BOX_WIDTH - padded.length(), ' '); // Right space padding
-			cout << VERTICAL;
-			for (char c : padded) {
-					cout << c << flush;
-					sleep_for(milliseconds(delay));
-			}
-			cout << VERTICAL << endl;
+        size_t RIGHT_PADDINNG = 0;
+        if(l.length() + PADDING < BOX_WIDTH){
+            RIGHT_PADDINNG = BOX_WIDTH - (l.length() + PADDING);
+        }
+
+        string padded = string(PADDING, ' ') + l + string(RIGHT_PADDINNG, ' ');
+        cout << VERTICAL;
+        for(char c: padded){
+            cout << c << flush;
+            sleep_for(milliseconds(delay));
+        }
+        cout << VERTICAL << endl;
 	}
 
 
