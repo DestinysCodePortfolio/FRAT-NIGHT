@@ -17,7 +17,6 @@ void UIScreen::userPrompt(){
 }
 
 void UIScreen::clearScreen() const{
-	// Clear screen (cross-platform)
 	// #ifdef _WIN32
 	// 	system("cls");
 	// #else
@@ -31,10 +30,9 @@ void TitleScreen::printScreen() const {
 	const string GAME_TITLE = "FRAT NIGHT!";
 	const string MENU_OPTIONS[] = {
 		"1. Start Game [s]",
-		"2. Continue Game [c]",
-		"3. Quit [q]"
+		"2. Quit [q]"
 	};
-	const int NUM_OPTIONS = 3;
+	const int NUM_OPTIONS = 2;
 	const uint8_t BOX_WIDTH = 40; // changes length of title screen box
 
 	// Double-line border characters
@@ -71,19 +69,14 @@ void TitleScreen::updateOptions(){}
 ScreenType TitleScreen::screenAction() const{
 	clearScreen();
 	if(userChoice == 's'){
-		cout<<"Starting game."<<endl;
+		cout<<"Starting game. Loading percentage: %100\n\n";
 		return MAIN_GAME;
-	}
-	else if(userChoice == 'c'){
-		cout<<"Loading game."<<endl;
-		 return MAIN_GAME;
 	}
 	else if(userChoice == 'q'){
 		cout<<"Thanks for playing!!!"<<endl;
 		return QUIT;
 	}
 	else{
-		cout<<"Try again!"<<endl;
 		return TITLE;
 	}
 }
@@ -93,21 +86,20 @@ MainGameScreen::MainGameScreen():
 {}
 MainGameScreen::~MainGameScreen(){
 	delete theTree;
-	theTree=nullptr;
 }
 void MainGameScreen::printScreen() const {
 	theTree->printCurrentDialogue();
 }
 void MainGameScreen::updateOptions(){
-	std::cout<<"going to update options: "<<theTree->getCurrentSceneName()<<endl;
 	theTree->updateScene(userChoice);
-	std::cout<<"did to update options"<<endl;
 }
 ScreenType MainGameScreen::screenAction() const{
+	clearScreen();
 	if(userChoice!='q'){
 		return RUNNING_GAME;
 	}
 	else{
+		cout<<"Thanks for playing!!!"<<endl;
 		return QUIT;
 	}
 }

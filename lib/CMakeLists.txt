@@ -5,7 +5,6 @@ add_library(simpleLibrary
 	interfaceTerminal.cpp
 	scene.cpp
 	quickTimeEvent.cpp
-	SaveAndLoadData.cpp
 	DialogueTree.cpp
 )
 
