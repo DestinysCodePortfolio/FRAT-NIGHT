@@ -118,6 +118,107 @@ void firstShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScen
 	std::cout<<"Updated possible Scenes\n";
 }
 
+string rejectFirstShot::dialogue(){
+  string output = string("\n I push the cup back toward him. I need to find her.")
+    + "\n Chad: I know you're paranoid about your friend and all, but she aint here little lady. Stop killing the vibe."
+    + "\n Natalie: Fine I'll find her myself, jerk."
+     + "\n Leave and look for clues[c]";
+    trickleDisplayString(output, 25);
+    return output;
+}
+void rejectFirstShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+    nextPossibleScenes.resize(1);
+    nextPossibleScenes.at(0)=new lookAroundForCLues('c');
+    std::cout<<"Updated possible Scenes\n";
+}
+
+string lookAroundForCLues::dialogue(){
+  string output = string("\n The music swells again, loud enough to shake the drywall.")
+  + "\n I weave through the bodies and pass some guy in a horse mask vomiting into a potted plant."
+  + "\n My shoulders brush past strangers who don’t even notice I’m there. "
+  + "\n  check bathroom [c] ";
+    trickleDisplayString(output, 25);
+    return output;
+} 
+void lookAroundForCLues :: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	nextPossibleScenes.resize(1);
+	nextPossibleScenes.at(0)=new bathroom('c');
+	std::cout<<"Updated possible Scenes\n";
+}
+
+string bathroom::dialogue(){
+string output;
+    if (!checkedCabinet) output += " check medicine cabinet [c]\n";
+    if (!checkedFlag)    output += " check frat flag [f]\n";
+    if (!checkedMirror)  output += " look in the mirror [m]\n";
+    if (checkedCabinet && checkedFlag && checkedMirror){
+        output += " leave bathroom [l]\n";
+       }
+    trickleDisplayString(output, 25);
+    return output;
+}
+
+string bathroomCheck::dialogue() {
+    string output;
+    if (checkedItem == 'c') {
+        output += "You open the creaky door to the medicine cabinet. Inside: bandages, half-used toothpaste, and a small, chilling surprise — a blister pack of Rohypnol.\n";
+        output += "Do you take it? → [grab it]\n";
+        output += "You pocket the pills. You don’t know why. Maybe you just don’t trust the people who live here — and that instinct feels right.\n";
+    } else if (checkedItem == 'f') {
+        output += "Hung crooked on the wall across from the toilet, a filthy frat flag flutters slightly from a draft you can't place.\n";
+        output += "Typical — they couldn’t even decorate with taste.\n";
+        output += "You pull it aside.\n";
+        output += "Behind it, nailed into the wall, dangles a small key on a string — the fabric stained a dark, tacky red. Blood?\n";
+        output += "Do you take it? → [take the key]\n";
+        output += "You hesitate. The stain is too fresh to ignore. Too thick to be paint.\n";
+        output += "Still, your hand moves on its own. You slip the string off the nail and clutch the key — it's small, rusted, and old. Not meant for safety. Meant for secrets.\n";
+        output += "The metal is warm.\n";
+        output += "From somewhere behind you:\nDrip.\nDrip.\nDrip.\nThree sharp echoes. Like footsteps in shallow water.\n";
+    } else if (checkedItem == 'm') {
+        output += "You see her blood on the walls.\n";
+        output += "The smell of metal makes you nauseous.\n";
+        output += "You blink and realize it wasn't real. You see yourself, and you feel her watching too.\n";
+    }
+    trickleDisplayString(output, 25);
+    return output;
+}
+void bathroomCheck::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
+    // After showing the narrative, go back to the main bathroom scene with updated flags
+    nextPossibleScenes.clear();
+    nextPossibleScenes.push_back(new bathroom('b', checkedCabinet, checkedFlag, checkedMirror));
+}
+
+void bathroom::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
+    nextPossibleScenes.clear();
+    if (!checkedCabinet)
+        nextPossibleScenes.push_back(new bathroomCheck('c', true, checkedFlag, checkedMirror));
+    if (!checkedFlag)
+        nextPossibleScenes.push_back(new bathroomCheck('f', checkedCabinet, true, checkedMirror));
+    if (!checkedMirror)
+        nextPossibleScenes.push_back(new bathroomCheck('m', checkedCabinet, checkedFlag, true));
+    if (checkedCabinet && checkedFlag && checkedMirror)
+        nextPossibleScenes.push_back(new lookKitchenOrBedroom('l'));
+    std::cout << "Updated possible Scenes\n";
+}
+
+string lookKitchenOrBedroom::dialogue(){
+    string output = string("\n > I step out the bathroom recollecting my thoughts from the expierence i just had.")
+    +  " \n > The kitchen is a mess, and you can see the bedroom from here , which I assume is Chads."
+    + " \n  The party is still going strong, and you can hear the bass thumping through the walls."
+    + "\n > I can see chad in the kitchen, maybe i can get him to ... not notice me snooping but how ??? "
+    + "\n  go to the kitchen [k]"
+    + "\n  go to the bathroom [u].";
+    trickleDisplayString(output, 25);
+    return output;
+}
+void lookKitchenOrBedroom::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+    // nextPossibleScenes.resize(2);
+    // nextPossibleScenes.at(0)=new kitchen('k');
+    // nextPossibleScenes.at(1)=new room('k');
+    // std::cout<<"Updated possible Scenes\n";
+    cout << "RELEASE MEEE";
+}
+
 //take first shot
 string secondShotOptionScene::dialogue(){
     string output = string("\n Kevin: WOOOAAAAAHH THAS LIQA!!!")
@@ -141,18 +242,6 @@ void secondShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleSce
 	std::cout<<"Updated possible Scenes\n";
 }
 
-
-//reject first shot 
-string rejectFirstShot::dialogue(){
-    string output = string("\n Chad: I know you're paranoid about your friend and all , but she aint here little lady. Stop killing the vibe.")
-    + "\n Natalie - Fine I'll find her myself, jerk.";
-    trickleDisplayString(output, 25);
-    return output;
-}
-
-void rejectFirstShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-
-}
 
 
 //takes second shot

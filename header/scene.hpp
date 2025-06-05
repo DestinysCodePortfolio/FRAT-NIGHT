@@ -149,3 +149,70 @@ struct takeThirdShot: public Scene{
 	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
+struct lookAroundForCLues: public Scene{
+	lookAroundForCLues(): Scene(){}
+	lookAroundForCLues(char name): Scene(name){}
+	~lookAroundForCLues() override=default;
+	lookAroundForCLues(lookAroundForCLues& other) = delete;
+	lookAroundForCLues& operator=(lookAroundForCLues& other) = delete;
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+struct bathroom: public Scene{
+	  bool checkedCabinet;
+    bool checkedFlag;
+    bool checkedMirror;
+
+    bathroom() : Scene('c'), checkedCabinet(false), checkedFlag(false), checkedMirror(false) {}
+	  bathroom(char name, bool cab = false, bool flag = false, bool mirror = false)
+        : Scene(name), checkedCabinet(cab), checkedFlag(flag), checkedMirror(mirror) {}
+
+	bathroom(char name): Scene(name){}
+	~bathroom() override=default;
+	bathroom(bathroom& other) = delete;
+	bathroom& operator=(bathroom& other) = delete;
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+
+struct lookKitchenOrBedroom: public Scene{
+	lookKitchenOrBedroom(): Scene(){}
+	lookKitchenOrBedroom(char name): Scene(name){}
+	~lookKitchenOrBedroom() override=default;
+	lookKitchenOrBedroom(lookKitchenOrBedroom& other) = delete;
+	lookKitchenOrBedroom& operator=(lookKitchenOrBedroom& other) = delete;
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+// header/scene.hpp
+struct bathroomCheck : public Scene {
+    char checkedItem; // 'c' for cabinet, 'f' for flag, 'm' for mirror
+    bool checkedCabinet, checkedFlag, checkedMirror;
+
+    bathroomCheck(char item, bool cab, bool flag, bool mirror)
+        : Scene(item), checkedItem(item), checkedCabinet(cab), checkedFlag(flag), checkedMirror(mirror) {}
+
+    string dialogue() override;
+    void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+struct room:public Scene{
+	room(): Scene(){}
+	room(char name): Scene(name){}
+	~room() override=default;
+	room(room& other) = delete;
+	room& operator=(room& other) = delete;  
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+struct kitchen:public Scene{
+	kitchen(): Scene(){}
+	kitchen(char name): Scene(name){}
+	~kitchen() override=default;
+	kitchen(kitchen& other) = delete;
+	kitchen& operator=(kitchen& other) = delete;  
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
