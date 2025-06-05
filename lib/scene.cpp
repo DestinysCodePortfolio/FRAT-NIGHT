@@ -315,9 +315,9 @@ string rejectThirdShot:: dialogue(){
     + "\n My pulse races in my ears, louder than the thudding beat inside. I try to scream, but Kevin’s hand is already over my mouth, his fingers cold and trembling."
     + "\n Kevin: You should have kept quiet, Natalie. But fear not,this is a privilege for her and for you. As his children we must obey, he's been waiting for you."
     + "\n Kevin: We will all be in his kingdom together, your death will have purpose, your flesh will bring us one step closer to reuniting with our father! επιστροφή σε μας Διόνυσο!"
-    + "\n I writhe in pain as zip ties tighten around my wrists, he pries my jaw open and pours sour wine down my throat."
-    + "\n I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness."
-    + "\n I'm sorry Evelyn , I couldn't save you."
+    + "\n >I writhe in pain as zip ties tighten around my wrists, he pries my jaw open and pours sour wine down my throat."
+    + "\n >I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness."
+    + "\n >I'm sorry Evelyn , I couldn't save you."
     + "\n Press q to quit";
     trickleDisplayString(output, 25);
     return output;
