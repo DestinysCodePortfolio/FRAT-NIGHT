@@ -12,14 +12,14 @@ using std::this_thread::sleep_for;
 using std::chrono::milliseconds;
 using std::flush;
 using std::cin;
+//Copy constructor
+// Scene& Scene::operator=(const Scene& other) {
+//     if (this != &other) {
+//         this->choice = other.choice;
+//     }
+//     return *this;
+// }
 
-void Scene:: trickleDisplayString(const string& inputString, uint8_t delay){
-	for(char currentChar : inputString){
-		cout<<currentChar<<flush;
-		sleep_for(milliseconds(delay));
-	}
-	cout<<endl;
-}
 
 //openers dialogue-- until where my hug at
 Scene::Scene():
@@ -50,11 +50,11 @@ void openingScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new takeHug('t');
 	nextPossibleScenes.at(1)=new rejectHug('r');
+	std::cout<<"Updated possible Scenes\n";
 }
 
 
 //if you take the hug
-
 string takeHug::dialogue(){
     string output = string("\n He reeks of tequila and cologne that never fully covered up whatever he did last night.")
     + "\n Natalie: Chad, have you been drinking?!"
@@ -63,12 +63,12 @@ string takeHug::dialogue(){
     + "\n Ask about [REDACTED] [t]";
     trickleDisplayString(output, 10);
     return output;
+}
 
 void takeHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
     nextPossibleScenes.resize(1);
 	nextPossibleScenes.at(0)=new firstShotOptionScene('t');
 	std::cout<<"Updated possible Scenes\n";
-
 }
 
 
@@ -86,6 +86,7 @@ void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.at(0)=new firstShotOptionScene('t');
 	std::cout<<"Updated possible Scenes\n";
 }
+
 
 
 //Continuing scene: kevin and lilith intro
@@ -116,7 +117,6 @@ void firstShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScen
 	nextPossibleScenes.at(1)=new rejectFirstShot('r');
 	std::cout<<"Updated possible Scenes\n";
 }
-
 
 //take first shot
 string secondShotOptionScene::dialogue(){
