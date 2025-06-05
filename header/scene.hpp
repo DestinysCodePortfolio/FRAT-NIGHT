@@ -16,7 +16,7 @@ class Scene{
 		Scene(Scene& other) = delete;
 		Scene& operator=(Scene& other) = delete;
 		char getOptionName();
-		virtual void dialogue()=0;
+		virtual string dialogue()=0;
 		virtual void updatePossibleScenes(vector<Scene*>& nextPossibleScenes)=0;
 };
 
@@ -26,7 +26,7 @@ struct openingScene:public Scene{
 	~openingScene() override=default;
 	openingScene(openingScene& other) = delete;
 	openingScene& operator=(openingScene& other) = delete;
-	void dialogue() override;
+	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
@@ -36,7 +36,7 @@ struct takeHug:public Scene{
 	~takeHug() override=default;
 	takeHug(takeHug& other) = delete;
 	takeHug& operator=(takeHug& other) = delete;  
-	void dialogue() override;
+	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
@@ -46,65 +46,106 @@ struct rejectHug:public Scene{
 	~rejectHug() override=default;
 	rejectHug(rejectHug& other) = delete;
 	rejectHug& operator=(rejectHug& other) = delete;  
-	void dialogue() override;
+	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
-// struct firstShotOptionScene:public Scene{
-// 	firstShotOptionScene(): Scene(){}
-// 	firstShotOptionScene(char name): Scene(name){}
-// 	~firstShotOptionScene() override=default;
-// 	firstShotOptionScene(firstShotOptionScene& other) = delete;
-// 	firstShotOptionScene& operator=(firstShotOptionScene& other) = delete;  
-// 	void dialogue() override;
-// 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
-// };
-// struct takeFirstShot:public Scene{
-// 	takeFirstShot(): Scene(){}
-// 	takeFirstShot(char name): Scene(name){}
-// 	~takeFirstShot() override=default;
-// 	takeFirstShot(takeFirstShot& other) = delete;
-// 	takeFirstShot& operator=(takeFirstShot& other) = delete;  
-// 	void dialogue() override;
-// 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
-// };
+struct firstShotOptionScene:public Scene{
+	firstShotOptionScene(): Scene(){}
+	firstShotOptionScene(char name): Scene(name){}
+	~firstShotOptionScene() override=default;
+	firstShotOptionScene(firstShotOptionScene& other) = delete;
+	firstShotOptionScene& operator=(firstShotOptionScene& other) = delete;  
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
 
-// struct rejectFirstShot:public Scene{
-// 	rejectFirstShot(): Scene(){}
-// 	rejectFirstShot(char name): Scene(name){}
-// 	~rejectFirstShot() override=default;
-// 	rejectFirstShot(rejectFirstShot& other) = delete;
-// 	rejectFirstShot& operator=(rejectFirstShot& other) = delete;  
-// 	void dialogue() override;
-// 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
-// };
+struct rejectFirstShot:public Scene{
+	rejectFirstShot(): Scene(){}
+	rejectFirstShot(char name): Scene(name){}
+	~rejectFirstShot() override=default;
+	rejectFirstShot(rejectFirstShot& other) = delete;
+	rejectFirstShot& operator=(rejectFirstShot& other) = delete;  
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
 
-// struct secondShotOptionScene:public Scene{
-// 	secondShotOptionScene(): Scene(){}
-// 	secondShotOptionScene(char name): Scene(name){}
-// 	~secondShotOptionScene() override=default;
-// 	secondShotOptionScene(secondShotOptionScene& other) = delete;
-// 	secondShotOptionScene& operator=(secondShotOptionScene& other) = delete;  
-// 	void dialogue() override;
-// 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
-// };
+struct secondShotOptionScene:public Scene{
+	secondShotOptionScene(): Scene(){}
+	secondShotOptionScene(char name): Scene(name){}
+	~secondShotOptionScene() override=default;
+	secondShotOptionScene(secondShotOptionScene& other) = delete;
+	secondShotOptionScene& operator=(secondShotOptionScene& other) = delete;  
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
 
 
-// struct takeSecondShot:public Scene{
-// 	takeSecondShot(): Scene(){}
-// 	takeSecondShot(char name): Scene(name){}
-// 	~takeSecondShot() override=default;
-// 	takeSecondShot(takeSecondShot& other) = delete;
-// 	takeSecondShot& operator=(takeSecondShot& other) = delete;  
-// 	void dialogue() override;
-// 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
-// };
+struct takeSecondShot:public Scene{
+	takeSecondShot(): Scene(){}
+	takeSecondShot(char name): Scene(name){}
+	~takeSecondShot() override=default;
+	takeSecondShot(takeSecondShot& other) = delete;
+	takeSecondShot& operator=(takeSecondShot& other) = delete;  
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
 
-// struct rejectSecondShot:public Scene{
-// 	rejectSecondShot(): Scene(){}
-// 	rejectSecondShot(char name): Scene(name){}
-// 	~rejectSecondShot() override=default;
-// 	rejectSecondShot(rejectSecondShot& other) = delete;
-// 	rejectSecondShot& operator=(rejectSecondShot& other) = delete;  
-// 	void dialogue() override;
-// 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
-// };
+struct pressHer:public Scene{
+	pressHer(): Scene(){}
+	pressHer(char name): Scene(name){}
+	~pressHer() override=default;
+	pressHer(pressHer& other) = delete;
+	pressHer& operator=(pressHer& other) = delete;  
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+struct lookForKevinScene: public Scene{
+	lookForKevinScene(): Scene(){}
+	lookForKevinScene(char name): Scene(name){}
+	~lookForKevinScene() override=default;
+	lookForKevinScene(lookForKevinScene& other) = delete;
+	lookForKevinScene& operator=(lookForKevinScene& other) = delete;
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+struct kevinArgument: public Scene{
+	kevinArgument(): Scene(){}
+	kevinArgument(char name): Scene(name){}
+	~kevinArgument() override=default;
+	kevinArgument(kevinArgument& other) = delete;
+	kevinArgument& operator=(kevinArgument& other) = delete;
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+struct kevinRomance: public Scene{
+	kevinRomance(): Scene(){}
+	kevinRomance(char name): Scene(name){}
+	~kevinRomance() override=default;
+	kevinRomance(kevinRomance& other) = delete;
+	kevinRomance& operator=(kevinRomance& other) = delete;
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+struct rejectThirdShot: public Scene{
+	rejectThirdShot(): Scene(){}
+	rejectThirdShot(char name): Scene(name){}
+	~rejectThirdShot() override=default;
+	rejectThirdShot(rejectThirdShot& other) = delete;
+	rejectThirdShot& operator=(rejectThirdShot& other) = delete;  
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+
+struct takeThirdShot: public Scene{
+	takeThirdShot(): Scene(){}
+	takeThirdShot(char name): Scene(name){}
+	~takeThirdShot() override=default;
+	takeThirdShot(takeThirdShot& other) = delete;
+	takeThirdShot& operator=(takeThirdShot& other) = delete;
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
