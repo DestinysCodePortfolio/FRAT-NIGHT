@@ -229,10 +229,11 @@ string kitchen::dialogue() {
             + "\nChad: riggghtttt. Well there's limes next to liquor, blind bitch."
             + "\nAlcoholic. I wish there was a way to fuck him up more so he could get off my back for five minutes.";
     }
-    else if (lastChecked == 'y') {
+    else if (lastChecked == 'y' && slippedSomethingInDrink) {
         output += string("\nI see a small notepad, inside is a bunch of grocery list items, but one page labeled passwords.")
             + "\nLAPTOP PASSWORD: MYBALLSITCH18"
             + "\nI put the notebook back and close the cabinet.";
+         gotPassword = true;
     }
     else if (lastChecked == 'f') {
         output += string("\nI see lots of wine, beer, and someone's gross leftovers, but behind that all I see ")
@@ -266,6 +267,7 @@ string kitchen::dialogue() {
                 + "\nAfter a few minutes of waiting in the kitchen he begins stumbling even more than before."
                 + "\nChad: I nEeD.. tO fInD.. LiLiTh."
                 + "\nHe stumbles out of the room. I can open whatever is in that cabinet now.";
+                slippedSomethingInDrink = true;
         }
         delete roofieEvent;
     }
@@ -277,7 +279,7 @@ string kitchen::dialogue() {
     if (!checkedKitchenCabinet) {
         output += "\n  [c] Open cabinet";
     }
-    if (checkedKitchenCabinet && !gotPassword) {
+    if (checkedKitchenCabinet && slippedSomethingInDrink) {
         output += "\n  [y] Check cabinet again";
     }
     if (!checkedFridge) {
@@ -300,45 +302,48 @@ string kitchen::dialogue() {
 void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
     nextPossibleScenes.clear();
 
-    // Add option to check cabinet if not already checked
+    // Check if the player chose to leave.
+    if (lastChecked == 'l') {
+        // If the roofie attempt was made but did not succeed, force bedroomNoPassword.
+        if (roofieAttempt && !slippedSomethingInDrink) {
+             std::cout << "Transitioning to bedroomNoPassword (failed roofie)" << std::endl;
+             nextPossibleScenes.push_back(new bedroomNoPassword('u'));
+        } else { 
+             // Otherwise, follow your normal transition logic.
+             // For example, if roofie was not attempted (or was successful), you might go to bedroomPassword.
+             std::cout << "Transitioning to bedroom scene normally" << std::endl;
+             if (gotPassword && slippedSomethingInDrink)
+                 nextPossibleScenes.push_back(new bedroomPassword('k'));
+             else
+                 nextPossibleScenes.push_back(new lookKitchenOrBedroom('l'));
+        }
+        return;
+    }
+
+    // Otherwise, continue offering kitchen choices.
     if (!checkedKitchenCabinet) {
         nextPossibleScenes.push_back(new kitchen('c', true, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, 'c', gotPassword));
     }
-    
-    // Add option to check cabinet again for password if cabinet checked but password not found
     if (checkedKitchenCabinet && !gotPassword) {
         nextPossibleScenes.push_back(new kitchen('y', checkedKitchenCabinet, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, 'y', true));
     }
-    
-    // Add option to check fridge if not already checked
     if (!checkedFridge) {
         nextPossibleScenes.push_back(new kitchen('f', checkedKitchenCabinet, true, checkedSink, roofieAttempt, slippedSomethingInDrink, 'f', gotPassword));
     }
-    
-    // Add option to check sink if not already checked
     if (!checkedSink) {
         nextPossibleScenes.push_back(new kitchen('s', checkedKitchenCabinet, checkedFridge, true, roofieAttempt, slippedSomethingInDrink, 's', gotPassword));
     }
-    
-    // Add option to attempt roofie if cabinet has been checked and no attempt made yet
     if (checkedKitchenCabinet && !roofieAttempt) {
-        nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, true, false, 'd', gotPassword)); // Note: slippedSomethingInDrink will be set based on QTE result
+        nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, true, false, 'd', gotPassword));
     }
-
-    // Transition scenes based on completion and roofie attempt outcome
-    if (roofieAttempt && !slippedSomethingInDrink) { 
-        // Failed roofie attempt – transition to bedroom scene without password
-        nextPossibleScenes.push_back(new bedroomNoPassword('u'));
-    } else if (checkedKitchenCabinet && checkedFridge && checkedSink && (slippedSomethingInDrink || roofieAttempt)) {
-        // All areas checked and either roofie succeeded or failed - allow leaving
-        if (gotPassword && slippedSomethingInDrink) {
-            nextPossibleScenes.push_back(new bedroomPassword('k'));
-        } else {
-            nextPossibleScenes.push_back(new lookKitchenOrBedroom('l'));
-        }
+    
+    if (checkedKitchenCabinet && checkedFridge && checkedSink) {
+        if (gotPassword && slippedSomethingInDrink)
+             nextPossibleScenes.push_back(new bedroomPassword('k'));
+        else
+             nextPossibleScenes.push_back(new bedroomNoPassword('l'));
     }
 }
-
 // Also need to fix the constructor parameter order to match the updated function calls
 // The constructor should be:
 
