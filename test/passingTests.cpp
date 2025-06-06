@@ -47,3 +47,20 @@ TEST(quickTimeTests, runningTest){
 
 }
 
+#include "../header/scene.hpp"
+
+TEST(dialogueTests, openingTest){
+    openingScene scene1; 
+    string correctOutput = string("> You are Natalie Fitzgerald, a university student whose friend went missing at a frat party a couple nights ago.")
+    + "\n> You are here at another party, trying to unravel the mystery of her disappearance. You know they did it. You just can't prove it. "
+    + "\n My ears throb with every bass drop pounding through the floorboards."
+    + "\n  Sweat clings to my back. The house is packed wall to wall—drunken laughter, sticky floors, and that sour-sweet stench of booze and regret."
+    + "\n ???: YO! Look who finally decided to pull up!"
+    + "\n  A can sprays open. A vodka seltzer fizzes out all over Chad’s hand as he slides into view,  stumbling a little with his arms open."
+    + "\n Chad: “Where my hug at?"
+    + "\n Take the hug[t]"
+    + "\n Reject the hug[r]";
+    EXPECT_EQ(scene1.dialogue(), correctOutput); 
+}
+
+
