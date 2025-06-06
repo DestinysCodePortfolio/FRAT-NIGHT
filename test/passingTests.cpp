@@ -4,7 +4,22 @@
 
 //quickTimeEvent tests
 #include "../header/quickTimeEvent.hpp"
+#include "../header/DialogueTree.hpp"
+#include "../header/interfaceTerminal.hpp"
 
+TEST(DialogueTreeTests, obtainSceneCharacter){
+	DialogueTree theTree = DialogueTree();
+	EXPECT_EQ(theTree.getCurrentSceneName(), 'o');
+}
+
+TEST(UIScreenTests, userPromptTests){
+	TitleScreen theScreen= TitleScreen();
+	std::stringstream input;
+	input << 'o';
+	auto original_cin = std::cin.rdbuf(); // Store original cin buffer
+	std::cin.rdbuf(input.rdbuf()); // Redirect cin to stringstream
+	EXPECT_EQ(theScreen.userPrompt(),'o');
+}
 
 TEST(quickTimeTests, getDurTest){
     quickTimeEvent checkDuration(5, "test");
@@ -16,7 +31,6 @@ TEST(quickTimeTests, setDurTest){
     checkSetDuration.setDuration(20);
     EXPECT_EQ(checkSetDuration.getDuration(), 20);
 }
-
 
 TEST(quickTimeTests, runningTest){
     quickTimeEvent runningTest(10, "lrlrlrlrlr");
@@ -32,3 +46,4 @@ TEST(quickTimeTests, runningTest){
     std::cin.rdbuf(original_cin);
 
 }
+

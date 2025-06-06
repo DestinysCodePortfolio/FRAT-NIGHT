@@ -10,10 +10,16 @@ UIScreen::UIScreen():
 	userChoice(0)
 {}
 
-void UIScreen::userPrompt(){
+// void UIScreen::userPrompt(){
+// 	cout<<"Your choice: ";
+// 	cin>> userChoice;
+// 	cout<<endl;
+// }
+char UIScreen::userPrompt(){
 	cout<<"Your choice: ";
 	cin>> userChoice;
 	cout<<endl;
+	return userChoice;
 }
 
 void UIScreen::clearScreen() const{

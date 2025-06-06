@@ -24,7 +24,8 @@ class UIScreen { //It should be a pure virtual function since it is an interface
         virtual void printScreen() const = 0;
         virtual void updateOptions() = 0;
         virtual ScreenType screenAction() const = 0; // Changed return type to ScreenType
-        void userPrompt();
+        // void userPrompt();
+				char userPrompt();
         void clearScreen() const;
 };
 
