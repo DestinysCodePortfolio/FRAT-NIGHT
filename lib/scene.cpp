@@ -271,9 +271,6 @@ string kitchen::dialogue() {
         }
         delete roofieEvent;
     }
-    else if (lastChecked == 'l') {
-        output += "\nNatalie: I decide to leave the kitchen.";
-    }
  
     // Show available options based on current state
     if (!checkedKitchenCabinet) {
@@ -297,56 +294,55 @@ string kitchen::dialogue() {
  
     trickleDisplayString(output, 1);
     return output;
-}
-
-void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
+}void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
     nextPossibleScenes.clear();
-
-    // Check if the player chose to leave.
-    if (lastChecked == 'l') {
-        // If the roofie attempt was made but did not succeed, force bedroomNoPassword.
+    
+    // Debug: log current state
+    std::cout << "updatePossibleScenes: lastChecked=" << lastChecked 
+              << ", roofieAttempt=" << roofieAttempt 
+              << ", slippedSomethingInDrink=" << slippedSomethingInDrink << std::endl;
+              
+    // If the player chose to leave:
+    if (lastChecked == 'd') {
+        // If a roofie was attempted but did not succeed:
         if (roofieAttempt && !slippedSomethingInDrink) {
-             std::cout << "Transitioning to bedroomNoPassword (failed roofie)" << std::endl;
-             nextPossibleScenes.push_back(new bedroomNoPassword('u'));
-        } else { 
-             // Otherwise, follow your normal transition logic.
-             // For example, if roofie was not attempted (or was successful), you might go to bedroomPassword.
-             std::cout << "Transitioning to bedroom scene normally" << std::endl;
-             if (gotPassword && slippedSomethingInDrink)
-                 nextPossibleScenes.push_back(new bedroomPassword('k'));
-             else
-                 nextPossibleScenes.push_back(new lookKitchenOrBedroom('l'));
+            std::cout << "Transitioning to bedroomNoPassword (failed roofie)" << std::endl;
+            lastChecked = 0; // clear the input state so it won't trigger repeatedly
+            nextPossibleScenes.push_back(new bedroomNoPassword('u'));
+            return;
         }
-        return;
-    }
-
-    // Otherwise, continue offering kitchen choices.
-    if (!checkedKitchenCabinet) {
-        nextPossibleScenes.push_back(new kitchen('c', true, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, 'c', gotPassword));
-    }
-    if (checkedKitchenCabinet && !gotPassword) {
-        nextPossibleScenes.push_back(new kitchen('y', checkedKitchenCabinet, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, 'y', true));
-    }
-    if (!checkedFridge) {
-        nextPossibleScenes.push_back(new kitchen('f', checkedKitchenCabinet, true, checkedSink, roofieAttempt, slippedSomethingInDrink, 'f', gotPassword));
-    }
-    if (!checkedSink) {
-        nextPossibleScenes.push_back(new kitchen('s', checkedKitchenCabinet, checkedFridge, true, roofieAttempt, slippedSomethingInDrink, 's', gotPassword));
-    }
-    if (checkedKitchenCabinet && !roofieAttempt) {
-        nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, true, false, 'd', gotPassword));
+        // Otherwise, if leave was pressed but roofie did not play a role, you can add another branch if needed.
     }
     
-    if (checkedKitchenCabinet && checkedFridge && checkedSink) {
-        if (gotPassword && slippedSomethingInDrink)
-             nextPossibleScenes.push_back(new bedroomPassword('k'));
-        else
-             nextPossibleScenes.push_back(new bedroomNoPassword('l'));
+    // Regular kitchen options:
+    if (!checkedKitchenCabinet) {
+        nextPossibleScenes.push_back(new kitchen('c', true, checkedFridge, checkedSink,
+                                                   roofieAttempt, slippedSomethingInDrink, 'c', gotPassword));
+    }
+    if (checkedKitchenCabinet && !gotPassword) {
+        nextPossibleScenes.push_back(new kitchen('y', checkedKitchenCabinet, checkedFridge, checkedSink,
+                                                   roofieAttempt, slippedSomethingInDrink, 'y', true));
+    }
+    if (!checkedFridge) {
+        nextPossibleScenes.push_back(new kitchen('f', checkedKitchenCabinet, true, checkedSink,
+                                                   roofieAttempt, slippedSomethingInDrink, 'f', gotPassword));
+    }
+    if (!checkedSink) {
+        nextPossibleScenes.push_back(new kitchen('s', checkedKitchenCabinet, checkedFridge, true,
+                                                   roofieAttempt, slippedSomethingInDrink, 's', gotPassword));
+    }
+    if (checkedKitchenCabinet && !roofieAttempt) {
+        nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink,
+                                                   true, false, 'd', gotPassword));
+    }
+    
+    // If all areas are checked and a roofie was attempted without success, force the transition.
+    if (checkedKitchenCabinet && checkedFridge && checkedSink &&
+        !slippedSomethingInDrink && roofieAttempt) {
+         nextPossibleScenes.push_back(new bedroomNoPassword('l'));
+         return;
     }
 }
-// Also need to fix the constructor parameter order to match the updated function calls
-// The constructor should be:
-
 string bedroomNoPassword:: dialogue(){
     string output = string("> I close the bedroom door behind me and lock it.")
     + "\n > KNOCK KNOCK KNOCK"
