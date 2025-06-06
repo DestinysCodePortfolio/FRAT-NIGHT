@@ -14,6 +14,7 @@ void quickTimeEvent::setDuration(double newDur){
 double quickTimeEvent::getDuration(){ return duration; }
 
 bool quickTimeEvent::startEvent(){
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "Quick time event starting, you have " << duration << " seconds to type the following exactly: \n" << soln << '\n';
     const auto start{std::chrono::steady_clock::now()};
     getline(std::cin, userInp);
