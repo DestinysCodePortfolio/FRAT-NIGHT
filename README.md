@@ -123,6 +123,13 @@ Verified all story branches lead to valid outcomes
 Confirmed text displays correctly word-by-word
 Tested timing mechanisms for quick-time events
 
+Dialogue Tree testing
+
+Confirmed the name of the scenes inside the dialogue tree
+
+UI screen testing
+
+Confirmed that userinput was correctly taken from uiScreen
 
 
 
