@@ -296,8 +296,11 @@ string kitchen::dialogue() {
         delete scene;
     }
     nextPossibleScenes.clear();
-    // Note: resize(0) is redundant after clear()
-    
+     if (roofieAttempt && !slippedSomethingInDrink) { 
+        cout << "DEBUG: Adding bedroomNoPassword scene" << endl;
+        nextPossibleScenes.push_back(new bedroomNoPassword('u'));
+    }
+
     // Add option to check cabinet if not already checked
     if (!checkedKitchenCabinet) {
         nextPossibleScenes.push_back(new kitchen('c', true, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, 'c', gotPassword));
@@ -323,11 +326,6 @@ string kitchen::dialogue() {
         nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, true, false, 'd', gotPassword));
     }
 
-    // Transition scenes based on completion and roofie attempt outcome
-     if (roofieAttempt && !slippedSomethingInDrink) { 
-        cout << "DEBUG: Adding bedroomNoPassword scene" << endl;
-        nextPossibleScenes.push_back(new bedroomNoPassword('u'));
-    }
        if (roofieAttempt && slippedSomethingInDrink && gotPassword) { 
         cout << "DEBUG: Adding password scene" << endl;
         nextPossibleScenes.push_back(new bedroomPassword('u'));
@@ -397,6 +395,7 @@ string failedQuickTimeEvent:: dialogue(){
     + "\n >I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness."
     + "\n >I'm sorry Evelyn , I couldn't save you."
     + "\n Press q to quit.";
+    trickleDisplayString(output , 1);
     return output;
 }
 
