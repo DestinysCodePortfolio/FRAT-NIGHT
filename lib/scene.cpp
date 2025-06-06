@@ -292,7 +292,7 @@ string kitchen::dialogue() {
 
 void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
     nextPossibleScenes.clear();
-
+		nextPossibleScenes.resize(0);
     // Add option to check cabinet if not already checked
     if (!checkedKitchenCabinet) {
         nextPossibleScenes.push_back(new kitchen('c', true, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, 'c', gotPassword));
@@ -356,6 +356,7 @@ string runQuickTimeEvent:: dialogue(){
     //IMPLEMENT QTE HERE
     //IF PASS, TAKE TO bedroomPassword
     //IF FAIL, TAKE TO failedQuickTimeEvent
+		return output;
 }
 
 //IMPLEMENT UPDATE SCENE HERE
@@ -385,7 +386,7 @@ string failedQuickTimeEvent:: dialogue(){
 }
 
 void failedQuickTimeEvent::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-
+	nextPossibleScenes.clear();
 }
 
 string bedroomPassword:: dialogue(){
@@ -444,7 +445,7 @@ string canonEnding:: dialogue(){
 }
 
 void canonEnding:: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-    
+	nextPossibleScenes.clear();
 } 
 
 
@@ -462,6 +463,7 @@ string policeEnding:: dialogue(){
 }
 
 void policeEnding:: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	nextPossibleScenes.clear();
 } 
 
 void room::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -581,7 +583,7 @@ string kevinArgument:: dialogue(){
     return output;
 }
 void kevinArgument::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-
+	nextPossibleScenes.clear();
 }
 
 
@@ -629,7 +631,7 @@ string takeThirdShot:: dialogue(){
 }
 
 void takeThirdShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-
+	nextPossibleScenes.clear();
 }
 
 
@@ -658,7 +660,7 @@ string rejectThirdShot:: dialogue(){
 } 
 
 void rejectThirdShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-
+	nextPossibleScenes.clear();
 }
 
 //TRICKLE
