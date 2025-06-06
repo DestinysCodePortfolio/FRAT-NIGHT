@@ -169,6 +169,9 @@ struct bathroom : public Scene {
 	bathroom& operator=(bathroom& other) = delete;
     bathroom(char name, bool cab = false, bool flag = false, bool mirror = false, char last = 0)
         : Scene(name), checkedCabinet(cab), checkedFlag(flag), checkedMirror(mirror), lastChecked(last) {}
+    string dialogue() override;
+    void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
 
     string dialogue() override;
     void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
@@ -219,6 +222,7 @@ struct kitchen : public Scene {
     string dialogue() override;
     void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
+
 struct bedroomNoPassword: public Scene {
 	bedroomNoPassword(): Scene(){}
 	bedroomNoPassword(char name): Scene(name){}
@@ -228,7 +232,6 @@ struct bedroomNoPassword: public Scene {
 	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
-
 
 struct bedroomPassword: public Scene {
 	bedroomPassword(): Scene(){}
@@ -279,3 +282,4 @@ struct failedQuickTimeEvent: public Scene {
 	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
+
