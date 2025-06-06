@@ -84,3 +84,11 @@ The Game will have a time complexity of O(n) since displaying each word separetl
 • Removed item and player classes due to unneccessary nature, both could be incorporated as choices in the dialogueTree  
 • Updated relation arrows to accurately reflect the nature of class interaction  
 
+
+## Installation/Usage Instructions
+1.) Enter "cmake ." into the terminal
+2.) Enter "make" into the terminal
+3.) Enter "./bin/Rush_Week" into the terminal
+4.) To run tests enter "./bin/runAllTests
+
+How To Play: Enter the prompted characters into the terminal depending on the choice you want to make.
