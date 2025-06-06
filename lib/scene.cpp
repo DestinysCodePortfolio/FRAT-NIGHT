@@ -227,6 +227,7 @@ string kitchen::dialogue() {
         output += string("\nI see a small notepad, inside is a bunch of grocery list items, but one page labeled passwords.")
             + "\nLAPTOP PASSWORD: MYBALLSITCH18"
             + "\nI put the notebook back and close the cabinet.";
+          
     }
     else if (lastChecked == 'f') {
         output += string("\nI see lots of wine, beer, and someone's gross leftovers, but behind that all I see ")
@@ -259,6 +260,7 @@ string kitchen::dialogue() {
                 + "\nAfter a few minutes of waiting in the kitchen he begins stumbling even more than before."
                 + "\nChad: I nEeD.. tO fInD.. LiLiTh."
                 + "\nHe stumbles out of the room. I can open whatever is in that cabinet now.";
+                slippedSomethingInDrink = true;
         }
         //delete roofieEvent;
     }
@@ -270,7 +272,7 @@ string kitchen::dialogue() {
     if (!checkedKitchenCabinet) {
         output += "\n  [c] Open cabinet";
     }
-    if (checkedKitchenCabinet && !gotPassword) {
+    if (checkedKitchenCabinet && slippedSomethingInDrink) {
         output += "\n  [y] Check cabinet again";
     }
     if (!checkedFridge) {
@@ -325,6 +327,10 @@ string kitchen::dialogue() {
      if (roofieAttempt && !slippedSomethingInDrink) { 
         cout << "DEBUG: Adding bedroomNoPassword scene" << endl;
         nextPossibleScenes.push_back(new bedroomNoPassword('u'));
+    }
+       if (roofieAttempt && slippedSomethingInDrink && gotPassword) { 
+        cout << "DEBUG: Adding password scene" << endl;
+        nextPossibleScenes.push_back(new bedroomPassword('u'));
     }
     else if (checkedKitchenCabinet && checkedFridge && checkedSink && (slippedSomethingInDrink || roofieAttempt)) {
         // All areas checked and either roofie succeeded or failed - allow leaving
@@ -468,9 +474,7 @@ void policeEnding:: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.clear();
 } 
 
-void room::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-     nextPossibleScenes.resize(2);
-}
+
 //take first shot
 string secondShotOptionScene::dialogue(){
     string output = string("\n Kevin: WOOOAAAAAHH THAS LIQA!!!")

@@ -184,15 +184,7 @@ struct lookKitchenOrBedroom: public Scene{
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
-struct room:public Scene{
-	room(): Scene(){}
-	room(char name): Scene(name){}
-	~room() override=default;
-	room(room& other) = delete;
-	room& operator=(room& other) = delete;  
-	string dialogue() override;
-	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
-};
+
 struct failRoofieScene:public Scene{
 	failRoofieScene(): Scene(){}
 	failRoofieScene(char name): Scene(name){}
