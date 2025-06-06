@@ -694,4 +694,4 @@ void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
 
 	// Bottom border
 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
-}
+};
