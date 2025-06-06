@@ -32,3 +32,31 @@ TEST(quickTimeTestsFail, runningTestFail){
     std::cin.rdbuf(original_cin);
 
 }
+
+
+#include "../header/scene.hpp"
+
+TEST(dialogueTestsF, openingTestF){
+    openingScene scene1; 
+    string incorrectOutput = string(":(");
+    EXPECT_NE(scene1.dialogue(), incorrectOutput); 
+}
+
+TEST(dialogueTestsF, hugTestF){
+    takeHug scene2;
+    string incorrectOutput = string(":(");
+    EXPECT_NE(scene2.dialogue(), incorrectOutput);
+}
+
+TEST(dialogueTestsF, noHugTestF){
+    rejectHug scene2;
+    string incorrectOutput = string(":(");
+    EXPECT_NE(scene2.dialogue(), incorrectOutput);
+}
+
+#include "../header/DialogueTree.hpp"
+TEST(dialogueTreeF, nextSceneTest){
+    DialogueTree* exTree = new DialogueTree();
+    char testSceneName = exTree->getCurrentSceneName();
+    EXPECT_NE(testSceneName, '0');
+}
