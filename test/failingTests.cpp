@@ -24,8 +24,8 @@ TEST(quickTimeTestsFail, runningTestFail){
     std::stringstream input;
     input << "rlrlrlrlrl";
 
-    auto original_cin = std::cin.rdbuf(); // Store original cin buffer
-    std::cin.rdbuf(input.rdbuf()); // Redirect cin to stringstream
+    auto original_cin = std::cin.rdbuf();
+    std::cin.rdbuf(input.rdbuf()); 
 
     EXPECT_FALSE(runningTest.startEvent());
 
