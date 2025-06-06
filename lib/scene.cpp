@@ -218,28 +218,24 @@ string kitchen::dialogue() {
         output += string("  \n Chad: (voice sharp now, stepping forward)")
             + " \n Chad : Okay, Natalie. What's your deal? "
             + " \n He's not smiling anymore."
-            + " \n You think this is funny? Snooping through our shit? You wanna get kicked the fuck out"
+            + " \n You think this is funny? Snooping through our shit? You wanna get kicked the fuck out?"
             + " \n  His breath reeks of liquor. His eyes are glassy—but alert."
             + " \n Something behind them is dangerous."
             + " \n Not playful anymore. Just angry. And hiding something."
             + " \n Natalie : Shit I was just looking for chasers, my bad bro."
             + " \n Chad : riggghtttt. Well there's limes next to liquor, blind bitch."
             + " \n Alcoholic. I wish there was a way to fuck him up more so he could get off my back for five minutes.";
-        checkedKitchenCabinet = true; // Set flag after narrative
     } else if (lastChecked == 'c' && checkedKitchenCabinet && slippedSomethingInDrink && !gotPassword) {
         output += string(" \n I see a small notepad, inside is a bunch of grocery list items, but one page labeled passwords.")
             + "\n LAPTOP PASSWORD: MYBALLSITCH18"
             + "\n I put the notebook back and close the cabinet.";
-        gotPassword = true;
-    } else if (lastChecked == 'f' && !checkedFridge) {
+    } else if (lastChecked == 'f') {
         output += string("\n  I see lots of wine, beer , and someones gross leftovers, but behind that all I see ")
             + "\n some unidentifiable meat that smells like its been rotting there for a while. I feel anxious just looking at it."
             + "\n Chad : YO GET THE FUCK OUTTA MY FRIDGE FAT FUCK";
-        checkedFridge = true;
-    } else if (lastChecked == 's' && !checkedSink) {
+    } else if (lastChecked == 's') {
         output += string("\n  You see hair that resembles hers. You miss her.")
             + "\n  It looks like someone tried to shove it down the drain. It looks like its been burned.";
-        checkedSink = true;
     } else if (lastChecked == 'd' && !roofieAttempt) {
         output += string("\n Natalie: I'm going to make another drink, do you want one?")
             + " \n Chad: Sure. Maybe then you'll chill out"
@@ -249,13 +245,13 @@ string kitchen::dialogue() {
 
         quickTimeEvent *roofieEvent = new quickTimeEvent(10, "ROOFIE CHAD");
         bool success = roofieEvent->startEvent();
-        roofieAttempt = true; // Set after QTE attempt
-
+        
         if (!success) {
             output += string("\n Shit.")
                 + " \n Chad looks over."
                 + " \n Chad: WHAT THE FUCK ARE YOU DOING? THAT'S IT GET THE FUCK OUT OF MY HOUSE!"
                 + " \n I run out of the kitchen and sprint up to the bedroom, I can't leave yet, not without what I need, I slip the key into the door and lock it behind me.";
+            // Failed roofie attempt - player gets caught
         } else {
             output += string("\nHe doesn't notice.")
                 + " \n Good."
@@ -264,7 +260,7 @@ string kitchen::dialogue() {
                 + " \n  After a few minutes of waiting in the kitchen he begins stumbling even more than he was before."
                 + " \n Chad: I nEeD.. tO fInD.. LiLiTh."
                 + " \n   He stumbles out of the room. I can open whatever is in that cabinet now.";
-            slippedSomethingInDrink = true;
+            // Successful roofie attempt - Chad is incapacitated
         }
         delete roofieEvent;
     }
@@ -279,7 +275,8 @@ string kitchen::dialogue() {
     if (!checkedSink) {
         output += "\n  [s] Look in the sink";
     }
-    // Only show roofie option if cabinet has been checked and roofie hasn't been attempted yet
+    // Only show roofie option if cabinet has been checked (so player knows Chad is suspicious)
+    // and roofie hasn't been attempted yet
     if (checkedKitchenCabinet && !roofieAttempt) {
         output += "\n  [d] Slip something in Chad's drink";
     }
@@ -291,8 +288,11 @@ string kitchen::dialogue() {
     trickleDisplayString(output, 1);
     return output;
 }
+
 void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
     nextPossibleScenes.clear();
+
+    // Options for investigating areas not yet checked
     if (!checkedKitchenCabinet)
         nextPossibleScenes.push_back(new kitchen('c', true, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, gotPassword, 'c'));
     if (!checkedFridge)
@@ -302,7 +302,7 @@ void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
     
     // Option to attempt roofie (only if cabinet checked and roofie not yet attempted)
     if (checkedKitchenCabinet && !roofieAttempt) {
-        nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, gotPassword, 'd'));
+        nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, true, slippedSomethingInDrink, gotPassword, 'd'));
     }
 
     // Transition scenes based on roofie outcome
