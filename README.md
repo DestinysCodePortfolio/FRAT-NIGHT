@@ -85,6 +85,25 @@ The Game will have a time complexity of O(n) since displaying each word separetl
 • Updated relation arrows to accurately reflect the nature of class interaction  
 
 
+
+Screenshot of Input/Output
+![OG Rush Week UML.pdf](terminal.png)
+
+Example gameplay showing the terminal 
+interface with story text and player choice
+![gameplay](https://github.com/user-attachments/assets/76553f9d-1eef-4073-820f-55dbd2e4c22e)
+
+Installation and Usage Instructions
+Prerequisites
+
+C++ compiler (g++ recommended)
+Terminal/Command prompt access
+Git (for cloning the repository)
+
+
+## No dependecies required
+
+
 ## Installation/Usage Instructions
 • 1.) Enter "cmake ." into the terminal
 
@@ -95,3 +114,25 @@ The Game will have a time complexity of O(n) since displaying each word separetl
 • 4.) To run tests enter "./bin/runAllTests
 
 • How To Play: Enter the prompted characters into the terminal depending on the choice you want to make.
+
+## TESTING
+Story Flow Testing
+
+Verified all story branches lead to valid outcomes
+Confirmed text displays correctly word-by-word
+Tested timing mechanisms for quick-time events
+
+
+
+
+Validation Results:
+
+All story paths function correctly
+Input validation prevents crashes from invalid entries
+All three endings are accessible through different choice combinations
+Performance meets expected time complexity requirements
+
+
+Why this project is important to us
+We wanted to create a game that blends the excitement of college life with the suspense of a mystery thriller. Rush Week allows us to practice our C++ programming skills while exploring storytelling, game design, and character development in an interactive format. This project also gives us the chance to integrate art and creativity through custom-drawn sprites and (potentially) a graphical UI in the future.
+Languages, Tools, and Technologies
