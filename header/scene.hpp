@@ -268,6 +268,7 @@ struct canonEnding: public Scene {
 };
 
 struct runQuickTimeEvent: public Scene {
+	bool runSuccess;
 	runQuickTimeEvent(): Scene(){}
 	runQuickTimeEvent(char name): Scene(name){}
 	~runQuickTimeEvent() override=default;
