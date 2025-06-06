@@ -245,7 +245,7 @@ string kitchen::dialogue() {
             + "\nI have to be careful slipping in what I found earlier so he does not notice.";
  
        
-        quickTimeEvent roofieEvent(20, "roofie");
+        quickTimeEvent roofieEvent(10, "roofie");
         if (!roofieEvent.startEvent()) {
             output += string("\nShit.")
                 + "\nChad looks over."
@@ -355,16 +355,23 @@ string runQuickTimeEvent:: dialogue(){
     string output = string("> I push the window open frantically and hop out")
     + "> My ankles throb after the landing but I begin sprinting. I hear someone chasing after me."
     + "> RUN.. ";
-    //IMPLEMENT QTE HERE
-    //IF PASS, TAKE TO bedroomPassword
-    //IF FAIL, TAKE TO failedQuickTimeEvent
-		return output;
+    quickTimeEvent run(8, "lrlrlrlrlrlr");
+    if(run.startEvent()){
+        runSuccess = true;
+    }else{
+        runSuccess = false;
+    }
+	return output;
 }
 
 //IMPLEMENT UPDATE SCENE HERE
 void runQuickTimeEvent::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 nextPossibleScenes.resize(1);
-nextPossibleScenes.at(0)=new policeEnding('p');
+    if(runSuccess){
+        nextPossibleScenes.at(0)=new policeEnding('p');
+    }else{
+        nextPossibleScenes.at(0)=new failedQuickTimeEvent();
+    }
 }
 
 
@@ -442,7 +449,7 @@ string canonEnding:: dialogue(){
     +"\nεπιστροφή σε μας Διόνυσο"
     +"\n> I lunge the knife into my throat." 
     +"\n> ..."
-    +"\n Surprise! :) "; //PUT LINK TO MURDERS HERE
+    +"\n Surprise! :) https://iqnc06.github.io/"; //PUT LINK TO MURDERS HERE
     return output;
 }
 
