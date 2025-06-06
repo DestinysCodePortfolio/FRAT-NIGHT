@@ -204,22 +204,30 @@ struct failRoofieScene:public Scene{
 };
 
 struct kitchen : public Scene {
-    bool checkedKitchenCabinet;
-    bool checkedFridge;
-    bool checkedSink;
-    char lastChecked; 
-	bool roofieAttempt = false; 
-	bool slippedSomethingInDrink = false;
-	bool gotPassword = false;
+	bool checkedKitchenCabinet;
+	bool checkedFridge;
+	bool checkedSink;
+	char lastChecked; 
+	bool roofieAttempt; 
+	bool slippedSomethingInDrink;
+	bool gotPassword;
     ~kitchen() override=default;
 	kitchen(kitchen& other) = delete;
 	kitchen& operator=(kitchen& other) = delete;
-  kitchen(char name, bool cab = false, bool fridge = false, bool sink = false, bool attempt = false, bool roofie = false, char last = 0, bool pass = false)
-    : Scene(name), checkedKitchenCabinet(cab), checkedFridge(fridge), checkedSink(sink), roofieAttempt(attempt), slippedSomethingInDrink(roofie), lastChecked(last), gotPassword(pass) {}
+  kitchen(char name=0, bool cab = false, bool fridge = false, bool sink = false, bool attempt = false, bool roofie = false, char last = 0, bool pass = false)
+    : Scene(name), 
+		checkedKitchenCabinet(cab), 
+		checkedFridge(fridge), 
+		checkedSink(sink), 
+		lastChecked(last),
+		roofieAttempt(attempt), 
+		slippedSomethingInDrink(roofie),  
+		gotPassword(pass) {}
     string dialogue() override;
     void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 struct bedroomNoPassword: public Scene {
+	char lastChecked; 
 	bedroomNoPassword(): Scene(){}
 	bedroomNoPassword(char name): Scene(name){}
 	~bedroomNoPassword() override=default;

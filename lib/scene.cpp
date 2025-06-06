@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std;
 using std::string;
-using std::cout;
+using std::cout;   
 using std::endl;
 using std::this_thread::sleep_for;
 using std::chrono::milliseconds;
@@ -33,25 +33,24 @@ char Scene::getOptionName(){
 	return optionName;
 }
 string openingScene::dialogue(){
-    string output = string("You are Natalie Fitzgerald, a university student whose friend went missing at a frat party...\n");
+    string output = string("> You are Natalie Fitzgerald, a university student whose friend went missing at a frat party a couple nights ago.")
+    + "\n> You are here at another party, trying to unravel the mystery of her disappearance. You know they did it. You just can't prove it. "
+    + "\n My ears throb with every bass drop pounding through the floorboards."
+    + "\n  Sweat clings to my back. The house is packed wall to wall—drunken laughter, sticky floors, and that sour-sweet stench of booze and regret."
+    + "\n ???: YO! Look who finally decided to pull up!"
+    + "\n  A can sprays open. A vodka seltzer fizzes out all over Chad’s hand as he slides into view,  stumbling a little with his arms open."
+    + "\n Chad: “Where my hug at?"
+    + "\n Take the hug[t]"
+    + "\n Reject the hug[r]";
     trickleDisplayString(output, 1);
     return output;
 
-    // cin >> userChoice;
 
-    // if (choice == 'a') {
-    //     return new takeHug();
-    // } else if (choice == 'b') {
-    //     return new rejectHug();
-    // }
-
-    // return nullptr; // if invalid input
 }
 void openingScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new takeHug('t');
 	nextPossibleScenes.at(1)=new rejectHug('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -69,7 +68,6 @@ string takeHug::dialogue(){
 void takeHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
     nextPossibleScenes.resize(1);
 	nextPossibleScenes.at(0)=new firstShotOptionScene('t');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -85,7 +83,6 @@ string rejectHug::dialogue(){
 void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(1);
 	nextPossibleScenes.at(0)=new firstShotOptionScene('t');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -116,7 +113,6 @@ void firstShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScen
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new secondShotOptionScene('t');
 	nextPossibleScenes.at(1)=new rejectFirstShot('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 string rejectFirstShot::dialogue(){
@@ -130,7 +126,6 @@ string rejectFirstShot::dialogue(){
 void rejectFirstShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
     nextPossibleScenes.resize(1);
     nextPossibleScenes.at(0)=new lookAroundForCLues('c');
-    std::cout<<"Updated possible Scenes\n";
 }
 
 string lookAroundForCLues::dialogue(){
@@ -144,7 +139,6 @@ string lookAroundForCLues::dialogue(){
 void lookAroundForCLues :: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(1);
 	nextPossibleScenes.at(0)=new bathroom('c');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 string bathroom::dialogue() {
@@ -153,7 +147,6 @@ string bathroom::dialogue() {
     // Show narrative for the last checked item
     if (lastChecked == 'c') {
         output += "You open the creaky door to the medicine cabinet. Inside: bandages, half-used toothpaste, and a small, chilling surprise — a blister pack of Rohypnol.\n";
-        output += "Do you take it? → [grab it]\n";
         output += "You pocket the pills. You don’t know why. Maybe you just don’t trust the people who live here — and that instinct feels right.\n";
     } else if (lastChecked == 'f') {
         output += "Hung crooked on the wall across from the toilet, a filthy frat flag flutters slightly from a draft you can't place.\n";
@@ -209,6 +202,7 @@ void lookKitchenOrBedroom::updatePossibleScenes(vector<Scene*>& nextPossibleScen
     nextPossibleScenes.clear();
     nextPossibleScenes.push_back(new kitchen('k'));
     nextPossibleScenes.push_back(new bedroomNoPassword('u')); // or whatever scene represents the bedroom
+
 }// Fixed kitchen scene implementation
 
 string kitchen::dialogue() {
@@ -250,10 +244,9 @@ string kitchen::dialogue() {
             + "\nI begin pouring the liquor into two red solo cups, "
             + "\nI have to be careful slipping in what I found earlier so he does not notice.";
  
-        quickTimeEvent *roofieEvent = new quickTimeEvent(10, "ROOFIE CHAD");
-        bool success = roofieEvent->startEvent();
- 
-        if (!success) {
+       
+        quickTimeEvent roofieEvent(20, "roofie");
+        if (!roofieEvent.startEvent()) {
             output += string("\nShit.")
                 + "\nChad looks over."
                 + "\nChad: WHAT THE FUCK ARE YOU DOING? THAT'S IT GET THE FUCK OUT OF MY HOUSE!"
@@ -267,7 +260,7 @@ string kitchen::dialogue() {
                 + "\nChad: I nEeD.. tO fInD.. LiLiTh."
                 + "\nHe stumbles out of the room. I can open whatever is in that cabinet now.";
         }
-        delete roofieEvent;
+        //delete roofieEvent;
     }
     else if (lastChecked == 'l') {
         output += "\nNatalie: I decide to leave the kitchen.";
@@ -295,11 +288,14 @@ string kitchen::dialogue() {
  
     trickleDisplayString(output, 1);
     return output;
-}
-
-void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
+}void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
+    // Properly delete existing Scene objects before clearing
+    for (Scene* scene : nextPossibleScenes) {
+        delete scene;
+    }
     nextPossibleScenes.clear();
-
+    // Note: resize(0) is redundant after clear()
+    
     // Add option to check cabinet if not already checked
     if (!checkedKitchenCabinet) {
         nextPossibleScenes.push_back(new kitchen('c', true, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, 'c', gotPassword));
@@ -322,14 +318,15 @@ void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
     
     // Add option to attempt roofie if cabinet has been checked and no attempt made yet
     if (checkedKitchenCabinet && !roofieAttempt) {
-        nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, true, false, 'd', gotPassword)); // Note: slippedSomethingInDrink will be set based on QTE result
+        nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, true, false, 'd', gotPassword));
     }
 
     // Transition scenes based on completion and roofie attempt outcome
-    if (roofieAttempt && !slippedSomethingInDrink) { 
-        // Failed roofie attempt – transition to bedroom scene without password
+     if (roofieAttempt && !slippedSomethingInDrink) { 
+        cout << "DEBUG: Adding bedroomNoPassword scene" << endl;
         nextPossibleScenes.push_back(new bedroomNoPassword('u'));
-    } else if (checkedKitchenCabinet && checkedFridge && checkedSink && (slippedSomethingInDrink || roofieAttempt)) {
+    }
+    else if (checkedKitchenCabinet && checkedFridge && checkedSink && (slippedSomethingInDrink || roofieAttempt)) {
         // All areas checked and either roofie succeeded or failed - allow leaving
         if (gotPassword && slippedSomethingInDrink) {
             nextPossibleScenes.push_back(new bedroomPassword('k'));
@@ -339,23 +336,20 @@ void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
     }
 }
 
-// Also need to fix the constructor parameter order to match the updated function calls
-// The constructor should be:
-
 string bedroomNoPassword:: dialogue(){
     string output = string("> I close the bedroom door behind me and lock it.")
     + "\n > KNOCK KNOCK KNOCK"
     + "\n > I need to hurry."
     + "\n There is a laptop open on the desk, I bet there is some sort of evidence on there."
     + "\n Take the laptop to the police[t]";
+    trickleDisplayString(output , 1);
     return output;
+} 
+void bedroomNoPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+    nextPossibleScenes.clear();
+    nextPossibleScenes.push_back(new runQuickTimeEvent('t')); 
 }
 
-void bedroomNoPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-	nextPossibleScenes.resize(1);
-	nextPossibleScenes.at(0)=new runQuickTimeEvent('t');
-	std::cout<<"Updated possible Scenes\n";
-}
 
 string runQuickTimeEvent:: dialogue(){
     string output = string("> I push the window open frantically and hop out")
@@ -364,6 +358,7 @@ string runQuickTimeEvent:: dialogue(){
     //IMPLEMENT QTE HERE
     //IF PASS, TAKE TO bedroomPassword
     //IF FAIL, TAKE TO failedQuickTimeEvent
+		return output;
 }
 
 //IMPLEMENT UPDATE SCENE HERE
@@ -393,7 +388,7 @@ string failedQuickTimeEvent:: dialogue(){
 }
 
 void failedQuickTimeEvent::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-
+	nextPossibleScenes.clear();
 }
 
 string bedroomPassword:: dialogue(){
@@ -410,7 +405,6 @@ void bedroomPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new runQuickTimeEvent('t');
 	nextPossibleScenes.at(1)=new canonEnding('e');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 //KYS Ending
@@ -453,7 +447,7 @@ string canonEnding:: dialogue(){
 }
 
 void canonEnding:: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-    
+	nextPossibleScenes.clear();
 } 
 
 
@@ -471,6 +465,7 @@ string policeEnding:: dialogue(){
 }
 
 void policeEnding:: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	nextPossibleScenes.clear();
 } 
 
 void room::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -496,7 +491,6 @@ void secondShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleSce
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new takeSecondShot('t');
 	nextPossibleScenes.at(1)=new pressHer('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -514,14 +508,15 @@ void takeSecondShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new lookForKevinScene('t');
 	nextPossibleScenes.at(1)=new pressHer('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 //press her
 string pressHer::dialogue(){
-    string output = string("\n Lilith : I did what he would have wanted.")
+    string output = string("\n Natalie: What do you know about what happened to [REDACTED]?")
+    + "\n Lilith : I did what he would have wanted."
     + "\n ..."
-    + "\n Lilith: I told you I don't know already, anyway I'm going back in to distract Chad while you get Kevin's attention, tell me how it goes.";
+    + "\n Lilith: I told you I don't know already, anyway I'm going back in to distract Chad while you get Kevin's attention, tell me how it goes."
+    + "\n Go Look For Kevin [t]";
     trickleDisplayString(output , 1);
     return output;
 }
@@ -529,7 +524,6 @@ string pressHer::dialogue(){
 void pressHer::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(1);
 	nextPossibleScenes.at(0)=new lookForKevinScene('t');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -564,7 +558,6 @@ void lookForKevinScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes)
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new kevinArgument('t');
 	nextPossibleScenes.at(1)=new kevinRomance('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 //kevin argument + death ending
@@ -592,7 +585,7 @@ string kevinArgument:: dialogue(){
     return output;
 }
 void kevinArgument::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-
+	nextPossibleScenes.clear();
 }
 
 
@@ -617,7 +610,6 @@ void kevinRomance::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new takeThirdShot('t'); //would take you to kevinDeathEnding
 	nextPossibleScenes.at(1)=new rejectThirdShot('r'); 
-	std::cout<<"Updated possible Scenes\n";
 }
 
 string takeThirdShot:: dialogue(){
@@ -641,7 +633,7 @@ string takeThirdShot:: dialogue(){
 }
 
 void takeThirdShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-
+	nextPossibleScenes.clear();
 }
 
 
@@ -670,11 +662,10 @@ string rejectThirdShot:: dialogue(){
 } 
 
 void rejectThirdShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-
+	nextPossibleScenes.clear();
 }
 
-
-// vvv Put this in the main game screen, not in the scene class
+//TRICKLE
 
 void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
 	const size_t BOX_WIDTH = 100; // Width inside the borders

@@ -39,7 +39,6 @@ void TitleScreen::printScreen() const {
 	const char CORNER = '+';
 	const char HORIZONTAL = '=';
 	const char VERTICAL = '|';
-
 	// Helper lambda to center text
 	auto centerText = [&BOX_WIDTH](const string &text) {
 		int padding = (BOX_WIDTH - text.length()) / 2;
