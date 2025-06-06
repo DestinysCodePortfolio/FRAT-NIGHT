@@ -17,11 +17,11 @@ void UIScreen::userPrompt(){
 }
 
 void UIScreen::clearScreen() const{
-	// #ifdef _WIN32
-	// 	system("cls");
-	// #else
-	// 	system("clear");
-	// #endif
+	#ifdef _WIN32
+		system("cls");
+	#else
+		system("clear");
+	#endif
 }
 TitleScreen::TitleScreen():
 	UIScreen(){
@@ -33,35 +33,28 @@ void TitleScreen::printScreen() const {
 		"2. Quit [q]"
 	};
 	const int NUM_OPTIONS = 2;
-	const uint8_t BOX_WIDTH = 40; // changes length of title screen box
+	const uint8_t BOX_WIDTH = 40;
 
-	// Double-line border characters
 	const char CORNER = '+';
 	const char HORIZONTAL = '=';
 	const char VERTICAL = '|';
-	// Helper lambda to center text
 	auto centerText = [&BOX_WIDTH](const string &text) {
 		int padding = (BOX_WIDTH - text.length()) / 2;
 		if (padding < 0) padding = 0;
 		return string(padding, ' ') + text;
 	};
 
-	// Top border
 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 
-	// Game title (centered)
 	cout << VERTICAL << centerText(GAME_TITLE) 
 					<< std::setw(BOX_WIDTH - centerText(GAME_TITLE).length() + 1) << VERTICAL << endl;
 
-	// Divider line
 	cout << VERTICAL << string(BOX_WIDTH, HORIZONTAL) << VERTICAL << endl;
 
-	// Menu options (centered)
 	for (int i = 0; i < NUM_OPTIONS; ++i) {
 		cout << VERTICAL << centerText(MENU_OPTIONS[i]) << std::setw(BOX_WIDTH - centerText(MENU_OPTIONS[i]).length() + 1) << VERTICAL << endl;
 	}
 
-	// Bottom border
 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 }
 void TitleScreen::updateOptions(){}

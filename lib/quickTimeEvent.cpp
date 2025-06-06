@@ -3,7 +3,6 @@
 
 quickTimeEvent::quickTimeEvent(double dur, std::string crrctAns){
     soln = crrctAns;
-    //userInp = getInp;
     duration = dur;
 }
 
@@ -25,27 +24,3 @@ bool quickTimeEvent::startEvent(){
     }
     return false;
 }
-
-
-
-/*example tests to demonstrate functionality 
-int main(){
-    quickTimeEvent run(17, "lrlrlrlrlrlr");
-    run.setDuration(7);
-    if(run.startEvent()){
-        std::cout << "You're a runner you're a track star!!\n";
-    }else{
-        std::cout << "You got murdered :(\n";
-    }
-
-    quickTimeEvent roofie(1, "roofie");
-    roofie.setDuration(6);
-    if(roofie.startEvent()){
-        std::cout << "Walter White core\n";
-    }else{
-        std::cout << "No drugging ppl for you\n";
-    }
-    return 0;
-}
-
-*/

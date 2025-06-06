@@ -13,16 +13,7 @@ using std::this_thread::sleep_for;
 using std::chrono::milliseconds;
 using std::flush;
 using std::cin;
-//Copy constructor
-// Scene& Scene::operator=(const Scene& other) {
-//     if (this != &other) {
-//         this->choice = other.choice;
-//     }
-//     return *this;
-// }
 
-
-//openers dialogue-- until where my hug at
 Scene::Scene():
 	optionName(0)
 {}
@@ -53,8 +44,6 @@ void openingScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.at(1)=new rejectHug('r');
 }
 
-
-//if you take the hug
 string takeHug::dialogue(){
     string output = string("\n He reeks of tequila and cologne that never fully covered up whatever he did last night.")
     + "\n Natalie: Chad, have you been drinking?!"
@@ -70,9 +59,6 @@ void takeHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.at(0)=new firstShotOptionScene('t');
 }
 
-
-
-//if you dont take the hug
 string rejectHug::dialogue(){
     string output = string("\n Damn, Natalie. Acting brand new?")
     + "\n Ask about [REDACTED] [t]";
@@ -85,9 +71,6 @@ void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.at(0)=new firstShotOptionScene('t');
 }
 
-
-
-//Continuing scene: kevin and lilith intro
 string firstShotOptionScene::dialogue(){
     string output = string("\n Natalie: Whatever. Have you seen [REDACTED]? She was not at her apartment, has not shown up to class, and her location is off…")
     + "\n Chad: Bro… I dunno. She is probably out getting hazed with her bigs or whatever."
@@ -144,7 +127,6 @@ void lookAroundForCLues :: updatePossibleScenes(vector<Scene*>& nextPossibleScen
 string bathroom::dialogue() {
     string output;
 
-    // Show narrative for the last checked item
     if (lastChecked == 'c') {
         output += "You open the creaky door to the medicine cabinet. Inside: bandages, half-used toothpaste, and a small, chilling surprise — a blister pack of Rohypnol.\n";
         output += "You pocket the pills. You don’t know why. Maybe you just don’t trust the people who live here — and that instinct feels right.\n";
@@ -164,7 +146,6 @@ string bathroom::dialogue() {
         output += "You blink and realize it wasn't real. You see yourself, and you feel her watching too.\n";
     }
 
-    // Show options
     if (!checkedCabinet) output += " check medicine cabinet [c]\n";
     if (!checkedFlag)    output += " check frat flag [f]\n";
     if (!checkedMirror)  output += " look in the mirror [m]\n";
@@ -201,9 +182,9 @@ string lookKitchenOrBedroom::dialogue(){
 void lookKitchenOrBedroom::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
     nextPossibleScenes.clear();
     nextPossibleScenes.push_back(new kitchen('k'));
-    nextPossibleScenes.push_back(new bedroomNoPassword('u')); // or whatever scene represents the bedroom
+    nextPossibleScenes.push_back(new bedroomNoPassword('u'));
 
-}// Fixed kitchen scene implementation
+}
 
 string kitchen::dialogue() {
     string output;
@@ -262,13 +243,10 @@ string kitchen::dialogue() {
                 + "\nHe stumbles out of the room. I can open whatever is in that cabinet now.";
                 slippedSomethingInDrink = true;
         }
-        //delete roofieEvent;
     }
     else if (lastChecked == 'l') {
         output += "\nNatalie: I decide to leave the kitchen.";
     }
- 
-    // Show available options based on current state
     if (!checkedKitchenCabinet) {
         output += "\n  [c] Open cabinet";
     }
@@ -291,39 +269,31 @@ string kitchen::dialogue() {
     trickleDisplayString(output, 1);
     return output;
 }void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
-    // Properly delete existing Scene objects before clearing
     for (Scene* scene : nextPossibleScenes) {
         delete scene;
     }
     nextPossibleScenes.clear();
-    // Note: resize(0) is redundant after clear()
     
-    // Add option to check cabinet if not already checked
     if (!checkedKitchenCabinet) {
         nextPossibleScenes.push_back(new kitchen('c', true, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, 'c', gotPassword));
     }
     
-    // Add option to check cabinet again for password if cabinet checked but password not found
     if (checkedKitchenCabinet && !gotPassword) {
         nextPossibleScenes.push_back(new kitchen('y', checkedKitchenCabinet, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, 'y', true));
     }
     
-    // Add option to check fridge if not already checked
     if (!checkedFridge) {
         nextPossibleScenes.push_back(new kitchen('f', checkedKitchenCabinet, true, checkedSink, roofieAttempt, slippedSomethingInDrink, 'f', gotPassword));
     }
     
-    // Add option to check sink if not already checked
     if (!checkedSink) {
         nextPossibleScenes.push_back(new kitchen('s', checkedKitchenCabinet, checkedFridge, true, roofieAttempt, slippedSomethingInDrink, 's', gotPassword));
     }
     
-    // Add option to attempt roofie if cabinet has been checked and no attempt made yet
     if (checkedKitchenCabinet && !roofieAttempt) {
         nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, true, false, 'd', gotPassword));
     }
 
-    // Transition scenes based on completion and roofie attempt outcome
      if (roofieAttempt && !slippedSomethingInDrink) { 
         cout << "DEBUG: Adding bedroomNoPassword scene" << endl;
         nextPossibleScenes.push_back(new bedroomNoPassword('u'));
@@ -333,7 +303,6 @@ string kitchen::dialogue() {
         nextPossibleScenes.push_back(new bedroomPassword('u'));
     }
     else if (checkedKitchenCabinet && checkedFridge && checkedSink && (slippedSomethingInDrink || roofieAttempt)) {
-        // All areas checked and either roofie succeeded or failed - allow leaving
         if (gotPassword && slippedSomethingInDrink) {
             nextPossibleScenes.push_back(new bedroomPassword('k'));
         } else {
@@ -370,7 +339,6 @@ string runQuickTimeEvent:: dialogue(){
 	return output;
 }
 
-//IMPLEMENT UPDATE SCENE HERE
 void runQuickTimeEvent::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 nextPossibleScenes.resize(1);
     if(runSuccess){
@@ -380,9 +348,6 @@ nextPossibleScenes.resize(1);
     }
 }
 
-
-
-//FAILED QTE SCENE
 string failedQuickTimeEvent:: dialogue(){
     string output = string("My legs give out as I fall and my head slams on the ground.")
     + "\n >..."
@@ -421,7 +386,6 @@ void bedroomPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.at(1)=new canonEnding('e');
 }
 
-//KYS Ending
 string canonEnding:: dialogue(){
     string output = string("> The computer unlocks, the desktop is a chaotic mess of files and folders.")
     + "\n> The file names are written in a different language… is that…Greek? "
@@ -456,7 +420,7 @@ string canonEnding:: dialogue(){
     +"\nεπιστροφή σε μας Διόνυσο"
     +"\n> I lunge the knife into my throat." 
     +"\n> ..."
-    +"\n Surprise! :) https://iqnc06.github.io/"; //PUT LINK TO MURDERS HERE
+    +"\n Surprise! :) https://iqnc06.github.io/";
     trickleDisplayString(output , 1);
     return output;
 }
@@ -465,8 +429,6 @@ void canonEnding:: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.clear();
 } 
 
-
-//POLICE ENDING 
 string policeEnding:: dialogue(){
     string output = string("> I hear voices screaming my name behind me")
     + "\n> but I am able to sprint fast enough out of there."
@@ -484,8 +446,6 @@ void policeEnding:: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.clear();
 } 
 
-
-//take first shot
 string secondShotOptionScene::dialogue(){
     string output = string("\n Kevin: WOOOAAAAAHH THAS LIQA!!!")
     + "\n Lilith: I'm tired of babysitting him, Chad, tag in."
@@ -507,9 +467,6 @@ void secondShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleSce
 	nextPossibleScenes.at(1)=new pressHer('r');
 }
 
-
-
-//takes second shot
 string takeSecondShot::dialogue(){
     string output = string("\n Lilith: Well the reason why he’s so drunk is cause he was trying to get the balls to talk to you again. Ever since yall met, he can't shut up about how he wants to get to know you more - you should go and talk to him right now see for yourself!")
     + "\n Leave and look for Kevin[t]"
@@ -524,7 +481,6 @@ void takeSecondShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.at(1)=new pressHer('r');
 }
 
-//press her
 string pressHer::dialogue(){
     string output = string("\n Natalie: What do you know about what happened to [REDACTED]?")
     + "\n Lilith : I did what he would have wanted."
@@ -540,13 +496,6 @@ void pressHer::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.at(0)=new lookForKevinScene('t');
 }
 
-
-
-
-
-///QUESTION FOR PEDRO HOW WE GONNA TRANSITION IS ONE OPTION TO GO BACK TO LOOK FOR KEVIN OKAY?  
-
-//look for kevin
 string lookForKevinScene:: dialogue(){
     string output = string("\n >I see Kevin next to the bathroom, keeping to himself. He doesn’t look like he's doing too well, as if he were about to profusely vomit.")
     + "\n >I sidle up to him, nervous with the revelation that Lilith gave me. We aren’t necessarily close, but we became pretty good friends"
@@ -574,7 +523,6 @@ void lookForKevinScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes)
 	nextPossibleScenes.at(1)=new kevinRomance('r');
 }
 
-//kevin argument + death ending
 string kevinArgument:: dialogue(){
     string output = string("\n Kevin: Natalie, no one here knows anything. You’re supposed to be her best friend. How would we know, and you wouldn't?")
     + "\n Natalie: BULLSHIT KEVIN!"
@@ -602,8 +550,6 @@ void kevinArgument::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.clear();
 }
 
-
-//Kevin romance
 string kevinRomance:: dialogue(){
     string output = string("Kevin becomes flushed and stammers.")
     +  "\n Kevin:  I, I don’t know I’m sorry. All I know is that when someone’s been gone for this long… they probably aren’t coming back Natalie."
@@ -622,7 +568,7 @@ string kevinRomance:: dialogue(){
 
 void kevinRomance::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
-	nextPossibleScenes.at(0)=new takeThirdShot('t'); //would take you to kevinDeathEnding
+	nextPossibleScenes.at(0)=new takeThirdShot('t');
 	nextPossibleScenes.at(1)=new rejectThirdShot('r'); 
 }
 
@@ -679,10 +625,8 @@ void rejectThirdShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.clear();
 }
 
-//TRICKLE
-
 void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
-	const size_t BOX_WIDTH = 100; // Width inside the borders
+	const size_t BOX_WIDTH = 100;
 	const size_t PADDING = 2;
 	const size_t MAX_LINE = BOX_WIDTH - PADDING * 4;
 
@@ -691,8 +635,6 @@ void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
 	vector<string> lines;
 	string rawLine;
 
-
-	// Word-wrap logic
 	while (getline(inputStream, rawLine)) {
 			istringstream wordStream(rawLine);
 			string word, line;
@@ -711,18 +653,12 @@ void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
 			if (rawLine.empty()) lines.push_back("");
 	}
 
-
-	// Box characters
 	const char CORNER = '+';
 	const char HORIZONTAL = '=';
 	const char VERTICAL = '|';
 
-
-	// Top border
 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 
-
-	// Display lines with borders and padding
 	for (const auto& l : lines) {
         size_t RIGHT_PADDINNG = 0;
         if(l.length() + PADDING < BOX_WIDTH){
@@ -738,7 +674,5 @@ void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
         cout <<  endl;
 	}
 
-
-	// Bottom border
 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 }
