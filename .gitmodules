@@ -1,3 +1,6 @@
 [submodule "test/googletest"]
 	path = test/googletest
 	url = https://github.com/google/googletest.git
+[submodule "FRAT-NIGHT"]
+    path = FRAT-NIGHT
+    url = https://github.com/DestinysCodePortfolio/FRAT-NIGHT
