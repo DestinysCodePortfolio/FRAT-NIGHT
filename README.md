@@ -34,8 +34,6 @@ Output: Branching story paths and multiple unique endings depending on player ch
 
 • Interactive storytelling with branching paths
 
-• Each branching path won't lead to an ending but to a early game over screen depening on player's actions
-
 • The player can collect items that will unlock different options that they can choose that can lead to different endings
 
 • Players are encouraged to search rooms while they explore the mystery of the game's lore
@@ -46,11 +44,7 @@ Output: Branching story paths and multiple unique endings depending on player ch
 
 • 3 possible endings based on player decisions
 
-• One secret ending will be achieved by looking through the files of the game and decrypting the messages to unlock the ending in game through in game user input
-
-• Mystery-solving mechanics through dialogue and file.txt manipulation
-
-• Hand-drawn character sprites (with possible future UI integration)
+• A mysterious link will be provided to the user for one of the endings, copying and pasting this link into your browser will show a wesbite that pertains to the plot.
 
 • Terminal-based user interface for simplicity and accessibility
 
