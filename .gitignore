@@ -42,3 +42,4 @@ cmake_install.cmake
 bin
 CTestTestfile.cmake
 DartConfiguration.tcl
+.vscode

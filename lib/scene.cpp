@@ -457,17 +457,28 @@ void bedroomNoPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes)
 
 string runQuickTimeEvent:: dialogue(){
     string output = string("> I push the window open frantically and hop out")
-    + "> My ankles throb after the landing but I begin sprinting. I hear someone chasing after me."
-    + "> RUN.. ";
+    + "\n> My ankles throb after the landing but I begin sprinting. I hear someone chasing after me."
+    + "\n> RUN!!!"
+		+ "\n> ";
+		quickTimeEvent run(20, "SHIT SHIT SHIT SHIT SHIT");
+		ifPassedEvent = run.startEvent();
     //IMPLEMENT QTE HERE
     //IF PASS, TAKE TO bedroomPassword
     //IF FAIL, TAKE TO failedQuickTimeEvent
+		return output;
 }
 
 //IMPLEMENT UPDATE SCENE HERE
 void runQuickTimeEvent::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-  nextPossibleScenes.resize(1);
-  nextPossibleScenes.at(0)=new policeEnding('p');
+	nextPossibleScenes.resize(1);
+  if (ifPassedEvent){
+		// Add next possible Scene here
+    nextPossibleScenes.at(0)=new policeEnding();
+	}
+	else{
+		// Add next possible Scene here
+    nextPossibleScenes.at(0)=new failedQuickTimeEvent();
+	}
 }
 
 

@@ -4,7 +4,7 @@
 
 //quickTimeEvent tests
 #include "../header/quickTimeEvent.hpp"
-
+#include "../lib/interfaceTerminal.cpp"
 
 TEST(quickTimeTests, getDurTest){
     quickTimeEvent checkDuration(5, "test");
@@ -31,4 +31,8 @@ TEST(quickTimeTests, runningTest){
 
     std::cin.rdbuf(original_cin);
 
+}
+TEST(DialogueTreeTests, UpdateOptionsTests){
+	DialogueTree theTree();
+	
 }
