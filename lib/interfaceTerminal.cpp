@@ -1,6 +1,5 @@
 #include "../header/interfaceTerminal.hpp"
 #include <iostream>
-#include <fstream>
 #include <iomanip>
 using std::cout;
 using std::endl;
