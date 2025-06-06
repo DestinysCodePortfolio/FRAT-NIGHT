@@ -22,7 +22,7 @@ TEST(quickTimeTests, runningTest){
     quickTimeEvent runningTest(10, "lrlrlrlrlr");
 
     std::stringstream input;
-    input << "lrlrlrlrlr";
+    input << "\nlrlrlrlrlr";
 
     auto original_cin = std::cin.rdbuf(); // Store original cin buffer
     std::cin.rdbuf(input.rdbuf()); // Redirect cin to stringstream
