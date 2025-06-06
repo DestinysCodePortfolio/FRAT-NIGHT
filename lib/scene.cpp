@@ -124,7 +124,7 @@ string rejectFirstShot::dialogue(){
     + "\n Chad: I know you're paranoid about your friend and all, but she aint here little lady. Stop killing the vibe."
     + "\n Natalie: Fine I'll find her myself, jerk."
      + "\n Leave and look for clues[c]";
-    trickleDisplayString(output, 25);
+    trickleDisplayString(output , 1);
     return output;
 }
 void rejectFirstShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -138,7 +138,7 @@ string lookAroundForCLues::dialogue(){
   + "\n I weave through the bodies and pass some guy in a horse mask vomiting into a potted plant."
   + "\n My shoulders brush past strangers who don’t even notice I’m there. "
   + "\n  check bathroom [c] ";
-    trickleDisplayString(output, 25);
+    trickleDisplayString(output , 1);
     return output;
 } 
 void lookAroundForCLues :: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -156,25 +156,6 @@ string bathroom::dialogue() {
         output += "Do you take it? → [grab it]\n";
         output += "You pocket the pills. You don’t know why. Maybe you just don’t trust the people who live here — and that instinct feels right.\n";
     } else if (lastChecked == 'f') {
-string bathroom::dialogue(){
-string output;
-    if (!checkedCabinet) output += " check medicine cabinet [c]\n";
-    if (!checkedFlag)    output += " check frat flag [f]\n";
-    if (!checkedMirror)  output += " look in the mirror [m]\n";
-    if (checkedCabinet && checkedFlag && checkedMirror){
-        output += " leave bathroom [l]\n";
-       }
-    trickleDisplayString(output, 25);
-    return output;
-}
-
-string bathroomCheck::dialogue() {
-    string output;
-    if (checkedItem == 'c') {
-        output += "You open the creaky door to the medicine cabinet. Inside: bandages, half-used toothpaste, and a small, chilling surprise — a blister pack of Rohypnol.\n";
-        output += "Do you take it? → [grab it]\n";
-        output += "You pocket the pills. You don’t know why. Maybe you just don’t trust the people who live here — and that instinct feels right.\n";
-    } else if (checkedItem == 'f') {
         output += "Hung crooked on the wall across from the toilet, a filthy frat flag flutters slightly from a draft you can't place.\n";
         output += "Typical — they couldn’t even decorate with taste.\n";
         output += "You pull it aside.\n";
@@ -212,41 +193,8 @@ void bathroom::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
         nextPossibleScenes.push_back(new lookKitchenOrBedroom('l'));
 }
 
-    trickleDisplayString(output, 25);
-    return output;
-}
 
-void bathroom::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
-    nextPossibleScenes.clear();
- if (!checkedCabinet){
-    nextPossibleScenes.push_back(new bathroomCheck('c', true, checkedFlag, checkedMirror));
- }
-if (!checkedFlag){
-    nextPossibleScenes.push_back(new bathroomCheck('f', checkedCabinet, true, checkedMirror));
-}
-if (!checkedMirror){
-    nextPossibleScenes.push_back(new bathroomCheck('m', checkedCabinet, checkedFlag, true));
-}
-    if (checkedCabinet && checkedFlag && checkedMirror){
-        nextPossibleScenes.push_back(new lookKitchenOrBedroom('l'));
-    }
-    std::cout << "Updated possible Scenes\n";
-}
-void bathroomCheck::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
-    bool newCabinet = checkedCabinet;
-    bool newFlag = checkedFlag;
-    bool newMirror = checkedMirror;
 
-    // Update the flag for the item just checked
-    if (checkedItem == 'c') newCabinet = true;
-    if (checkedItem == 'f') newFlag = true;
-    if (checkedItem == 'm') newMirror = true;
-
-    nextPossibleScenes.clear();
-    nextPossibleScenes.push_back(new bathroom('b', newCabinet, newFlag, newMirror));
-     std::cout << "Updated possible Scenes IT WEHTNT BACK\n";
-}
-  
 string lookKitchenOrBedroom::dialogue(){
     string output = string("\n > I step out the bathroom recollecting my thoughts from the expierence i just had.")
     +  " \n > The kitchen is a mess, and you can see the bedroom from here , which I assume is Chads."
@@ -261,12 +209,11 @@ void lookKitchenOrBedroom::updatePossibleScenes(vector<Scene*>& nextPossibleScen
     nextPossibleScenes.clear();
     nextPossibleScenes.push_back(new kitchen('k'));
     nextPossibleScenes.push_back(new bedroomNoPassword('u')); // or whatever scene represents the bedroom
-}
-string kitchen::dialogue() {
+}string kitchen::dialogue() {
     string output;
 
     // Show narrative for the last checked item
-    if (lastChecked == 'c' && !checkedKitchenCabinet) {
+    if (lastChecked == 'c') {
         output += string("  \n Chad: (voice sharp now, stepping forward)")
             + " \n Chad : Okay, Natalie. What's your deal? "
             + " \n He's not smiling anymore."
@@ -277,20 +224,21 @@ string kitchen::dialogue() {
             + " \n Natalie : Shit I was just looking for chasers, my bad bro."
             + " \n Chad : riggghtttt. Well there's limes next to liquor, blind bitch."
             + " \n Alcoholic. I wish there was a way to fuck him up more so he could get off my back for five minutes.";
-    } 
-    else if (lastChecked == 'c' && checkedKitchenCabinet && slippedSomethingInDrink && !gotPassword) {
+        checkedKitchenCabinet = true;
+    } else if (lastChecked =='y') {
         output += string(" \n I see a small notepad, inside is a bunch of grocery list items, but one page labeled passwords.")
             + "\n LAPTOP PASSWORD: MYBALLSITCH18"
             + "\n I put the notebook back and close the cabinet.";
-    } 
-    else if (lastChecked == 'f') {
+        gotPassword = true;
+    } else if (lastChecked == 'f' && !checkedFridge) {
         output += string("\n  I see lots of wine, beer , and someones gross leftovers, but behind that all I see ")
             + "\n some unidentifiable meat that smells like its been rotting there for a while. I feel anxious just looking at it."
             + "\n Chad : YO GET THE FUCK OUTTA MY FRIDGE FAT FUCK";
-    } 
-    else if (lastChecked == 's') {
+        checkedFridge = true;
+    } else if (lastChecked == 's' && !checkedSink) {
         output += string("\n  You see hair that resembles hers. You miss her.")
             + "\n  It looks like someone tried to shove it down the drain. It looks like its been burned.";
+        checkedSink = true;
     } else if (lastChecked == 'd' && !roofieAttempt) {
         output += string("\n Natalie: I'm going to make another drink, do you want one?")
             + " \n Chad: Sure. Maybe then you'll chill out"
@@ -300,13 +248,13 @@ string kitchen::dialogue() {
 
         quickTimeEvent *roofieEvent = new quickTimeEvent(10, "ROOFIE CHAD");
         bool success = roofieEvent->startEvent();
-        
+        roofieAttempt = true;
+
         if (!success) {
             output += string("\n Shit.")
                 + " \n Chad looks over."
                 + " \n Chad: WHAT THE FUCK ARE YOU DOING? THAT'S IT GET THE FUCK OUT OF MY HOUSE!"
                 + " \n I run out of the kitchen and sprint up to the bedroom, I can't leave yet, not without what I need, I slip the key into the door and lock it behind me.";
-            // Failed roofie attempt - player gets caught
         } else {
             output += string("\nHe doesn't notice.")
                 + " \n Good."
@@ -315,131 +263,53 @@ string kitchen::dialogue() {
                 + " \n  After a few minutes of waiting in the kitchen he begins stumbling even more than he was before."
                 + " \n Chad: I nEeD.. tO fInD.. LiLiTh."
                 + " \n   He stumbles out of the room. I can open whatever is in that cabinet now.";
-            // Successful roofie attempt - Chad is incapacitated
+            slippedSomethingInDrink = true;
         }
         delete roofieEvent;
     }
 
     // Show available options based on current state
-    if (!checkedKitchenCabinet) {
-        output += "\n  [c] Open cabinet";
-    }
-    if (!checkedFridge) {
-        output += "\n  [f] Open fridge";
-    }
-    if (!checkedSink) {
-        output += "\n  [s] Look in the sink";
-    }
-    // Only show roofie option if cabinet has been checked (so player knows Chad is suspicious)
-    // and roofie hasn't been attempted yet
-    if (checkedKitchenCabinet && !roofieAttempt) {
-        output += "\n  [d] Slip something in Chad's drink";
-    }
-    // If all areas checked and roofie successful, show option to leave
-    if (checkedKitchenCabinet && checkedFridge && checkedSink && slippedSomethingInDrink) {
+    if (!checkedKitchenCabinet) output += "\n  [c] Open cabinet";
+    if (slippedSomethingInDrink) output += "\n  [y] Open cabinet";
+    if (!checkedFridge) output += "\n  [f] Open fridge";
+    if (!checkedSink) output += "\n  [s] Look in the sink";
+    if (checkedKitchenCabinet && !roofieAttempt) output += "\n  [d] Slip something in Chad's drink";
+    if (checkedKitchenCabinet && checkedFridge && checkedSink && slippedSomethingInDrink)
         output += "\n  [l] Leave kitchen";
-    }
 
     trickleDisplayString(output, 1);
-    return output;
-}
-    + "\n  go to the bathroom [u].";
-    trickleDisplayString(output, 25);
-    return output;
-}
-void lookKitchenOrBedroom::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-     nextPossibleScenes.resize(2);
-     nextPossibleScenes.at(0)=new kitchen('k');
-    // nextPossibleScenes.at(1)=new room('k');
-    // std::cout<<"Updated possible Scenes\n";
-    cout << "RELEASE MEEE";
-}
-string kitchen::dialogue() {
-    string output = string("\n > The kitchen is a mess. Sticky floors, red solo cups stacked like pyramids, and the smell of burnt pizza fighting the stench of beer.");
-    if (slippedSomethingInDrink) {
-        output += "\n  [f] Open fridge"
-                  "\n  [s] Look in the sink"
-                  "\n  [c] Open cabinet";
-    }
-    if (!slippedSomethingInDrink && checkedCabinet) {
-        output += "\n  Slip something in Chad's drink [d]";
-    }
-    trickleDisplayString(output, 25);
-    return output;
-}
-string kitchenCheck::dialogue() {
-    string output;
-    if (checkedItem == 'f') {
-        output += "Chad : YO GET THE FUCK OUTTA MY FRIDGE FAT FUCK";
-    } else if (checkedItem == 'f' && roofieAttempt == false) {
-     output = string(" Chad: (voice sharp now, stepping forward)") 
-       +  " \n “Okay, Natalie. What’s your deal?” "
-       +  " \n output += He’s not smiling anymore."
-       +  " \n “You think this is funny? Snooping through our shit? You wanna get kicked the fuck out?”"
-       +  " \n  His breath reeks of liquor. His eyes are glassy—but alert."
-       +  " \n Something behind them is dangerous."
-       +  " \n Not playful anymore. Just angry. And hiding something."
-       +  " \n Natalie : Shit i was just looking for chasers , my bad bro. "
-       +  " \n Chad : riggghtttt. Well theres limes next to liquor , blind bitch. "
-       +  " \n Alcoholic. I wish there was a way to fuck him up more so he could get off my back for five minutes.";
-    } else if (checkedItem == 'd') {
-        output = string(" Natalie: I’m going to make another drink, do you want one?")
-         +  " \n Chad: Sure. Maybe then you'll chill out"
-         +  " \n  He pulls out a geek bar and leans on the counter."
-         +  " \n   I begin pouring the liquor into two red solo cups, "
-         +  " \n I have to be careful slipping in what I found earlier so he does not notice.";
-         quickTimeEvent *roofieEvent =  new quickTimeEvent(10,"ROOFIE CHAD");
-         roofieEvent->startEvent();
-         if (!(roofieEvent->startEvent())){
-            output = string( "Shit.")
-            +  " \n Chad looks over." 
-            +  " \n Chad: WHAT THE FUCK ARE YOU DOING? THATS IT GET THE FUCK OUT OF MY HOUSE!"
-            +  " \n I run out of the kitchen and sprint up to the bedroom, I can’t leave yet, not without what I need, I slip the key into the door and lock it behind me.";
-         }
-         if ((roofieEvent->startEvent())){
-            output = string( "He doesn’t notice.")
-            +  " \n Good." 
-            +  " \n Natalie: Here you go."
-            +  " \n Chad takes it and gulps it down."
-            +  " \n  After a few minutes of waiting in the kitchen he begins stumbling even more than he was before."
-            +  " \n Chad: I nEeD.. tO fInD.. LiLiTh."
-            +  " \n   He stumbles out of the room. I can open whatever is in that cabinet now.";
-            roofieSuccess = true;
-         }
-             delete roofieEvent;
-
-    }
-    trickleDisplayString(output, 25);
     return output;
 }
 
 void kitchen::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
     nextPossibleScenes.clear();
-    // Options for investigating areas not yet checked
-    if (!checkedKitchenCabinet)
-        nextPossibleScenes.push_back(new kitchen('c', true, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, gotPassword, 'c'));
-    if (!checkedFridge)
-        nextPossibleScenes.push_back(new kitchen('f', checkedKitchenCabinet, true, checkedSink, roofieAttempt, slippedSomethingInDrink, gotPassword, 'f'));
-    if (!checkedSink)
-        nextPossibleScenes.push_back(new kitchen('s', checkedKitchenCabinet, checkedFridge, true, roofieAttempt, slippedSomethingInDrink, gotPassword, 's'));
-    
-    // Option to attempt roofie (only if cabinet checked and roofie not yet attempted)
-    if (checkedKitchenCabinet && !roofieAttempt) {
-        nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, true, slippedSomethingInDrink, gotPassword, 'd'));
-    }
 
-    // Transition scenes based on roofie outcome
-    if (roofieAttempt && !slippedSomethingInDrink) {
-        // Failed roofie attempt - go to bedroom without password
+    // Only add options that have not yet been checked,
+    // passing the current flag values rather than force-setting them.
+    if (!checkedKitchenCabinet)
+        nextPossibleScenes.push_back(new kitchen('c', checkedKitchenCabinet, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, gotPassword, 'c'));
+    if (!checkedFridge)
+        nextPossibleScenes.push_back(new kitchen('f', checkedKitchenCabinet, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, gotPassword, 'f'));
+    if (!checkedSink)
+        nextPossibleScenes.push_back(new kitchen('s', checkedKitchenCabinet, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, gotPassword, 's'));
+    
+    // Option to attempt roofie (only if the cabinet has been checked and no attempt made yet)
+    if (checkedKitchenCabinet && !roofieAttempt)
+        nextPossibleScenes.push_back(new kitchen('d', checkedKitchenCabinet, checkedFridge, checkedSink, roofieAttempt, slippedSomethingInDrink, gotPassword, 'd'));
+
+    // Transition scenes based on the outcome of the roofie attempt.
+    if (roofieAttempt && !slippedSomethingInDrink) { 
+        // Failed roofie attempt – transition to bedroom scene without password.
         nextPossibleScenes.push_back(new bedroomNoPassword('u'));
     } else if (roofieAttempt && slippedSomethingInDrink && gotPassword) {
-        // Successful roofie + got password - go to bedroom with password
+        // Successful roofie attempt and password obtained – transition to bedroom with password.
         nextPossibleScenes.push_back(new bedroomPassword('k'));
     } else if (checkedKitchenCabinet && checkedFridge && checkedSink && slippedSomethingInDrink) {
-        // All areas checked and Chad incapacitated - option to leave kitchen
+        // All areas have been checked and Chad has been incapacitated – allow leaving kitchen.
         nextPossibleScenes.push_back(new lookKitchenOrBedroom('l'));
     }
 }
+
 string bedroomNoPassword:: dialogue(){
     string output = string("> I close the bedroom door behind me and lock it.")
     + "\n > KNOCK KNOCK KNOCK"
@@ -466,8 +336,8 @@ string runQuickTimeEvent:: dialogue(){
 
 //IMPLEMENT UPDATE SCENE HERE
 void runQuickTimeEvent::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-  nextPossibleScenes.resize(1);
-  nextPossibleScenes.at(0)=new policeEnding('p');
+nextPossibleScenes.resize(1);
+nextPossibleScenes.at(0)=new policeEnding('p');
 }
 
 
@@ -551,6 +421,7 @@ string canonEnding:: dialogue(){
 }
 
 void canonEnding:: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+    
 } 
 
 
@@ -573,7 +444,6 @@ void policeEnding:: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 void room::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
      nextPossibleScenes.resize(2);
 }
-
 //take first shot
 string secondShotOptionScene::dialogue(){
     string output = string("\n Kevin: WOOOAAAAAHH THAS LIQA!!!")
@@ -834,4 +704,4 @@ void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
 
 	// Bottom border
 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
-};
+}
