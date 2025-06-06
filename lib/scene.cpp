@@ -1,4 +1,5 @@
 #include "../header/scene.hpp"
+#include "../header/quickTimeEvent.hpp"
 #include "../header/interfaceTerminal.hpp"
 #include <iostream>
 #include <thread>
@@ -31,8 +32,8 @@ Scene::Scene(char name):
 char Scene::getOptionName(){
 	return optionName;
 }
-void openingScene::dialogue(){
-    string output = "You are Natalie Fitzgerald, a university student whose friend went missing at a frat party...\n";
+string openingScene::dialogue(){
+    string output = string("You are Natalie Fitzgerald, a university student whose friend went missing at a frat party...\n");
     trickleDisplayString(output, 1);
 
     // cin >> userChoice;
@@ -59,6 +60,7 @@ void takeHug::dialogue(){
     output = " He reeks of tequila and cologne that never fully covered up whatever he did last night.\n Natalie: Chad, have you been drinking?! \n Chad: Have you not? It's Halloweekend, babe. \n It’s Thursday.";
     trickleDisplayString(output, 50);
 }
+
 void takeHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	for(Scene* currentPointer : nextPossibleScenes){
 		cout<<currentPointer->getOptionName()<<endl;
@@ -71,11 +73,14 @@ void rejectHug::dialogue(){
     output = "Damn, Natalie. Acting brand new?";
     trickleDisplayString(output, 50);
 }
+
 void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	for(Scene* currentPointer : nextPossibleScenes){
 		cout<<currentPointer->getOptionName()<<endl;
 	}
 }
+
+
 
 //Continuing scene: kevin and lilith intro
 void firstShotOptionScene::dialogue(){
@@ -123,6 +128,19 @@ void secondShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleSce
 	std::cout<<"Updated possible Scenes\n";
 }
 
+string rejectFirstShot::dialogue(){
+  string output = string("\n I push the cup back toward him. I need to find her.")
+    + "\n Chad: I know you're paranoid about your friend and all, but she aint here little lady. Stop killing the vibe."
+    + "\n Natalie: Fine I'll find her myself, jerk."
+     + "\n Leave and look for clues[c]";
+    trickleDisplayString(output, 25);
+    return output;
+}
+void rejectFirstShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+    nextPossibleScenes.resize(1);
+    nextPossibleScenes.at(0)=new lookAroundForCLues('c');
+    std::cout<<"Updated possible Scenes\n";
+}
 
 //reject first shot 
 void rejectFirstShot::dialogue(){
@@ -299,66 +317,99 @@ void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
 
 
 //takes second shot
+string takeSecondShot::dialogue(){
+    string output = string("\n Lilith: Well the reason why he’s so drunk is cause he was trying to get the balls to talk to you again. Ever since yall met, he can't shut up about how he wants to get to know you more - you should go and talk to him right now see for yourself!")
+    + "\n Leave and look for Kevin[t]"
+    + "\n Press her about what happened to[REDACTED][r]";
+    trickleDisplayString(output, 25);
+    return output;
+}
+
+void takeSecondShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	nextPossibleScenes.resize(2);
+	nextPossibleScenes.at(0)=new lookForKevinScene('t');
+	nextPossibleScenes.at(1)=new pressHer('r');
+	std::cout<<"Updated possible Scenes\n";
+}
+
+//press her
+string pressHer::dialogue(){
+    string output = string("\n Lilith : I did what he would have wanted.")
+    + "\n ..."
+    + "\n Lilith: I told you I don't know already, anyway I'm going back in to distract Chad while you get Kevin's attention, tell me how it goes.";
+    trickleDisplayString(output, 25);
+    return output;
+}
+
+void pressHer::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
+	nextPossibleScenes.resize(1);
+	nextPossibleScenes.at(0)=new lookForKevinScene('t');
+	std::cout<<"Updated possible Scenes\n";
+}
 
 
 
 
 //vvv Put this in the main game screen, not in the scene class
 
-// void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
-// 	const size_t BOX_WIDTH = 70; // Width inside the borders
-// 	const size_t PADDING = 2;
-// 	const size_t MAX_LINE = BOX_WIDTH - PADDING * 2;
+void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
+	const size_t BOX_WIDTH = 100; // Width inside the borders
+	const size_t PADDING = 2;
+	const size_t MAX_LINE = BOX_WIDTH - PADDING * 4;
 
 
-// 	istringstream inputStream(inputString);
-// 	vector<string> lines;
-// 	string rawLine;
+	istringstream inputStream(inputString);
+	vector<string> lines;
+	string rawLine;
 
 
-// 	// Word-wrap logic
-// 	while (getline(inputStream, rawLine)) {
-// 			istringstream wordStream(rawLine);
-// 			string word, line;
-// 			while (wordStream >> word) {
-// 					if (line.length() + word.length() + 1 > MAX_LINE) {
-// 							lines.push_back(line);
-// 							line = word;
-// 					} else {
-// 							if (!line.empty()) line += " ";
-// 							line += word;
-// 					}
-// 			}
-// 			if (!line.empty()) {
-// 					lines.push_back(line);
-// 			}
-// 			if (rawLine.empty()) lines.push_back("");
-// 	}
+	// Word-wrap logic
+	while (getline(inputStream, rawLine)) {
+			istringstream wordStream(rawLine);
+			string word, line;
+			while (wordStream >> word) {
+					if (line.length() + word.length() + 1 > MAX_LINE) {
+							lines.push_back(line);
+							line = word;
+					} else {
+							if (!line.empty()) line += " ";
+							line += word;
+					}
+			}
+			if (!line.empty()) {
+					lines.push_back(line);
+			}
+			if (rawLine.empty()) lines.push_back("");
+	}
 
 
-// 	// Box characters
-// 	const char CORNER = '+';
-// 	const char HORIZONTAL = '=';
-// 	const char VERTICAL = '|';
+	// Box characters
+	const char CORNER = '+';
+	const char HORIZONTAL = '=';
+	const char VERTICAL = '|';
 
 
-// 	// Top border
-// 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
+	// Top border
+	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
 
 
-// 	// Display lines with borders and padding
-// 	for (const auto& l : lines) {
-// 			string padded = string(PADDING, ' ') + l;
-// 			padded += string(BOX_WIDTH - padded.length(), ' '); // Right space padding
-// 			cout << VERTICAL;
-// 			for (char c : padded) {
-// 					cout << c << flush;
-// 					sleep_for(milliseconds(delay));
-// 			}
-// 			cout << VERTICAL << endl;
-// 	}
+	// Display lines with borders and padding
+	for (const auto& l : lines) {
+        size_t RIGHT_PADDINNG = 0;
+        if(l.length() + PADDING < BOX_WIDTH){
+            RIGHT_PADDINNG = BOX_WIDTH - (l.length() + PADDING);
+        }
+
+        string padded = string(PADDING, ' ') + l + string(RIGHT_PADDINNG, ' ');
+        cout << VERTICAL;
+        for(char c: padded){
+            cout << c << flush;
+            sleep_for(milliseconds(delay));
+        }
+        cout <<  endl;
+	}
 
 
-// 	// Bottom border
-// 	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
-// }
+	// Bottom border
+	cout << CORNER << string(BOX_WIDTH, HORIZONTAL) << CORNER << endl;
+}

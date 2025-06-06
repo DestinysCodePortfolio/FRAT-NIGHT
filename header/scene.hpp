@@ -16,7 +16,7 @@ class Scene{
 		Scene(Scene& other) = delete;
 		Scene& operator=(Scene& other) = delete;
 		char getOptionName();
-		virtual void dialogue()=0;
+		virtual string dialogue()=0;
 		virtual void updatePossibleScenes(vector<Scene*>& nextPossibleScenes)=0;
 };
 
@@ -26,7 +26,7 @@ struct openingScene:public Scene{
 	~openingScene() override=default;
 	openingScene(openingScene& other) = delete;
 	openingScene& operator=(openingScene& other) = delete;
-	void dialogue() override;
+	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
@@ -36,7 +36,7 @@ struct takeHug:public Scene{
 	~takeHug() override=default;
 	takeHug(takeHug& other) = delete;
 	takeHug& operator=(takeHug& other) = delete;  
-	void dialogue() override;
+	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
@@ -46,7 +46,16 @@ struct rejectHug:public Scene{
 	~rejectHug() override=default;
 	rejectHug(rejectHug& other) = delete;
 	rejectHug& operator=(rejectHug& other) = delete;  
-	void dialogue() override;
+	string dialogue() override;
+	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+};
+struct firstShotOptionScene:public Scene{
+	firstShotOptionScene(): Scene(){}
+	firstShotOptionScene(char name): Scene(name){}
+	~firstShotOptionScene() override=default;
+	firstShotOptionScene(firstShotOptionScene& other) = delete;
+	firstShotOptionScene& operator=(firstShotOptionScene& other) = delete;  
+	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 struct firstShotOptionScene:public Scene{

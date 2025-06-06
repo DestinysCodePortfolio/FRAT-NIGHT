@@ -40,3 +40,5 @@ Makefile
 Rush_Week
 cmake_install.cmake
 bin
+CTestTestfile.cmake
+DartConfiguration.tcl
