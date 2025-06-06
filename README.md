@@ -73,6 +73,7 @@ The Game will have a time complexity of O(n) since displaying each word separetl
 
 ## Class Diagram (Updated)
 ![Class Diagram Rush Week drawio](https://github.com/user-attachments/assets/434b5bad-c6b9-482d-8c7b-ee373642a6ce)
+![gameplay](https://github.com/user-attachments/assets/c4e32ad9-ad8a-4731-ba5c-85d0f8730725)
 
 • Completed quickTimeEvent to SOLID standards  
   • QuickTimeEvent in accordance with the single responsibility principle  
