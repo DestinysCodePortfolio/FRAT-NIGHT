@@ -322,16 +322,25 @@ void bedroomNoPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes)
 
 string runQuickTimeEvent:: dialogue(){
     string output = string("> I push the window open frantically and hop out")
-    + "> My ankles throb after the landing but I begin sprinting. I hear someone chasing after me."
-    + "> RUN.. ";
+    + "\n> My ankles throb after the landing but I begin sprinting. I hear someone chasing after me."
+    + "\n> RUN!!!"
+		+ "\n> ";
+		quickTimeEvent run(20, "SHIT SHIT SHIT SHIT SHIT");
+		ifPassedEvent = run.startEvent();
     //IMPLEMENT QTE HERE
     //IF PASS, TAKE TO bedroomPassword
     //IF FAIL, TAKE TO failedQuickTimeEvent
+		return output;
 }
 
 //IMPLEMENT UPDATE SCENE HERE
 void runQuickTimeEvent::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-
+	if (ifPassedEvent){
+		// Add next possible Scene here
+	}
+	else{
+		// Add next possible Scene here
+	}
 }
 
 
@@ -375,7 +384,7 @@ void bedroomPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 }
 
 //KYS Ending
-void canonEnding:: dialogue(){
+string canonEnding:: dialogue(){
     string output = string("> The computer unlocks, the desktop is a chaotic mess of files and folders.")
     + "\n> The file names are written in a different language… is that…Greek? "
     + "\n> I click on a file"

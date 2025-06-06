@@ -277,14 +277,16 @@ struct canonEnding: public Scene {
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
-struct runQuickTimeEvent: public Scene {
-	runQuickTimeEvent(): Scene(){}
-	runQuickTimeEvent(char name): Scene(name){}
-	~runQuickTimeEvent() override=default;
-	runQuickTimeEvent(runQuickTimeEvent& other) = delete;
-	runQuickTimeEvent& operator=(runQuickTimeEvent& other) = delete;  
-	string dialogue() override;
-	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+class runQuickTimeEvent: public Scene {
+		bool ifPassedEvent;
+	public:
+		runQuickTimeEvent(): Scene(),ifPassedEvent(0){}
+		runQuickTimeEvent(char name): Scene(name),ifPassedEvent(0){}
+		~runQuickTimeEvent() override=default;
+		runQuickTimeEvent(runQuickTimeEvent& other) = delete;
+		runQuickTimeEvent& operator=(runQuickTimeEvent& other) = delete;  
+		string dialogue() override;
+		void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
 struct failedQuickTimeEvent: public Scene {
@@ -295,4 +297,4 @@ struct failedQuickTimeEvent: public Scene {
 	failedQuickTimeEvent& operator=(failedQuickTimeEvent& other) = delete;  
 	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
-}
+};
