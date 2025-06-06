@@ -50,7 +50,7 @@ string takeHug::dialogue(){
     + "\n Chad: Have you not? It's Halloweekend, babe."
     + "\n >It's Thursday. This man needs a life."
     + "\n Ask about [REDACTED] [t]";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -62,7 +62,7 @@ void takeHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 string rejectHug::dialogue(){
     string output = string("\n Damn, Natalie. Acting brand new?")
     + "\n Ask about [REDACTED] [t]";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -89,7 +89,7 @@ string firstShotOptionScene::dialogue(){
     + "\n Chad : PICK YOUR POISON!"
     + "\n Take the shot[t]"
     + "\n Reject the shot[r]";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 void firstShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -103,7 +103,7 @@ string rejectFirstShot::dialogue(){
     + "\n Chad: I know you're paranoid about your friend and all, but she aint here little lady. Stop killing the vibe."
     + "\n Natalie: Fine I'll find her myself, jerk."
      + "\n Leave and look for clues[c]";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 void rejectFirstShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -116,7 +116,7 @@ string lookAroundForCLues::dialogue(){
   + "\n I weave through the bodies and pass some guy in a horse mask vomiting into a potted plant."
   + "\n My shoulders brush past strangers who don’t even notice I’m there. "
   + "\n  check bathroom [c] ";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 } 
 void lookAroundForCLues :: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -152,7 +152,7 @@ string bathroom::dialogue() {
     if (checkedCabinet && checkedFlag && checkedMirror)
         output += " leave bathroom [l]\n";
 
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 void bathroom::updatePossibleScenes(vector<Scene*>& nextPossibleScenes) {
@@ -176,7 +176,7 @@ string lookKitchenOrBedroom::dialogue(){
     + "\n > I can see chad in the kitchen, maybe i can get him to ... not notice me snooping but how ??? "
     + "\n  go to the kitchen [k]"
     + "\n  go to the bedroom [u].";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 void lookKitchenOrBedroom::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -317,12 +317,12 @@ string bedroomNoPassword:: dialogue(){
     + "\n > I need to hurry."
     + "\n There is a laptop open on the desk, I bet there is some sort of evidence on there."
     + "\n Take the laptop to the police[t]";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 } 
 void bedroomNoPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
      nextPossibleScenes.resize(1);
-	nextPossibleScenes.at(0)=new runQuickTimeEvent('t');
+	nextPossibleScenes.at(0)=new policeEnding('t');
 }
 
 
@@ -362,6 +362,7 @@ string failedQuickTimeEvent:: dialogue(){
     + "\n >I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness."
     + "\n >I'm sorry Evelyn , I couldn't save you."
     + "\n Press q to quit.";
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -376,13 +377,13 @@ string bedroomPassword:: dialogue(){
     + "\n There is a laptop open on the desk, I bet there is some sort of evidence on there."
     + "\n Take the laptop to the police[t]"
     + "\n Enter the password you found[e]";
-        trickleDisplayString(output , 1);
+        trickleDisplayString(output, 10);
         return output;
 }
 
 void bedroomPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
-	nextPossibleScenes.at(0)=new runQuickTimeEvent('t');
+	nextPossibleScenes.at(0)=new policeEnding('t');
 	nextPossibleScenes.at(1)=new canonEnding('e');
 }
 
@@ -421,7 +422,7 @@ string canonEnding:: dialogue(){
     +"\n> I lunge the knife into my throat." 
     +"\n> ..."
     +"\n Surprise! :) https://iqnc06.github.io/";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -438,7 +439,7 @@ string policeEnding:: dialogue(){
     + "\n Police found footage of the 4 in what looks like a mass homicide. It is rumored that this was a part of a ritual led by Williams as a religious sacrifice to a Roman god named Dionysus."
     + "\n he police found the bodies in the forest after an anonymous individual left a laptop at the Indiana University police department with footage of the suspects brutally murdering"
     + "\n 19-year-old Evelyn Gonzalez , a girl rushing for the frat. Some of the bodies were so dismembered that police only found their identities after a DNA report.";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -458,7 +459,7 @@ string secondShotOptionScene::dialogue(){
     + "\n Lilith: Oops did that slip out , well I'm too deep in now to not tell you, but i need another shot so WE forget that I told you!"
     + "\n Take the shot: Kevin’s cute, and I wanna know more[t]"
     + "\n Reject the shot: I need to find my friend[r]";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 void secondShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -471,7 +472,7 @@ string takeSecondShot::dialogue(){
     string output = string("\n Lilith: Well the reason why he’s so drunk is cause he was trying to get the balls to talk to you again. Ever since yall met, he can't shut up about how he wants to get to know you more - you should go and talk to him right now see for yourself!")
     + "\n Leave and look for Kevin[t]"
     + "\n Press her about what happened to[REDACTED][r]";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -487,7 +488,7 @@ string pressHer::dialogue(){
     + "\n ..."
     + "\n Lilith: I told you I don't know already, anyway I'm going back in to distract Chad while you get Kevin's attention, tell me how it goes."
     + "\n Go Look For Kevin [t]";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -513,7 +514,7 @@ string lookForKevinScene:: dialogue(){
     + "\n >He looks on edge."
     + "\n Intensify your glare[t]"
     + "\n Put your hand on his arm, feigning innocent conern[r]";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -543,7 +544,7 @@ string kevinArgument:: dialogue(){
     + "\n >I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness."
     + "\n >I'm sorry Evelyn , I couldn't save you."
     + "\n Press q to quit";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 void kevinArgument::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -562,7 +563,7 @@ string kevinRomance:: dialogue(){
     + "\n Kevin: We will go to the police station first thing tomorrow, together. But tonight let’s just relax."
     + "\n Take shot [t]"
     + "\n Reject shot [r]"; 
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -588,7 +589,7 @@ string takeThirdShot:: dialogue(){
     + "\n >I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness."
     + "\n >I'm sorry Evelyn , I couldn't save you."
     + "\n Press q to quit.";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 }
 
@@ -617,7 +618,7 @@ string rejectThirdShot:: dialogue(){
     + "\n >I try to spit it out, but he covers my mouth, forcing me to choke it down. I feel lighter as I accept my fate and see the haze of the candles slowly fade into darkness."
     + "\n >I'm sorry Evelyn , I couldn't save you."
     + "\n Press q to quit";
-    trickleDisplayString(output , 1);
+    trickleDisplayString(output, 10);
     return output;
 } 
 
