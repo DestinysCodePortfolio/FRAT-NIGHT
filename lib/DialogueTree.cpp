@@ -16,7 +16,11 @@ DialogueTree::~DialogueTree(){
 void DialogueTree::updateScene(char userInput){
 	currentScene->updatePossibleScenes(nextPossibleScenes);
 	for(Scene* currentPossibleScene : nextPossibleScenes){
-		if(userInput==currentPossibleScene->getOptionName()){
+		if(nextPossibleScenes.size()==1){
+			delete currentScene;
+			currentScene=currentPossibleScene;
+		}
+		else if(userInput==currentPossibleScene->getOptionName()){
 			delete currentScene;
 			currentScene=currentPossibleScene;
 		}
