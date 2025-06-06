@@ -244,10 +244,9 @@ string kitchen::dialogue() {
             + "\nI begin pouring the liquor into two red solo cups, "
             + "\nI have to be careful slipping in what I found earlier so he does not notice.";
  
-        quickTimeEvent *roofieEvent = new quickTimeEvent(10, "ROOFIE CHAD");
-        bool success = roofieEvent->startEvent();
- 
-        if (!success) {
+       
+        quickTimeEvent roofieEvent(20, "roofie");
+        if (!roofieEvent.startEvent()) {
             output += string("\nShit.")
                 + "\nChad looks over."
                 + "\nChad: WHAT THE FUCK ARE YOU DOING? THAT'S IT GET THE FUCK OUT OF MY HOUSE!"
@@ -261,7 +260,7 @@ string kitchen::dialogue() {
                 + "\nChad: I nEeD.. tO fInD.. LiLiTh."
                 + "\nHe stumbles out of the room. I can open whatever is in that cabinet now.";
         }
-        delete roofieEvent;
+        //delete roofieEvent;
     }
     else if (lastChecked == 'l') {
         output += "\nNatalie: I decide to leave the kitchen.";
@@ -509,9 +508,11 @@ void takeSecondShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 
 //press her
 string pressHer::dialogue(){
-    string output = string("\n Lilith : I did what he would have wanted.")
+    string output = string("\n Natalie: What do you know about what happened to [REDACTED]?")
+    + "\n Lilith : I did what he would have wanted."
     + "\n ..."
-    + "\n Lilith: I told you I don't know already, anyway I'm going back in to distract Chad while you get Kevin's attention, tell me how it goes.";
+    + "\n Lilith: I told you I don't know already, anyway I'm going back in to distract Chad while you get Kevin's attention, tell me how it goes."
+    + "\n Go Look For Kevin [t]";
     trickleDisplayString(output , 1);
     return output;
 }
