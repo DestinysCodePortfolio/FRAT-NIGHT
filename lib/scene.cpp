@@ -33,25 +33,24 @@ char Scene::getOptionName(){
 	return optionName;
 }
 string openingScene::dialogue(){
-    string output = string("You are Natalie Fitzgerald, a university student whose friend went missing at a frat party...\n");
+    string output = string("> You are Natalie Fitzgerald, a university student whose friend went missing at a frat party a couple nights ago.")
+    + "\n> You are here at another party, trying to unravel the mystery of her disappearance. You know they did it. You just can't prove it. "
+    + "\n My ears throb with every bass drop pounding through the floorboards."
+    + "\n  Sweat clings to my back. The house is packed wall to wall—drunken laughter, sticky floors, and that sour-sweet stench of booze and regret."
+    + "\n ???: YO! Look who finally decided to pull up!"
+    + "\n  A can sprays open. A vodka seltzer fizzes out all over Chad’s hand as he slides into view,  stumbling a little with his arms open."
+    + "\n Chad: “Where my hug at?"
+    + "\n Take the hug[t]"
+    + "\n Reject the hug[r]";
     trickleDisplayString(output, 1);
     return output;
 
-    // cin >> userChoice;
 
-    // if (choice == 'a') {
-    //     return new takeHug();
-    // } else if (choice == 'b') {
-    //     return new rejectHug();
-    // }
-
-    // return nullptr; // if invalid input
 }
 void openingScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new takeHug('t');
 	nextPossibleScenes.at(1)=new rejectHug('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -69,7 +68,6 @@ string takeHug::dialogue(){
 void takeHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
     nextPossibleScenes.resize(1);
 	nextPossibleScenes.at(0)=new firstShotOptionScene('t');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -85,7 +83,6 @@ string rejectHug::dialogue(){
 void rejectHug::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(1);
 	nextPossibleScenes.at(0)=new firstShotOptionScene('t');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -116,7 +113,6 @@ void firstShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleScen
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new secondShotOptionScene('t');
 	nextPossibleScenes.at(1)=new rejectFirstShot('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 string rejectFirstShot::dialogue(){
@@ -130,7 +126,6 @@ string rejectFirstShot::dialogue(){
 void rejectFirstShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
     nextPossibleScenes.resize(1);
     nextPossibleScenes.at(0)=new lookAroundForCLues('c');
-    std::cout<<"Updated possible Scenes\n";
 }
 
 string lookAroundForCLues::dialogue(){
@@ -144,7 +139,6 @@ string lookAroundForCLues::dialogue(){
 void lookAroundForCLues :: updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(1);
 	nextPossibleScenes.at(0)=new bathroom('c');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 string bathroom::dialogue() {
@@ -153,7 +147,6 @@ string bathroom::dialogue() {
     // Show narrative for the last checked item
     if (lastChecked == 'c') {
         output += "You open the creaky door to the medicine cabinet. Inside: bandages, half-used toothpaste, and a small, chilling surprise — a blister pack of Rohypnol.\n";
-        output += "Do you take it? → [grab it]\n";
         output += "You pocket the pills. You don’t know why. Maybe you just don’t trust the people who live here — and that instinct feels right.\n";
     } else if (lastChecked == 'f') {
         output += "Hung crooked on the wall across from the toilet, a filthy frat flag flutters slightly from a draft you can't place.\n";
@@ -322,7 +315,6 @@ string bedroomNoPassword:: dialogue(){
 void bedroomNoPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(1);
 	nextPossibleScenes.at(0)=new runQuickTimeEvent('t');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 string runQuickTimeEvent:: dialogue(){
@@ -378,7 +370,6 @@ void bedroomPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new runQuickTimeEvent('t');
 	nextPossibleScenes.at(1)=new canonEnding('e');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 //KYS Ending
@@ -464,7 +455,6 @@ void secondShotOptionScene::updatePossibleScenes(vector<Scene*>& nextPossibleSce
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new takeSecondShot('t');
 	nextPossibleScenes.at(1)=new pressHer('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -482,7 +472,6 @@ void takeSecondShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new lookForKevinScene('t');
 	nextPossibleScenes.at(1)=new pressHer('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 //press her
@@ -497,7 +486,6 @@ string pressHer::dialogue(){
 void pressHer::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(1);
 	nextPossibleScenes.at(0)=new lookForKevinScene('t');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 
@@ -532,7 +520,6 @@ void lookForKevinScene::updatePossibleScenes(vector<Scene*>& nextPossibleScenes)
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new kevinArgument('t');
 	nextPossibleScenes.at(1)=new kevinRomance('r');
-	std::cout<<"Updated possible Scenes\n";
 }
 
 //kevin argument + death ending
@@ -585,7 +572,6 @@ void kevinRomance::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 	nextPossibleScenes.resize(2);
 	nextPossibleScenes.at(0)=new takeThirdShot('t'); //would take you to kevinDeathEnding
 	nextPossibleScenes.at(1)=new rejectThirdShot('r'); 
-	std::cout<<"Updated possible Scenes\n";
 }
 
 string takeThirdShot:: dialogue(){
@@ -641,8 +627,7 @@ void rejectThirdShot::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
 
 }
 
-
-// vvv Put this in the main game screen, not in the scene class
+//TRICKLE
 
 void Scene::trickleDisplayString(const string& inputString, uint8_t delay){
 	const size_t BOX_WIDTH = 100; // Width inside the borders
