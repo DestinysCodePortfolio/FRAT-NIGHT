@@ -163,11 +163,9 @@ struct bathroom: public Scene{
     bool checkedFlag;
     bool checkedMirror;
 
-    bathroom() : Scene('c'), checkedCabinet(false), checkedFlag(false), checkedMirror(false) {}
+    bathroom() : Scene('b'), checkedCabinet(false), checkedFlag(false), checkedMirror(false) {}
 	  bathroom(char name, bool cab = false, bool flag = false, bool mirror = false)
         : Scene(name), checkedCabinet(cab), checkedFlag(flag), checkedMirror(mirror) {}
-
-	bathroom(char name): Scene(name){}
 	~bathroom() override=default;
 	bathroom(bathroom& other) = delete;
 	bathroom& operator=(bathroom& other) = delete;
@@ -208,8 +206,14 @@ struct room:public Scene{
 };
 
 struct kitchen:public Scene{
-	kitchen(): Scene(){}
-	kitchen(char name): Scene(name){}
+	 bool checkedCabinet;
+    bool checkedFridge;
+    bool checkedSink;
+    bool slippedSomethingInDrink;
+
+    kitchen(char name, bool cab = false, bool fridge = false, bool sink = false, bool slipped = false)
+        : Scene(name), checkedCabinet(cab), checkedFridge(fridge), checkedSink(sink), slippedSomethingInDrink(slipped) {}
+
 	~kitchen() override=default;
 	kitchen(kitchen& other) = delete;
 	kitchen& operator=(kitchen& other) = delete;  
@@ -218,14 +222,16 @@ struct kitchen:public Scene{
 };
 
 struct kitchenCheck:public Scene{
-struct bathroomCheck : public Scene {
     char checkedItem; // 'c' for cabinet, 'f' for flag, 'm' for mirror
-    bool checkedCabinet, checkedFlag, checkedMirror;
+    bool checkedCabinet;
+	bool checkedFridge;
+	bool checkedSink;
+	bool roofieAttempt; 
+	bool roofieSuccess;
 
-    bathroomCheck(char item, bool cab, bool flag, bool mirror)
-        : Scene(item), checkedItem(item), checkedCabinet(cab), checkedFlag(flag), checkedMirror(mirror) {}
+    kitchenCheck(char item, bool cab, bool fridge,bool sink, bool roofie , bool pills)
+        : Scene(item), checkedItem(item), checkedCabinet(cab),checkedFridge(fridge),checkedSink(sink),roofieAttempt(roofie), roofieSuccess(pills){}
 
     string dialogue() override;
     void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
-};
 };
