@@ -86,9 +86,9 @@ The Game will have a time complexity of O(n) since displaying each word separetl
 
 
 ## Installation/Usage Instructions
-1.) Enter "cmake ." into the terminal
-2.) Enter "make" into the terminal
-3.) Enter "./bin/Rush_Week" into the terminal
-4.) To run tests enter "./bin/runAllTests
+• 1.) Enter "cmake ." into the terminal
+• 2.) Enter "make" into the terminal
+• 3.) Enter "./bin/Rush_Week" into the terminal
+• 4.) To run tests enter "./bin/runAllTests
 
-How To Play: Enter the prompted characters into the terminal depending on the choice you want to make.
+• How To Play: Enter the prompted characters into the terminal depending on the choice you want to make.
