@@ -347,7 +347,7 @@ string bedroomNoPassword:: dialogue(){
 } 
 void bedroomNoPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
     nextPossibleScenes.clear();
-    nextPossibleScenes.push_back(new runQuickTimeEvent('t')); 
+    nextPossibleScenes.push_back(new runQuickTimeEvent('t')); // next scene for option 't'
 }
 
 
