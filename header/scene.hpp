@@ -158,19 +158,20 @@ struct lookAroundForCLues: public Scene{
 	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
-struct bathroom: public Scene{
-	  bool checkedCabinet;
+
+struct bathroom : public Scene {
+    bool checkedCabinet;
     bool checkedFlag;
     bool checkedMirror;
-
-    bathroom() : Scene('b'), checkedCabinet(false), checkedFlag(false), checkedMirror(false) {}
-	  bathroom(char name, bool cab = false, bool flag = false, bool mirror = false)
-        : Scene(name), checkedCabinet(cab), checkedFlag(flag), checkedMirror(mirror) {}
-	~bathroom() override=default;
+    char lastChecked;
+    ~bathroom() override=default;
 	bathroom(bathroom& other) = delete;
 	bathroom& operator=(bathroom& other) = delete;
-	string dialogue() override;
-	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
+    bathroom(char name, bool cab = false, bool flag = false, bool mirror = false, char last = 0)
+        : Scene(name), checkedCabinet(cab), checkedFlag(flag), checkedMirror(mirror), lastChecked(last) {}
+
+    string dialogue() override;
+    void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
 
@@ -183,6 +184,7 @@ struct lookKitchenOrBedroom: public Scene{
 	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
+
 // header/scene.hpp
 struct bathroomCheck : public Scene {
     char checkedItem; // 'c' for cabinet, 'f' for flag, 'm' for mirror
@@ -205,33 +207,29 @@ struct room:public Scene{
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
-struct kitchen:public Scene{
-	 bool checkedCabinet;
-    bool checkedFridge;
-    bool checkedSink;
-    bool slippedSomethingInDrink;
-
-    kitchen(char name, bool cab = false, bool fridge = false, bool sink = false, bool slipped = false)
-        : Scene(name), checkedCabinet(cab), checkedFridge(fridge), checkedSink(sink), slippedSomethingInDrink(slipped) {}
-
-	~kitchen() override=default;
-	kitchen(kitchen& other) = delete;
-	kitchen& operator=(kitchen& other) = delete;  
+struct failRoofieScene:public Scene{
+	failRoofieScene(): Scene(){}
+	failRoofieScene(char name): Scene(name){}
+	~failRoofieScene() override=default;
+	failRoofieScene(failRoofieScene& other) = delete;
+	failRoofieScene& operator=(failRoofieScene& other) = delete;  
 	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
 
-struct kitchenCheck:public Scene{
-    char checkedItem; // 'c' for cabinet, 'f' for flag, 'm' for mirror
-    bool checkedCabinet;
-	bool checkedFridge;
-	bool checkedSink;
-	bool roofieAttempt; 
-	bool roofieSuccess;
-
-    kitchenCheck(char item, bool cab, bool fridge,bool sink, bool roofie , bool pills)
-        : Scene(item), checkedItem(item), checkedCabinet(cab),checkedFridge(fridge),checkedSink(sink),roofieAttempt(roofie), roofieSuccess(pills){}
-
+struct kitchen : public Scene {
+    bool checkedKitchenCabinet;
+    bool checkedFridge;
+    bool checkedSink;
+    char lastChecked; 
+	bool roofieAttempt = false; 
+	bool slippedSomethingInDrink = false;
+	bool gotPassword = false;
+    ~kitchen() override=default;
+	kitchen(kitchen& other) = delete;
+	kitchen& operator=(kitchen& other) = delete;
+  kitchen(char name, bool cab = false, bool fridge = false, bool sink = false, bool attempt = false, bool roofie = false, char last = 0, bool pass = false)
+    : Scene(name), checkedKitchenCabinet(cab), checkedFridge(fridge), checkedSink(sink), roofieAttempt(attempt), slippedSomethingInDrink(roofie), lastChecked(last), gotPassword(pass) {}
     string dialogue() override;
     void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
 };
@@ -295,4 +293,5 @@ struct failedQuickTimeEvent: public Scene {
 	failedQuickTimeEvent& operator=(failedQuickTimeEvent& other) = delete;  
 	string dialogue() override;
 	void updatePossibleScenes(vector<Scene*>& nextPossibleScenes) override;
-}
+};
+
