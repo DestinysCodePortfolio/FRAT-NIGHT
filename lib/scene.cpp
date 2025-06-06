@@ -352,8 +352,8 @@ string bedroomNoPassword:: dialogue(){
     return output;
 } 
 void bedroomNoPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
-    nextPossibleScenes.clear();
-    nextPossibleScenes.push_back(new runQuickTimeEvent('t')); // next scene for option 't'
+     nextPossibleScenes.resize(1);
+	nextPossibleScenes.at(0)=new runQuickTimeEvent('t');
 }
 
 
@@ -411,7 +411,8 @@ string bedroomPassword:: dialogue(){
     + "\n There is a laptop open on the desk, I bet there is some sort of evidence on there."
     + "\n Take the laptop to the police[t]"
     + "\n Enter the password you found[e]";
-    return output;
+        trickleDisplayString(output , 1);
+        return output;
 }
 
 void bedroomPassword::updatePossibleScenes(vector<Scene*>& nextPossibleScenes){
@@ -456,6 +457,7 @@ string canonEnding:: dialogue(){
     +"\n> I lunge the knife into my throat." 
     +"\n> ..."
     +"\n Surprise! :) https://iqnc06.github.io/"; //PUT LINK TO MURDERS HERE
+    trickleDisplayString(output , 1);
     return output;
 }
 
@@ -474,6 +476,7 @@ string policeEnding:: dialogue(){
     + "\n Police found footage of the 4 in what looks like a mass homicide. It is rumored that this was a part of a ritual led by Williams as a religious sacrifice to a Roman god named Dionysus."
     + "\n he police found the bodies in the forest after an anonymous individual left a laptop at the Indiana University police department with footage of the suspects brutally murdering"
     + "\n 19-year-old Evelyn Gonzalez , a girl rushing for the frat. Some of the bodies were so dismembered that police only found their identities after a DNA report.";
+    trickleDisplayString(output , 1);
     return output;
 }
 
